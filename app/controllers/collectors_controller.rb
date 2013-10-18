@@ -1,7 +1,7 @@
 class CollectorsController < ApplicationController
 
   def index
-    @collectors = Collector.all
+    @collectors = ::Collector.all
   end
 
 
