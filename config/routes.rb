@@ -5,4 +5,10 @@ Ocs::Application.routes.draw do
   post 'permutations/collect', to: 'permutations#collect'
   
   resources :users
+
+  resources :collectors do
+    collection do 
+      get 'collectors', to: 'collectors#index'
+    end
+  end
 end

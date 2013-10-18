@@ -1,0 +1,10 @@
+%h3 Collectors
+.span8
+  %table.table.table-condensed
+    %thead
+      %tr
+        %th Name
+    %tbody
+      - @collectors.each do |collector|
+        %tr
+          %td= collector.name
