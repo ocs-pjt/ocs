@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018080102) do
+ActiveRecord::Schema.define(version: 20131018081626) do
 
   create_table "collectors", force: true do |t|
     t.string   "name"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20131018080102) do
     t.text     "permutation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "use_case_id"
+    t.integer  "collector_id"
   end
 
   create_table "roles", force: true do |t|
@@ -46,6 +49,7 @@ ActiveRecord::Schema.define(version: 20131018080102) do
     t.string   "program"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   create_table "users", force: true do |t|
