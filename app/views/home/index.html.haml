@@ -1,4 +1,4 @@
 %h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+
+= select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), prompt: "Select a collector" 
+#auth_token
