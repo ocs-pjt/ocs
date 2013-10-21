@@ -1,5 +1,5 @@
 class Permutation < ActiveRecord::Base
-  serialize :permutation, JSON
+  #serialize :permutation, JSON
 
   belongs_to :user
 
