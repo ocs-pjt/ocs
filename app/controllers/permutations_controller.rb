@@ -13,9 +13,6 @@ class PermutationsController < ApplicationController
           p.user_id = 1
           p.use_case_id = 1
         end
-        # params[:data].each do |result|
-        #   Permutation.create(name: result[:name], permutation: result[:array])
-        # end
       end
     end
 

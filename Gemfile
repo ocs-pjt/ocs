@@ -15,8 +15,6 @@ gem 'haml-rails'
 gem 'pg'
 gem 'rolify'
 gem 'simple_form', '>= 3.0.0.rc'
-gem 'oj'
-
 
 group :assets do
   gem 'therubyracer', platform: :ruby
