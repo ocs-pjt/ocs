@@ -58,8 +58,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 h2. Similar Projects
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
 h2. Contributing
 
 If you make improvements to this application, please share with others.
