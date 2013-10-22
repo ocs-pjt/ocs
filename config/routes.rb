@@ -11,4 +11,6 @@ Ocs::Application.routes.draw do
       get 'collectors', to: 'collectors#index'
     end
   end
+
+  get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
 end

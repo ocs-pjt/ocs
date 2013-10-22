@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131021084706) do
+ActiveRecord::Schema.define(version: 20131022122513) do
 
   create_table "auth_tokens", force: true do |t|
-    t.string   "token"
     t.integer  "collector_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
   end
 
   create_table "collectors", force: true do |t|

@@ -1,4 +1,6 @@
 %h3 Home
-
-= select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), prompt: "Select a collector" 
-#auth_token
+%p Select a collector
+= select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), include_blank: true
+#auth_token 
+  Auth token : 
+  %span
