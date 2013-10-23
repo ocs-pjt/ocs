@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022122513) do
+ActiveRecord::Schema.define(version: 20131023094457) do
 
   create_table "auth_tokens", force: true do |t|
     t.integer  "collector_id"
@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(version: 20131022122513) do
 
   create_table "collectors", force: true do |t|
     t.string   "name"
+    t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "toto"
   end
 
   create_table "permutations", force: true do |t|
@@ -81,8 +83,8 @@ ActiveRecord::Schema.define(version: 20131022122513) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree

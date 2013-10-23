@@ -1,4 +1,5 @@
 class AuthTokensController < ApplicationController
+  before_action :authenticate_user!
 
   # Generate the auth_token if it doesn't exist already
   def create_or_get

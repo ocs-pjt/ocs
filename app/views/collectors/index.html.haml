@@ -1,10 +1,21 @@
-%h3 Collectors
-.span8
-  %table.table.table-condensed
-    %thead
-      %tr
-        %th Name
-    %tbody
-      - @collectors.each do |collector|
-        %tr
-          %td= collector.name
+%h1 Listing collectors
+
+%table
+  %tr
+    %th Name
+    %th File
+    %th
+    %th
+    %th
+
+  - @collectors.each do |collector|
+    %tr
+      %td= collector.name
+      %td= display_filename(collector.file)
+      %td= link_to 'Show', collector
+      %td= link_to 'Edit', edit_collector_path(collector)
+      %td= link_to 'Destroy', collector, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Collector', new_collector_path

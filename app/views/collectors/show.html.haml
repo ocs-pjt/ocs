@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @collector.name
+%p
+  %b File:
+  = display_filename(@collector.file)
+
+= link_to 'Edit', edit_collector_path(@collector)
+\|
+= link_to 'Back', collectors_path

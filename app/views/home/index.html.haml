@@ -1,6 +1,12 @@
 %h3 Home
-%p Select a collector
-= select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), include_blank: true
-#auth_token 
-  Auth token : 
-  %span
+
+- if user_signed_in?
+  %p Select a collector
+  = select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), include_blank: true
+  
+  #download_collector
+    Download collector :
+    %span
+  #auth_token 
+    Auth token : 
+    %span

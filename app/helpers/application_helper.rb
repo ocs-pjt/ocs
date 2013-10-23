@@ -12,4 +12,8 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def display_filename(file)
+    link_to File.basename(file.path), file.url 
+  end
+
 end
