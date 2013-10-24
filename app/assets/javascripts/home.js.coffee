@@ -2,10 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
-$(document).ready(initialize)
-$(document).on('page:load', initialize)
-
 initialize = ->
   $('#collector-list').on 'click', ->
     unless $(this).val() == ""
@@ -19,3 +15,6 @@ initialize = ->
         $('#download_collector span').html("<a href='" + result1[0]['url'] + "'>" + result1[0]['filename'] + "</a>")
         $('#auth_token span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
       )
+
+$(document).ready(initialize)
+$(document).on('page:load', initialize)
