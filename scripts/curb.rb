@@ -14,8 +14,8 @@ Benchmark.bm do |x|
 
   x.report do
     @http = Curl::Easy.http_post(
-      "http://localhost:3000/permutations/collect",
-      '{ "auth_token": "abc", "data": [' + data + ']}'
+      "http://localhost:9292/permutations/collect",
+      '{ "authentication_key": "kSN4kfsDqGYwNZGhQBgM", "data": [' + data + ']}'
     ) do |curl|
       curl.headers['Accept'] = 'application/json'
       curl.headers['Content-Type'] = 'application/json'

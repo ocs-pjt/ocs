@@ -3,8 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-# create or get auth_token
-$(document).ready ->
+$(document).ready(initialize)
+$(document).on('page:load', initialize)
+
+initialize = ->
   $('#collector-list').on 'click', ->
     unless $(this).val() == ""
       $.when( 

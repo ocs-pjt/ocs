@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
  
   private
 
+    # GIST : https://gist.github.com/josevalim/fb706b1e933ef01e4fb6#file-2_safe_token_authentication-rb
     def authenticate_user_from_token!
       user_email = params[:user_email].presence
       user = user_email && User.find_by_email(user_email)
