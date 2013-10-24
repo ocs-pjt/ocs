@@ -1,6 +1,6 @@
 Ocs::Application.routes.draw do
   root to: "home#index"
-  devise_for :users, controllers: {registrations: "registrations"}
+  devise_for :users, controllers: {registrations: "registrations"}, token_authentication_key: 'authentication_key'
 
   post 'permutations/collect', to: 'permutations#collect'
   
@@ -13,4 +13,5 @@ Ocs::Application.routes.draw do
   end
 
   get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
+
 end
