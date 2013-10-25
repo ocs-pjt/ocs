@@ -13,7 +13,7 @@ initialize = ->
         )
       ).done( (result1, result2)->
         $('#download_collector span').html("<a href='" + result1[0]['url'] + "'>" + result1[0]['filename'] + "</a>")
-        $('#auth_token span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
+        #$('#auth_token span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
       )
 
 $(document).ready(initialize)

@@ -38,7 +38,10 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'thin'
-  gem 'debugger', require: false
+  gem 'pry', '~> 0.9.7.4'
+  gem 'pry-remote'
+  gem 'pry-nav'
+  gem 'debugger2'
 end
 group :production do
   gem 'puma'

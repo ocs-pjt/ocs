@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :authenticate_user_from_token!
+  before_action :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, alert: exception.message
@@ -22,12 +23,13 @@ class ApplicationController < ActionController::Base
     # GIST : https://gist.github.com/josevalim/fb706b1e933ef01e4fb6#file-2_safe_token_authentication-rb
     def authenticate_user_from_token!
       user_email = params[:user_email].presence
-      user = user_email && User.find_by_email(user_email)
+      user = user_email && User.find_by(email: user_email)
        
       # Notice how we use Devise.secure_compare to compare the token
       # in the database with the token given in the params, mitigating
       # timing attacks.
-      if user && Devise.secure_compare(user.authentication_token, params[:user_token])
+
+      if user && Devise.secure_compare(user.authentication_token, params[:authentication_key])
         sign_in user, store: false
       end
     end
