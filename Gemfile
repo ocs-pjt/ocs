@@ -42,6 +42,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'debugger2'
+  gem 'mailcatcher'
 end
 group :production do
   gem 'puma'
