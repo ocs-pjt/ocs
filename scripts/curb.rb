@@ -3,15 +3,14 @@ require 'benchmark'
 
 data = ""
 
-ar = (1..100).to_a
-1.times do
+ar = (1..500).to_a
+9999.times do
   str = ar.shuffle.join(",")
   data << '{"name": "qsort", "permutation":"' << str << '"},'
 end
 data << '{"name": "mergesort", "permutation": "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"}'
 
 Benchmark.bm do |x|
-
   x.report do
     @http = Curl::Easy.http_post(
       "http://localhost:9292/permutations/collect",
@@ -23,5 +22,4 @@ Benchmark.bm do |x|
     end
   end
   puts @http.body_str
-
 end

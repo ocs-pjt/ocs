@@ -6,12 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   before_save :ensure_authentication_token
-  
 
   def self.authentication_token
     loop do
       token = Devise.friendly_token
-      break token unless to_adapter.find_first({ :authentication_token => token })
+      break token unless to_adapter.find_first({ authentication_token: token })
     end
   end
 
