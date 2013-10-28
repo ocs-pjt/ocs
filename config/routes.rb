@@ -1,6 +1,4 @@
 Ocs::Application.routes.draw do
-  resources :totos
-
   root to: "home#index"
   devise_for :users, controllers: {registrations: "registrations"}
 
