@@ -16,6 +16,11 @@ gem 'pg'
 gem 'rolify'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'carrierwave'
+gem 'mongoid', github: 'mongoid/mongoid'
+gem 'bson_ext'
+gem 'newrelic_rpm'
+gem 'ruby-prof'
+
 
 group :assets do
   gem 'therubyracer', platform: :ruby

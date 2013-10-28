@@ -3,9 +3,9 @@ require 'benchmark'
 
 data = ""
 
-ar = (1..500).to_a
-9999.times do
-  str = ar.shuffle.join(",")
+ar = (1..100).to_a
+49999.times do
+  str = ar.join(",")
   data << '{"name": "qsort", "permutation":"' << str << '"},'
 end
 data << '{"name": "mergesort", "permutation": "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"}'
@@ -14,7 +14,7 @@ Benchmark.bm do |x|
   x.report do
     @http = Curl::Easy.http_post(
       "http://localhost:9292/permutations/collect",
-      '{ "user_email": "test@test.com", "authentication_key": "x7gguuKpBv-gcMs-cA76", "data": [' + data + ']}'
+      '{ "user_email": "toto@test.com", "authentication_key": "x7gguuKpBv-gcMs-cA76", "data": [' + data + ']}'
     ) do |curl|
       curl.headers['Accept'] = 'application/json'
       curl.headers['Content-Type'] = 'application/json'

@@ -1,5 +1,13 @@
-class Permutation < ActiveRecord::Base
-  belongs_to :user
+class Permutation #< ActiveRecord::Base
+  #belongs_to :user
+  include Mongoid::Document
+  include Mongoid::Timestamps::Short
 
-  validates :permutation, presence: true
+  field :permutation,   type: String
+  field :name,          type: String
+  field :collector_id,  type: Integer
+  field :user_id,       type: Integer
+  field :use_case_id,   type: Integer
+
+  #validates :bla, presence: true
 end
