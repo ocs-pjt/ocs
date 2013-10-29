@@ -80,3 +80,6 @@ pickle-email-*.html
 
 # Ignore SHA1 hex digest
 .digest
+
+
+/config/deploy/production.rb
