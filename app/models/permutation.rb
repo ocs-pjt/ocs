@@ -9,5 +9,5 @@ class Permutation #< ActiveRecord::Base
   field :user_id,       type: Integer
   field :use_case_id,   type: Integer
 
-  #validates :bla, presence: true
+  validates :permutation, presence: true
 end
