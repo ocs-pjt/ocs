@@ -1,0 +1,5 @@
+task :uptime do |host|
+  on roles(:app), in: :parallel do
+    capture(:uptime)
+  end
+end
