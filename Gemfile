@@ -21,7 +21,6 @@ gem 'bson_ext'
 gem 'newrelic_rpm'
 gem 'ruby-prof'
 
-
 group :assets do
   gem 'therubyracer', platform: :ruby
 end

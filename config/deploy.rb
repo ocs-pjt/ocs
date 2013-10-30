@@ -15,12 +15,17 @@ set :pty, true
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-set :keep_releases, 3
+set :keep_releases, 5
+set :scm_verbose, false
 
 set :use_sudo, false 
 
 namespace :deploy do
-
+  desc "Start puma server"
+  task :start, roles: :app, except: {no_release: true} do
+    run "bundle exec puma -C config/puma.rb"
+  end
+  
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -41,3 +46,4 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 
 end
+
