@@ -8,6 +8,12 @@
     - if can? :manage, Collector
       %li
         = link_to 'Collectors', collectors_path
+    - if can? :manage, Program
+      %li
+        = link_to 'Programs', programs_path
+    - if can? :manage, Tag
+      %li
+        = link_to 'Tags', tags_path
     - if current_user.has_role? :admin
       %li
         = link_to 'Admin', users_path

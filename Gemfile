@@ -40,6 +40,7 @@ group :development do
   gem 'capistrano', '~> 3.0.0'
   gem 'capistrano-bundler'
   gem 'highline'
+  gem 'brakeman', :require => false
 end
 group :development, :test do
   gem 'factory_girl_rails'
