@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
 
     # GIST : https://gist.github.com/josevalim/fb706b1e933ef01e4fb6#file-2_safe_token_authentication-rb
     def authenticate_user_from_token!
-      user_email = params[:user_email].presence
-      user = user_email && User.find_by(email: user_email)
+      email = params[:email].presence
+      user = email && User.find_by(email: email)
        
       # Notice how we use Devise.secure_compare to compare the token
       # in the database with the token given in the params, mitigating
