@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 9b3bc1264032209b7a6c0e82d0ca656f401e476b
+  revision: 10d351f3e1e75c701e0fbc4be0c22c4284fff9b1
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0.0)
@@ -61,7 +61,7 @@ GEM
     bson_ext (1.5.1)
     builder (3.1.4)
     cancan (1.6.10)
-    capistrano (3.0.0)
+    capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
       sshkit (>= 0.0.23)
@@ -108,13 +108,13 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
-    factory_girl (4.2.0)
+    factory_girl (4.3.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
+    factory_girl_rails (4.3.0)
+      factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
     fastercsv (1.5.5)
-    ffi (1.9.2)
+    ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -220,7 +220,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.0)
       sprockets-rails (~> 2.0.0)
-    rails_layout (0.1.9)
+    rails_layout (0.2.2)
     railties (4.0.0)
       actionpack (= 4.0.0)
       activesupport (= 4.0.0)
