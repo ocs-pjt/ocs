@@ -1,32 +1,28 @@
-class Permutation #< ActiveRecord::Base
+class Permutation
   include Mongoid::Document
   include Mongoid::Timestamps::Short
 
-  field :permutation,   type: String
-  field :name,          type: String
-  field :user_id,       type: Integer
-  field :collector_id,  type: Integer
-  field :program_id,    type: Integer
-  field :tags_ids,      type: String
+  field :data,              type: String
+  field :function,          type: String
+  field :email,             type: String
+  field :collector_name,    type: String
+  field :collector_version, type: String
+  field :program_name,      type: String
+  field :program_version,   type: String    
+  field :tags,              type: String
 
-
-  validates :permutation, presence: true
-
+  validates :data, :function, :email, :collector_name, :collector_version, presence: true
 
   def user
-    User.find self.user_id
+    User.find_by(email: self.email)
   end
 
   def collector
-    Collector.find self.collector_id
+    ::Collector.find_by(collector_name: self.collector_name)
   end
 
   def program
-    Program.find self.program_id
-  end
-
-  def tags
-    self.tags_ids.split(",").map { |id| Tag.find id }
+    Program.find_by(name: self.program_name)
   end
 
 end

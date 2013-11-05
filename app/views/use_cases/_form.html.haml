@@ -1,0 +1,13 @@
+= simple_form_for(@use_case) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :key
+    = f.input :user_id
+    = f.input :collector_id
+    = f.input :collector_version_id
+    = f.input :program_id
+    = f.input :program_version_id
+
+  .form-actions
+    = f.button :submit

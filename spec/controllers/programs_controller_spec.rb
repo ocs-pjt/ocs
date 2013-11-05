@@ -20,6 +20,11 @@ require 'spec_helper'
 
 describe ProgramsController do
 
+  before (:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Program. As you add validations to Program, be sure to
   # adjust the attributes here as well.

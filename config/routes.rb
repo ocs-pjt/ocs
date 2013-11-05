@@ -1,4 +1,6 @@
 Ocs::Application.routes.draw do
+  resources :use_cases
+
   resources :tags
 
   resources :programs

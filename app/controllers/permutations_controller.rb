@@ -3,20 +3,27 @@ class PermutationsController < ApplicationController
   def collect
     response = "ok"
 
-
-    #DevelopmentProfiler::prof("import") do
-    user      = User.find_by(email: params[:email])
-    collector = ::Collector.find_by(name: params[:collector_name])
-    program   = Program.find_by(name: params[:program_name])
-    tags_ids  = params[:tags].split(",").map { |tag| Tag.find_by(name: tag).id }.join(",")
-
-    Permutation.collection.insert(params[:data]) do |p|
-      p.user_id       = user.id
-      p.collector_id  = collector.id
-      p.program_id    = program.id
-      p.tags_ids      = tags_ids
+    unless collector = ::Collector.find_by(name: params[:collector_name])
+          && CollectorVersion.find_by(version: params[:collector_version], collector_id: collector.id)
+      response = "Collector invalid"
     end
-    #end
+
+    unless use_case = UseCase.find_by(key: params[:use_case_key])
+      response = "Use Case key invalid"
+    end
+
+    if response == "ok"  
+      tags = use_case.joined_tags
+
+      Permutation.collection.insert(params[:items]) do |p|
+        p.email             = params[:email] # this param is safe (see application_controller.rb)
+        p.collector_name    = use_case.collector.name
+        p.collector_version = use_case.collector_version.version
+        p.program           = use_case.program_name
+        p.program_version   = use_case.program_version_version
+        p.tags              = tags
+      end
+    end
     
     respond_to do |format|
       format.json do

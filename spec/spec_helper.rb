@@ -1,5 +1,8 @@
-require 'simplecov'
-SimpleCov.start 'rails'
+if ENV['COVERAGE']
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -11,9 +14,21 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+
+# module for helping request specs
+module ValidUserRequestHelper
+  # for use in request specs
+  def sign_in_as_a_valid_user
+    @user ||= FactoryGirl.create :user
+    post_via_redirect user_session_path, 'user[email]' => @user.email, 'user[password]' => @user.password
+  end
+end
+
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
+  config.include ValidUserRequestHelper, :type => :request
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

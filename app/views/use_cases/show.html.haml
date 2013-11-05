@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Key:
+  = @use_case.key
+%p
+  %b User:
+  = @use_case.user_id
+%p
+  %b Collector:
+  = @use_case.collector_id
+%p
+  %b Collector version:
+  = @use_case.collector_version_id
+%p
+  %b Program:
+  = @use_case.program_id
+%p
+  %b Program version:
+  = @use_case.program_version_id
+
+= link_to 'Edit', edit_use_case_path(@use_case)
+\|
+= link_to 'Back', use_cases_path

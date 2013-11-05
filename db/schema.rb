@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104110059) do
+ActiveRecord::Schema.define(version: 20131105115156) do
 
   create_table "auth_tokens", force: true do |t|
     t.integer  "collector_id"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20131104110059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
+  end
+
+  create_table "collector_versions", force: true do |t|
+    t.string   "version"
+    t.integer  "collector_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "collectors", force: true do |t|
@@ -38,20 +45,19 @@ ActiveRecord::Schema.define(version: 20131104110059) do
     t.string   "name"
   end
 
+  create_table "program_versions", force: true do |t|
+    t.string   "version"
+    t.integer  "program_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "programs", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "programs_tags_sets", id: false, force: true do |t|
-    t.integer "program_id"
-    t.integer "tags_set_id"
-  end
-
-  add_index "programs_tags_sets", ["program_id", "tags_set_id"], name: "index_programs_tags_sets_on_program_id_and_tags_set_id", using: :btree
-  add_index "programs_tags_sets", ["program_id"], name: "index_programs_tags_sets_on_program_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -71,18 +77,24 @@ ActiveRecord::Schema.define(version: 20131104110059) do
     t.datetime "updated_at"
   end
 
-  create_table "tags_sets", force: true do |t|
+  create_table "tags_use_cases", id: false, force: true do |t|
+    t.integer "tag_id"
+    t.integer "use_case_id"
+  end
+
+  add_index "tags_use_cases", ["use_case_id", "tag_id"], name: "index_tags_use_cases_on_use_case_id_and_tag_id", using: :btree
+  add_index "tags_use_cases", ["use_case_id"], name: "index_tags_use_cases_on_use_case_id", using: :btree
+
+  create_table "use_cases", force: true do |t|
+    t.string   "key"
+    t.integer  "user_id"
+    t.integer  "collector_id"
+    t.integer  "collector_version_id"
+    t.integer  "program_id"
+    t.integer  "program_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "tags_tags_sets", id: false, force: true do |t|
-    t.integer "tag_id"
-    t.integer "tags_set_id"
-  end
-
-  add_index "tags_tags_sets", ["tag_id", "tags_set_id"], name: "index_tags_tags_sets_on_tag_id_and_tags_set_id", using: :btree
-  add_index "tags_tags_sets", ["tag_id"], name: "index_tags_tags_sets_on_tag_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
