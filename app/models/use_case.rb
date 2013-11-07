@@ -7,6 +7,8 @@ class UseCase < ActiveRecord::Base
 
   has_and_belongs_to_many :tags
 
+  validates :key, :user, :collector, presence: true
+
   def program_name
     program.try(:name)
   end

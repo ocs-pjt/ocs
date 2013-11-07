@@ -9,6 +9,9 @@ Ocs::Application.routes.draw do
 
   post 'permutations/collect', to: 'permutations#collect'
   get 'permutations/collect', to: 'permutations#collect'
+
+  post 'use_cases/get_key', to: 'use_cases#get_key'
+  get 'use_cases/get_key', to: 'use_cases#get_key'
   
   resources :users
 

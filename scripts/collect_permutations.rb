@@ -1,8 +1,8 @@
 require 'curb'
 require 'benchmark'
 
+### WEBSERVICE 2 ###
 data = ""
-
 ar = (1..200).to_a
 99.times do
   str = ar.join(",")
@@ -22,7 +22,7 @@ params =
 Benchmark.bm do |x|
   x.report do
 
-    100.times do
+    10.times do
       @http = Curl::Easy.http_post(
         "http://localhost:9292/permutations/collect",
         params

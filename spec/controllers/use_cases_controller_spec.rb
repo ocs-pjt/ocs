@@ -28,7 +28,7 @@ describe UseCasesController do
   # This should return the minimal set of attributes required to create a valid
   # UseCase. As you add validations to UseCase, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "key" => "MyString" } }
+  let(:valid_attributes) { { "key" => "MyString", user: @user, collector: FactoryGirl.create(:collector) } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -43,123 +43,9 @@ describe UseCasesController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested use_case as @use_case" do
-      use_case = UseCase.create! valid_attributes
-      get :show, {:id => use_case.to_param}, valid_session
-      assigns(:use_case).should eq(use_case)
-    end
+  describe "POST get_key" do 
+    it "generates a key"
+    it "returns an existing key"
+    it "tests all possible errors (to define later)"
   end
-
-  describe "GET new" do
-    it "assigns a new use_case as @use_case" do
-      get :new, {}, valid_session
-      assigns(:use_case).should be_a_new(UseCase)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested use_case as @use_case" do
-      use_case = UseCase.create! valid_attributes
-      get :edit, {:id => use_case.to_param}, valid_session
-      assigns(:use_case).should eq(use_case)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new UseCase" do
-        expect {
-          post :create, {:use_case => valid_attributes}, valid_session
-        }.to change(UseCase, :count).by(1)
-      end
-
-      it "assigns a newly created use_case as @use_case" do
-        post :create, {:use_case => valid_attributes}, valid_session
-        assigns(:use_case).should be_a(UseCase)
-        assigns(:use_case).should be_persisted
-      end
-
-      it "redirects to the created use_case" do
-        post :create, {:use_case => valid_attributes}, valid_session
-        response.should redirect_to(UseCase.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved use_case as @use_case" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        UseCase.any_instance.stub(:save).and_return(false)
-        post :create, {:use_case => { "key" => "invalid value" }}, valid_session
-        assigns(:use_case).should be_a_new(UseCase)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        UseCase.any_instance.stub(:save).and_return(false)
-        post :create, {:use_case => { "key" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested use_case" do
-        use_case = UseCase.create! valid_attributes
-        # Assuming there are no other use_cases in the database, this
-        # specifies that the UseCase created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        UseCase.any_instance.should_receive(:update).with({ "key" => "MyString" })
-        put :update, {:id => use_case.to_param, :use_case => { "key" => "MyString" }}, valid_session
-      end
-
-      it "assigns the requested use_case as @use_case" do
-        use_case = UseCase.create! valid_attributes
-        put :update, {:id => use_case.to_param, :use_case => valid_attributes}, valid_session
-        assigns(:use_case).should eq(use_case)
-      end
-
-      it "redirects to the use_case" do
-        use_case = UseCase.create! valid_attributes
-        put :update, {:id => use_case.to_param, :use_case => valid_attributes}, valid_session
-        response.should redirect_to(use_case)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the use_case as @use_case" do
-        use_case = UseCase.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        UseCase.any_instance.stub(:save).and_return(false)
-        put :update, {:id => use_case.to_param, :use_case => { "key" => "invalid value" }}, valid_session
-        assigns(:use_case).should eq(use_case)
-      end
-
-      it "re-renders the 'edit' template" do
-        use_case = UseCase.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        UseCase.any_instance.stub(:save).and_return(false)
-        put :update, {:id => use_case.to_param, :use_case => { "key" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested use_case" do
-      use_case = UseCase.create! valid_attributes
-      expect {
-        delete :destroy, {:id => use_case.to_param}, valid_session
-      }.to change(UseCase, :count).by(-1)
-    end
-
-    it "redirects to the use_cases list" do
-      use_case = UseCase.create! valid_attributes
-      delete :destroy, {:id => use_case.to_param}, valid_session
-      response.should redirect_to(use_cases_url)
-    end
-  end
-
 end

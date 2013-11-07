@@ -4,6 +4,7 @@ class Collector < ActiveRecord::Base
   has_many :collector_versions
 
   validates :name, :file, presence: true
+  validates :name, uniqueness: true
 
   def filename
     File.basename(self.file.path)

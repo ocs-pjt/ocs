@@ -1,5 +1,4 @@
 class UseCasesController < ApplicationController
-  before_action :set_use_case, only: [:show, :edit, :update, :destroy]
 
   # GET /use_cases
   # GET /use_cases.json
@@ -7,65 +6,46 @@ class UseCasesController < ApplicationController
     @use_cases = UseCase.all
   end
 
-  # GET /use_cases/1
-  # GET /use_cases/1.json
-  def show
-  end
+  # TODO : to split and move function in the use_case model
+  def get_key
+    if collector = ::Collector.find_by(name: params[:collector_name])
+      program = Program.find_by(name: params[:program_name])
 
-  # GET /use_cases/new
-  def new
-    @use_case = UseCase.new
-  end
+      use_cases = UseCase.where(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
+      
+      use_case = 
+        use_cases.select do |use_case|
+          Set.new(use_case.tags.map(&:name)) == Set.new(params[:tags])
+        end.first
 
-  # GET /use_cases/1/edit
-  def edit
-  end
-
-  # POST /use_cases
-  # POST /use_cases.json
-  def create
-    @use_case = UseCase.new(use_case_params)
-
-    respond_to do |format|
-      if @use_case.save
-        format.html { redirect_to @use_case, notice: 'Use case was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @use_case }
+      if use_case
+        response = use_case.key
       else
-        format.html { render action: 'new' }
-        format.json { render json: @use_case.errors, status: :unprocessable_entity }
+        tags = params[:tags].map do |tag_name|
+          Tag.find_or_create_by!(name: tag_name)
+        end if params[:tags]
+        u = UseCase.new(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
+        u.tags << tags if tags
+        u.key = SecureRandom.hex
+        
+        if u.save! 
+          response = u.key
+        else
+          response = "Couldn't generate key"
+        end 
       end
+    else
+      response = "Invalid collector name"
     end
-  end
 
-  # PATCH/PUT /use_cases/1
-  # PATCH/PUT /use_cases/1.json
-  def update
     respond_to do |format|
-      if @use_case.update(use_case_params)
-        format.html { redirect_to @use_case, notice: 'Use case was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @use_case.errors, status: :unprocessable_entity }
+      format.json do
+        render json: { response: response }.to_json, status: :ok
       end
-    end
-  end
-
-  # DELETE /use_cases/1
-  # DELETE /use_cases/1.json
-  def destroy
-    @use_case.destroy
-    respond_to do |format|
-      format.html { redirect_to use_cases_url }
-      format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_use_case
-      @use_case = UseCase.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def use_case_params
