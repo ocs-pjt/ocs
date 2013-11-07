@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131105115156) do
+ActiveRecord::Schema.define(version: 20131107102912) do
 
   create_table "auth_tokens", force: true do |t|
     t.integer  "collector_id"
@@ -36,13 +36,11 @@ ActiveRecord::Schema.define(version: 20131105115156) do
   end
 
   create_table "permutations", force: true do |t|
-    t.text     "permutation"
+    t.text     "data"
+    t.string   "function"
+    t.integer  "use_case_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "use_case_id"
-    t.integer  "collector_id"
-    t.string   "name"
   end
 
   create_table "program_versions", force: true do |t|
@@ -77,7 +75,7 @@ ActiveRecord::Schema.define(version: 20131105115156) do
     t.datetime "updated_at"
   end
 
-  create_table "tags_use_cases", id: false, force: true do |t|
+  create_table "tags_use_cases", force: true do |t|
     t.integer "tag_id"
     t.integer "use_case_id"
   end

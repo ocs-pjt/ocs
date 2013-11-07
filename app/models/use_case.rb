@@ -7,7 +7,6 @@ class UseCase < ActiveRecord::Base
 
   has_and_belongs_to_many :tags
 
-
   def program_name
     program.try(:name)
   end
@@ -15,4 +14,9 @@ class UseCase < ActiveRecord::Base
   def program_version_version
     program_version.try(:version)
   end
+
+  def joined_tags
+    self.tags.all.map(&:name).join(",")
+  end
+
 end

@@ -1,6 +1,6 @@
 class CreateUseCaseTag < ActiveRecord::Migration
   def self.up
-    create_table :tags_use_cases, :id => false do |t|
+    create_table :tags_use_cases do |t|
       t.references :tag
       t.references :use_case
     end

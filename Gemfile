@@ -20,6 +20,7 @@ gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bson_ext'
 gem 'newrelic_rpm'
 gem 'ruby-prof'
+gem 'sidekiq'
 
 group :assets do
   gem 'therubyracer', platform: :ruby
@@ -41,6 +42,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'highline'
   gem 'brakeman', :require => false
+  gem 'populator', require: false
 end
 group :development, :test do
   gem 'factory_girl_rails'
@@ -51,6 +53,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'debugger2'
   gem 'mailcatcher'
+  gem 'faker'
 end
 group :production do
   gem 'puma'
