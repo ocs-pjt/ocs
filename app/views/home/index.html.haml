@@ -1,12 +1,29 @@
 %h3 Home
 
 - if user_signed_in?
-  %p Select a collector
-  = select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), include_blank: true
-  
-  #download_collector
-    Download collector :
-    %span
-  / #auth_token 
-  /   Auth token : 
-  /   %span
+  = form_tag get_key_from_form_use_cases_path, id: "generate-key-form" do
+    %p * Select a collector :
+    = select_tag "collector-list", options_from_collection_for_select(@collectors, "id", "name"), include_blank: true, name: "collector_id"
+
+    #download_collector
+      Download collector :
+      %span
+    / #auth_token 
+    /   Auth token : 
+    /   %span
+    %br
+    %p Select a program : 
+    = select_tag "program-list", options_from_collection_for_select(Program.all, "id", "name"), include_blank: true, name: "program_id"
+
+    %br
+    %p Select tags :
+    = select_tag "tag-list", options_from_collection_for_select(Tag.all, "id", "name"), multiple: true, include_blank: true, name: "tag_ids[]"
+
+    %br
+    %br
+    =submit_tag "Generate key", data: { disable_with: 'Please wait...' }, class: "btn btn-primary"
+    %br
+    %br
+    #use_case_key
+      Key :
+      %span

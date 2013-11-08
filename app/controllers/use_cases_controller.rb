@@ -45,6 +45,40 @@ class UseCasesController < ApplicationController
     end
   end
 
+
+  def get_key_from_form
+    if collector = ::Collector.find_by(id: params[:collector_id].to_i)
+      program = Program.find_by(id: params[:program_id].to_i)
+
+      use_cases = UseCase.where(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
+      
+      tags = params[:tag_ids].map{ |tag_id| Tag.find(tag_id) }
+
+      use_case = 
+        use_cases.select do |use_case|
+          Set.new(use_case.tags.map(&:name)) == Set.new(tags.map(&:name))
+        end.first
+
+      if use_case
+        response = use_case.key
+      else
+        u = UseCase.new(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
+        u.tags << tags if tags
+        u.key = SecureRandom.hex
+        
+        if u.save! 
+          response = u.key
+        else
+          response = "Couldn't generate key"
+        end 
+      end
+    else
+      response = "Invalid collector name"
+    end
+
+    render json: { response: response }.to_json, status: :ok if request.xhr?
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.

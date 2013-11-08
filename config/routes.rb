@@ -1,5 +1,12 @@
 Ocs::Application.routes.draw do
-  resources :use_cases
+  resources :use_cases, only: :index do
+    collection do
+      post 'get_key', to: 'use_cases#get_key'
+      get 'get_key', to: 'use_cases#get_key'
+      post 'get_key_from_form', to: 'use_cases#get_key_from_form'
+      get 'get_key_from_form', to: 'use_cases#get_key_from_form'
+    end
+  end
 
   resources :tags
 
@@ -10,9 +17,6 @@ Ocs::Application.routes.draw do
   post 'permutations/collect', to: 'permutations#collect'
   get 'permutations/collect', to: 'permutations#collect'
 
-  post 'use_cases/get_key', to: 'use_cases#get_key'
-  get 'use_cases/get_key', to: 'use_cases#get_key'
-  
   resources :users
 
   resources :collectors
@@ -20,5 +24,4 @@ Ocs::Application.routes.draw do
   get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
 
   root to: "home#index"
-
 end

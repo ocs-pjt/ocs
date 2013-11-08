@@ -1,6 +1,6 @@
 %h1 Listing use_cases
 
-%table
+%table.table
   %tr
     %th Key
     %th User
@@ -20,10 +20,5 @@
       %td= use_case.collector_version_id
       %td= use_case.program_id
       %td= use_case.program_version_id
-      %td= link_to 'Show', use_case
-      %td= link_to 'Edit', edit_use_case_path(use_case)
-      %td= link_to 'Destroy', use_case, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
-
-= link_to 'New Use case', new_use_case_path

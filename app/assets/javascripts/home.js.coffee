@@ -16,5 +16,15 @@ initialize = ->
         #$('#auth_token span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
       )
 
+  $('#generate-key-form').on 'submit', (event)->
+    event.preventDefault()
+    $.getJSON(
+      $(this).attr("action"),
+      $(this).serialize()
+    ).done( (result) ->
+      $('#use_case_key span').html(result['response'])
+      $("#generate-key-form input[type=submit]").removeAttr("disabled")
+      $("#generate-key-form input[type=submit]").val("Generate key")
+    )
 $(document).ready(initialize)
 $(document).on('page:load', initialize)

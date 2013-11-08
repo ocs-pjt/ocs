@@ -3,8 +3,8 @@ require 'benchmark'
 
 ### WEBSERVICE 2 ###
 data = ""
-ar = (1..200).to_a
-99.times do
+ar = (1..10).to_a
+9.times do
   str = ar.join(",")
   data << '{"function": "qsort", "data":"' << str << '"},'
 end
@@ -21,8 +21,7 @@ params =
 
 Benchmark.bm do |x|
   x.report do
-
-    10.times do
+    1000.times do
       @http = Curl::Easy.http_post(
         "http://localhost:9292/permutations/collect",
         params
