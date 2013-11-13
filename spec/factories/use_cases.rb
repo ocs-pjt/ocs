@@ -2,11 +2,15 @@
 
 FactoryGirl.define do
   factory :use_case do
-    key "MyString"
-    user_id 1
-    collector_id 1
-    collector_version_id 1
-    program_id 1
-    program_version_id 1
+    key "abc"
+    user
+    collector
+    collector_version
+    program
+    program_version
+
+    factory :use_case_with_tags do 
+      tags { [FactoryGirl.create(:tag), FactoryGirl.create(:tag)] }
+    end
   end
 end

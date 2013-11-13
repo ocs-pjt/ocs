@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :collector do
-    name "MyString"
+    sequence(:name) { |n| "Ruby#{n}" }
     file Rack::Test::UploadedFile.new(File.open(Rails.root.join('spec', 'fixtures','files', 'fake.txt')))
   end
 end

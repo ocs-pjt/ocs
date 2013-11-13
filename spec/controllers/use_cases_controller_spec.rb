@@ -22,13 +22,14 @@ describe UseCasesController do
 
   before (:each) do
     @user = FactoryGirl.create(:user)
+    @use_case = FactoryGirl.create(:use_case, user: @user)
     sign_in @user
   end
 
   # This should return the minimal set of attributes required to create a valid
   # UseCase. As you add validations to UseCase, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "key" => "MyString", user: @user, collector: FactoryGirl.create(:collector) } }
+  let(:valid_attributes) { { "key" => "abc", user: @user, collector: @collector } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -37,15 +38,40 @@ describe UseCasesController do
 
   describe "GET index" do
     it "assigns all use_cases as @use_cases" do
-      use_case = UseCase.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:use_cases).should eq([use_case])
+      assigns(:use_cases).should eq([@use_case])
     end
   end
 
   describe "POST get_key" do 
-    it "generates a key"
-    it "returns an existing key"
-    it "tests all possible errors (to define later)"
+    it "returns an error if the collector doesn't exist" do 
+      post :get_key, {collector_name: "C+++", program_name: @use_case.program.name}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+      expect(response.body).to eql "{\"response\":\"Invalid collector name\"}"
+      expect(response.response_code).to be 200 
+    end
+
+    it "returns an error if the collector version is incorrect"
+
+    it 'returns a message with the key in it' do 
+      post :get_key, {collector_name: @use_case.collector.name, program_name: @use_case.program.name}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+      expect(response.body).to eql "{\"response\":\"#{@use_case.key}\"}"
+      expect(response.response_code).to be 200 
+    end
+  end
+
+  describe "POST get_key_from_form" do 
+    it "returns an error if the collector doesn't exist" do
+      xhr :post, :get_key_from_form, {collector_id: nil, program_id: @use_case.program.id}
+      expect(response.body).to eql "{\"response\":\"Invalid collector name\"}"
+      expect(response.response_code).to be 200 
+    end
+
+    it "returns an error if the collector version is incorrect"
+
+    it 'returns a message with the key in it' do 
+      xhr :post, :get_key_from_form, {collector_id: @use_case.collector.id, program_id: @use_case.program.id}
+      expect(response.body).to eql "{\"response\":\"#{@use_case.key}\"}"
+      expect(response.response_code).to be 200 
+    end
   end
 end

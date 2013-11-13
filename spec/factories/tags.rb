@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :tag do
-    name "MyString"
+    sequence(:name) { |n| "Mathematic#{n}" }
     description "MyText"
   end
 end

@@ -13,4 +13,12 @@ class Collector < ActiveRecord::Base
   def url
     self.file.url
   end
+
+  def self.with_name(name)
+    find_by(name: name.try(:strip))
+  end
+
+  def self.with_id(id)
+    find_by(id: id)
+  end
 end

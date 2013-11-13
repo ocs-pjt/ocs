@@ -6,71 +6,39 @@ class UseCasesController < ApplicationController
     @use_cases = UseCase.all
   end
 
-  # TODO : to split and move function in the use_case model
   def get_key
-    if collector = ::Collector.find_by(name: params[:collector_name])
-      program = Program.find_by(name: params[:program_name])
+    if collector = ::Collector.with_name(params[:collector_name])
+      program_id = Program.with_name(params[:program_name]).try(:id)
+      tag_names = Tag.tag_names_from_str(params[:tags])
 
-      use_cases = UseCase.where(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
+      use_cases = UseCase.with_params(current_user.id, collector.id, program_id)
       
-      use_case = 
-        use_cases.select do |use_case|
-          Set.new(use_case.tags.map(&:name)) == Set.new(params[:tags])
-        end.first
-
-      if use_case
+      if use_case = use_cases.select_use_case_with_tag_names(tag_names).first
         response = use_case.key
       else
-        tags = params[:tags].map do |tag_name|
-          Tag.find_or_create_by!(name: tag_name)
-        end if params[:tags]
-        u = UseCase.new(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
-        u.tags << tags if tags
-        u.key = SecureRandom.hex
-        
-        if u.save! 
-          response = u.key
-        else
-          response = "Couldn't generate key"
-        end 
+        tags = Tag.find_or_create_tags(tag_names)
+        response = save_use_case_with_tags(current_user.id, collector.id, program_id, tags)
       end
     else
       response = "Invalid collector name"
     end
 
-    respond_to do |format|
-      format.json do
-        render json: { response: response }.to_json, status: :ok
-      end
-    end
+    render json: { response: response }.to_json, status: :ok
   end
 
 
   def get_key_from_form
-    if collector = ::Collector.find_by(id: params[:collector_id].to_i)
-      program = Program.find_by(id: params[:program_id].to_i)
 
-      use_cases = UseCase.where(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
+    if collector = ::Collector.with_id(params[:collector_id])
+      program_id = Program.with_id(params[:program_id]).try(:id)
+
+      use_cases = UseCase.with_params(current_user.id, collector.id, program_id)
+      tags = Tag.with_ids(params[:tag_ids])
       
-      tags = params[:tag_ids].map{ |tag_id| Tag.find(tag_id) }
-
-      use_case = 
-        use_cases.select do |use_case|
-          Set.new(use_case.tags.map(&:name)) == Set.new(tags.map(&:name))
-        end.first
-
-      if use_case
+      if use_case = use_cases.select_use_case_with_tags(tags).first
         response = use_case.key
       else
-        u = UseCase.new(user_id: current_user.id, collector_id: collector.id, program_id: program.try(:id))
-        u.tags << tags if tags
-        u.key = SecureRandom.hex
-        
-        if u.save! 
-          response = u.key
-        else
-          response = "Couldn't generate key"
-        end 
+        response = save_use_case_with_tags(current_user.id, collector.id, program_id, tags)
       end
     else
       response = "Invalid collector name"
@@ -79,7 +47,13 @@ class UseCasesController < ApplicationController
     render json: { response: response }.to_json, status: :ok if request.xhr?
   end
 
+  
   private
+
+    def save_use_case_with_tags(user_id, collector_id, program_id, tags)
+      uc = UseCase.new_use_case_with_tags(user_id, collector_id, program_id, tags) 
+      uc.save! ? uc.key : "Couldn't generate key"
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def use_case_params

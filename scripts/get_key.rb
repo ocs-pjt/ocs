@@ -7,14 +7,15 @@ params =
   [
     '{"email": "test@test.com"', 
     '"authentication_key": "YWyHE936yyeMAV9jvKDE"', 
-    '"collector_name": "RUBY"}'
+    '"collector_name": "RUBY"',
+    '"tags": "Biology, Genomic, Something stupid, Something stupid4"}'
   ].join(", ")
 
 
 Benchmark.bm do |x|
   x.report do
     @http = Curl::Easy.http_post(
-      "http://localhost:9292/use_cases/get_key",
+      "http://localhost:3000/use_cases/get_key",
       params
     ) do |curl|
       curl.headers['Accept']        = 'application/json'
