@@ -23,5 +23,7 @@ Ocs::Application.routes.draw do
 
   get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
 
+  resources :concurrents
+
   root to: "home#index"
 end

@@ -21,6 +21,8 @@ gem 'bson_ext'
 gem 'newrelic_rpm'
 gem 'ruby-prof'
 gem 'sidekiq'
+gem 'activeresource', require: 'active_resource'
+gem 'activeresource-persistent', require: 'active_resource/persistent'
 
 group :assets do
   gem 'therubyracer', platform: :ruby
@@ -33,7 +35,7 @@ group :development do
   gem 'guard-rspec'
   gem 'html2haml'
   gem 'hub', require: nil
-  gem 'quiet_assets'
+  #gem 'quiet_assets'
   gem 'rails_layout'
   gem 'rb-fchange', require: false
   gem 'rb-fsevent', require: false
@@ -55,9 +57,9 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'faker'
 end
-group :production do
+#group :production do
   gem 'puma'
-end
+#end
 group :test do
   gem 'capybara'
   gem 'database_cleaner', '1.0.1'

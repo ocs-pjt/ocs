@@ -15,11 +15,7 @@ class PermutationsController < ApplicationController
       response = "Use Case key invalid"
     end
     
-    respond_to do |format|
-      format.json do
-        render json: { response: response }.to_json, status: :ok
-      end
-    end
+    render json: { response: response }.to_json, status: :ok
   end
 
 end
