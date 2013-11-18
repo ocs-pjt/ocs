@@ -79,11 +79,11 @@ Ocs::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # TODO : to define later
-  config.action_mailer.default_url_options = {host: 'yourdomain.com'}
+  config.action_mailer.default_url_options = {host: 'cornflakes.univ-mlv.fr'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "127.0.0.1",
+    address: "193.55.63.80",
     port:    25,
-    domain:  'yourdomain.com'
+    domain:  'univ-mlv.fr'
   }
 end

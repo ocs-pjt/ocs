@@ -1,6 +1,6 @@
 # rails_env = ENV['RAILS_ENV'] || 'development'
 
-threads 4,4
+threads 4,8
 
 # bind  "unix:///home/institut/egret/ocs/shared/tmp/puma/ocs-puma.sock"
 # pidfile "/home/institut/egret/ocs/current/tmp/puma/pid"

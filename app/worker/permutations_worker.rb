@@ -7,7 +7,7 @@ class PermutationsWorker
 
     inserts = []
     params['items'].each do |h|
-      inserts.push "('#{h['function']}', '#{h['data']}', #{params['use_case_id']}, '#{time}')"
+      inserts.push "('#{h['data']}', '#{h['function']}', #{params['use_case_id']}, '#{time}')"
     end
     sql = "INSERT INTO permutations (data, function, use_case_id, created_at) VALUES #{inserts.join(", ")}"
     ActiveRecord::Base.connection.execute sql

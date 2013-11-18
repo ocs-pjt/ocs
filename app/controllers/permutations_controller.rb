@@ -1,21 +1,30 @@
 class PermutationsController < ApplicationController
 
   def collect
-    if use_case = UseCase.find_by(key: params[:use_case_key].strip)
-      if collector = use_case.collector
-        if collector_version = use_case.collector_version
-          PermutationsWorker.perform_async({items: params[:items], use_case_id: use_case.id})
+    if params[:items].presence
+      if use_case = UseCase.find_by(key: params[:use_case_key].strip)
+        if collector = use_case.collector
+          if collector_version = use_case.collector_version
+            PermutationsWorker.perform_async({items: params[:items], use_case_id: use_case.id})
+          else
+            response = "Collector version invalid"
+          end
         else
-          response = "Collector version invalid"
+          response = "Collector name invalid"
         end
       else
-        response = "Collector name invalid"
+        response = "Use Case key invalid"
       end
     else
-      response = "Use Case key invalid"
+      response = "No data to proceed"
     end
-    
-    render json: { response: response }.to_json, status: :ok
+
+    if response
+      render json: { response: response }.to_json, status: :ok
+    else
+      render nothing: true
+    end
+
   end
 
 end

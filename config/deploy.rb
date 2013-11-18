@@ -51,3 +51,11 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup', 'deploy:start'
 end
 
+namespace :puma do
+  desc "Start the application"
+  task :start, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec puma -t 8:16 -b 'unix://#{shared_path}/sockets/puma.sock' -S #{shared_path}/sockets/puma.state --control 'unix://#{shared_path}/sockets/pumactl.sock' >> #{shared_path}/log/puma-#{rails_env}.log 2>&1 &", :pty => false
+  end
+  after "deploy:start", "puma:start"
+end
+
