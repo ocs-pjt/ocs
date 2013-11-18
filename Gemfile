@@ -42,6 +42,7 @@ group :development do
   gem 'rb-inotify', require: false
   gem 'capistrano', '~> 3.0.0'
   gem 'capistrano-bundler'
+  gem 'rvm1-capistrano3', require: false
   gem 'highline'
   gem 'brakeman', :require => false
   gem 'populator', require: false

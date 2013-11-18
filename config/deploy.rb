@@ -48,5 +48,10 @@ namespace :deploy do
     end
   end
 
+
+
+  before 'deploy', 'rvm1:install:rvm'  # install/update RVM
   after :finishing, 'deploy:cleanup', 'deploy:start'
+
+
 end
