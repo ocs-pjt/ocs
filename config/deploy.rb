@@ -44,14 +44,7 @@ namespace :deploy do
 
   before :updated, :bundle do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{release_path} && bundle install"
+      #execute "cd #{release_path} && bundle install"
     end
   end
-
-
-
-  before 'deploy', 'rvm1:install:rvm'  # install/update RVM
-  after :finishing, 'deploy:cleanup', 'deploy:start'
-
-
 end

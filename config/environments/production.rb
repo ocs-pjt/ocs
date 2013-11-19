@@ -84,6 +84,8 @@ Ocs::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "193.55.63.80",
     port:    25,
-    domain:  'univ-mlv.fr'
+    domain:  'univ-mlv.fr',
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
   }
 end

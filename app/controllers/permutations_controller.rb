@@ -5,7 +5,13 @@ class PermutationsController < ApplicationController
       if use_case = UseCase.find_by(key: params[:use_case_key].strip)
         if collector = use_case.collector
           if collector_version = use_case.collector_version
-            PermutationsWorker.perform_async({items: params[:items], use_case_id: use_case.id})
+            time = Time.now
+            inserts = []
+            params['items'].each do |h|
+              inserts.push "('#{h['data']}', '#{h['function']}', #{use_case.id}, '#{time}')"
+            end
+            sql = "INSERT INTO permutations (data, function, use_case_id, created_at) VALUES #{inserts.join(", ")}"
+            ActiveRecord::Base.connection.execute sql
           else
             response = "Collector version invalid"
           end
