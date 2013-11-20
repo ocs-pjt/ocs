@@ -21,7 +21,20 @@ set :scm_verbose, false
 namespace :deploy do
   task :start do
     on roles(:all) do 
-      execute "bundle exec puma -C config/puma.rb" 
+      #execute "bundle exec puma -C config/puma.rb" 
+    end
+  end
+
+  namespace :assets do
+    desc 'Run the precompile assets task'
+    task :precompile do 
+      on roles(:web), :except => { :no_release => true } do
+        # within fetch(:latest_release_directory) do
+        #with rails_env: fetch(:rails_env) do
+          execute 'pwd'
+        #end
+        # end
+      end
     end
   end
 
@@ -48,3 +61,5 @@ namespace :deploy do
     end
   end
 end
+
+after 'deploy:updated', 'deploy:assets:precompile'
