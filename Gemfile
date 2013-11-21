@@ -42,6 +42,7 @@ group :development do
   gem 'rb-fsevent', require: false
   gem 'rb-inotify', require: false
   gem 'capistrano', '~> 3.0.0'
+  gem "rvm1-capistrano3", "~> 0.9.1"
   gem 'highline'
   gem 'brakeman', :require => false
   gem 'populator', require: false

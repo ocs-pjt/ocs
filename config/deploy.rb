@@ -12,7 +12,7 @@ set :deploy_to, "/home/institut/#{fetch(:user)}/#{fetch(:application)}"
 set :pty, true
 
 set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 3
@@ -29,11 +29,11 @@ namespace :deploy do
     desc 'Run the precompile assets task'
     task :precompile do 
       on roles(:web), :except => { :no_release => true } do
-        # within fetch(:latest_release_directory) do
-        #with rails_env: fetch(:rails_env) do
-          execute 'pwd'
-        #end
-        # end
+        within fetch(:release_path) do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'assets:precompile'
+          end
+        end
       end
     end
   end
@@ -57,7 +57,11 @@ namespace :deploy do
 
   before :updated, :bundle do
     on roles(:app), in: :sequence, wait: 5 do
-      #execute "cd #{release_path} && bundle install"
+      within(fetch(:release_path)) do 
+        with rails_env: fetch(:rails_env) do
+          execute :bundle
+        end
+      end
     end
   end
 end
