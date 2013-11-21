@@ -1,4 +1,4 @@
-h1. Ocs !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs
+h1. Ocs !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs
 
 This application was generated with the "rails_apps_composer":https://github.com/RailsApps/rails_apps_composer gem provided by the "RailsApps Project":http://railsapps.github.io/.
 
