@@ -9,6 +9,7 @@ user = User.new(email: 'test@test.com',
                 password_confirmation: 'test1234')
 user.confirm!
 user.authentication_token = "YWyHE936yyeMAV9jvKDE"
+user.add_role :normal
 user.save!
 
 user2 = User.new(email: 'vialette@univ-mlv.fr',
@@ -16,6 +17,7 @@ user2 = User.new(email: 'vialette@univ-mlv.fr',
                 password_confirmation: 'test1234')
 user2.confirm!
 user2.authentication_token = "GNp72m1Tmu9Hym4a7h6n"
+user2.add_role :admin
 user2.save!
 
 Tag.create!([{name: 'Genomic'}, {name: 'Mathematic'}])

@@ -43,6 +43,9 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
+      within(shared_path.join("tmp/puma")) do
+        # execute 'pumactl -s state restart'
+      end
     end
   end
 

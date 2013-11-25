@@ -8,11 +8,12 @@ class Ability
 
     if user.has_role? :admin
       can :manage, :all
+      can :manage, Collector
+      can :manage, Program
+      can :manage, Tag
     end
 
-    can :manage, Collector
-    can :manage, Program
-    can :manage, Tag
+    
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
