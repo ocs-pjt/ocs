@@ -12,7 +12,7 @@ Ocs::Application.routes.draw do
 
   resources :programs
 
-  devise_for :users, controllers: {registrations: "registrations"}
+  devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
 
   post 'permutations/collect', to: 'permutations#collect'
   get 'permutations/collect', to: 'permutations#collect'

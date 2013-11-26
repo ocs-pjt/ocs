@@ -24,6 +24,9 @@ gem 'ruby-prof'
 gem 'sidekiq'
 gem 'activeresource', require: 'active_resource'
 gem 'activeresource-persistent', require: 'active_resource/persistent'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'zocial'
 
 group :assets do
   gem 'therubyracer', platform: :ruby

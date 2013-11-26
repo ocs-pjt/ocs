@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   rolify
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
+         :recoverable, :rememberable, :trackable, :validatable, 
+         :confirmable, :lockable, :omniauthable, omniauth_providers: [:facebook]
 
   before_save :ensure_authentication_token
 
@@ -21,4 +22,24 @@ class User < ActiveRecord::Base
   def reset_authentication_token
     self.authentication_token = self.class.authentication_token
   end
+
+  # For login in with facebook
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(provider: auth.provider, uid: auth.uid).first
+    
+    unless user
+      user = User.new(name: auth.extra.raw_info.name,
+                          provider: auth.provider,
+                          uid: auth.uid,
+                          email: auth.info.email,
+                          password: Devise.friendly_token[0,20])
+    
+
+      user.skip_confirmation!
+      user.save!
+    end
+
+    user
+  end
+
 end
