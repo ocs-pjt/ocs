@@ -12,7 +12,7 @@ set :deploy_to, "/home/institut/#{fetch(:user)}/#{fetch(:application)}"
 set :pty, true
 
 set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets public/uploads}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 3
@@ -43,9 +43,9 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      within(shared_path.join("tmp/puma")) do
-        # execute 'pumactl -s state restart'
-      end
+      # within(shared_path.join("tmp/puma")) do
+      #   execute 'pumactl -s state restart'
+      # end
     end
   end
 
