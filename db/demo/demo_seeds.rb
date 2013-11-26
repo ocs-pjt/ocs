@@ -10,6 +10,7 @@ user = User.new(email: 'test@test.com',
 user.confirm!
 user.authentication_token = "YWyHE936yyeMAV9jvKDE"
 user.add_role :normal
+user.locked_at = Time.now
 user.save!
 
 user2 = User.new(email: 'vialette@univ-mlv.fr',

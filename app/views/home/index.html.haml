@@ -17,7 +17,7 @@
 
     %br
     %p Select tags :
-    = select_tag "tag-list", options_from_collection_for_select(Tag.all, "id", "name"), multiple: true, include_blank: true, name: "tag_ids[]"
+    = select_tag "tag-list", options_from_collection_for_select(Tag.all, "id", "name"), multiple: true, name: "tag_ids[]"
 
     %br
     %br
