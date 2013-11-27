@@ -26,6 +26,7 @@ gem 'activeresource', require: 'active_resource'
 gem 'activeresource-persistent', require: 'active_resource/persistent'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 group :assets do
   gem 'therubyracer', platform: :ruby

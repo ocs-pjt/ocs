@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
-         :confirmable, :lockable, :omniauthable, omniauth_providers: [:facebook]
+         :confirmable, :lockable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   before_save :ensure_authentication_token
 
@@ -34,7 +34,22 @@ class User < ActiveRecord::Base
                           email: auth.info.email,
                           password: Devise.friendly_token[0,20])
     
+      user.skip_confirmation!
+      user.save!
+    end
 
+    user
+  end
+
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    data = access_token.info
+    user = User.where(email: data["email"]).first
+
+    unless user
+      user = User.new(name: data["name"],
+           email: data["email"],
+           password: Devise.friendly_token[0,20]
+          )
       user.skip_confirmation!
       user.save!
     end
