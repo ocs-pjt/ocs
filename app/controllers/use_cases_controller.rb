@@ -8,7 +8,7 @@ class UseCasesController < ApplicationController
 
   def get_key
     if collector = ::Collector.with_name(params[:collector_name])
-      program_id = Program.with_name(params[:program_name]).try(:id)
+      program_id = Program.find_or_create_with_name(params[:program_name]).try(:id)
       tag_names = Tag.tag_names_from_str(params[:tags])
 
       use_cases = UseCase.with_params(current_user.id, collector.id, program_id)
@@ -28,7 +28,6 @@ class UseCasesController < ApplicationController
 
 
   def get_key_from_form
-
     if collector = ::Collector.with_id(params[:collector_id])
       program_id = Program.with_id(params[:program_id]).try(:id)
 
