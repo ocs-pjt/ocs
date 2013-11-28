@@ -3,18 +3,38 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 initialize = ->
-  $('#collector-list').on 'click', ->
-    unless $(this).val() == ""
-      $.when( 
-        $.getJSON('/collectors/' + $(this).val()), 
-        $.getJSON(
-          '/auth_tokens/create_or_get',
-          { collector_id: $(this).val() }
-        )
-      ).done( (result1, result2)->
-        $('#download_collector span').html("<a href='" + result1[0]['url'] + "'>" + result1[0]['filename'] + "</a>")
-        #$('#auth_token span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
-      )
+  # on 'change' doesn't work as expected on certain versions of IE.
+  # put on 'click' if needed
+  $('#collector-list').on 'change', ->
+    $.ajax
+      url: '/collectors/' + $(this).val() + '/versions'
+      success: (options) ->
+        console.log options.length
+        html = ''
+        options.forEach (option) ->
+          html += "<option value='" + option['id'] + "'>" + option['version'] + "</option>"
+        $("#collector-version-list").html(html)
+        $.ajax
+          url: '/collector_versions/' + $("#collector-version-list").val()
+          dataType: 'json'
+          success: (result) ->
+            $('#download_collector span').html("<a href='" + result['url'] + "'>" + result['filename'] + "</a>")
+
+      # $.when( 
+      #   $.getJSON('/collectors/versions')
+      # ,
+      #   $.getJSON('/collector_versions/' + $("#collector-version-list").val())
+      # ).done( (result1, result2)->
+      #   # $('#collector-version-list').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
+      #   $('#download_collector span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
+      # )
+
+  $('#collector-version-list').on 'change', ->
+    $.ajax
+      url: '/collector_versions/' + $(this).val()
+      dataType: 'json'
+      success: (result) ->
+        $('#download_collector span').html("<a href='" + result['url'] + "'>" + result['filename'] + "</a>")
 
   $('#generate-key-form').on 'submit', (event)->
     event.preventDefault()
@@ -26,5 +46,7 @@ initialize = ->
       $("#generate-key-form input[type=submit]").removeAttr("disabled")
       $("#generate-key-form input[type=submit]").val("Generate key")
     )
+  
+
 $(document).ready(initialize)
 $(document).on('page:load', initialize)

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :program_version do
-    version "MyString"
-    program_id 1
+    sequence(:version) { |n| "1.0.#{n}" }
+    program
   end
 end

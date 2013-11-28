@@ -1,5 +1,5 @@
 class CollectorsController < ApplicationController
-  before_action :set_collector, only: [:show, :edit, :update, :destroy]
+  before_action :set_collector, only: [:show, :edit, :update, :destroy, :versions]
 
   # GET /collectors
   # GET /collectors.json
@@ -61,6 +61,10 @@ class CollectorsController < ApplicationController
     end
   end
 
+  def versions
+    @collector_versions = @collector.collector_versions
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_collector
@@ -69,6 +73,6 @@ class CollectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def collector_params
-      params.require(:collector).permit(:name, :file)
+      params.require(:collector).permit(:name)
     end
 end

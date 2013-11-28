@@ -29,7 +29,7 @@ describe UseCasesController do
   # This should return the minimal set of attributes required to create a valid
   # UseCase. As you add validations to UseCase, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "key" => "abc", user: @user, collector: @collector } }
+  let(:valid_attributes) { { "key" => "abc", user: @user } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -44,16 +44,20 @@ describe UseCasesController do
   end
 
   describe "POST get_key" do 
-    it "returns an error if the collector doesn't exist" do 
-      post :get_key, {collector_name: "C+++", program_name: @use_case.program.name}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
-      expect(response.body).to eql "{\"response\":\"Invalid collector name\"}"
+    it "returns an error message if the collector name doesn't exist" do 
+      post :get_key, {collector_name: "C+++", collector_version: "1.0.0"}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+      expect(response.body).to eql "{\"response\":\"Invalid collector name and/or version\"}"
       expect(response.response_code).to be 200 
     end
 
-    it "returns an error if the collector version is incorrect"
+    it "returns an error if the collector version is incorrect" do 
+      post :get_key, {collector_name: @use_case.collector.name, collector_version: "1.1.1"}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+      expect(response.body).to eql "{\"response\":\"Invalid collector name and/or version\"}"
+      expect(response.response_code).to be 200 
+    end
 
     it 'returns a message with the key in it' do 
-      post :get_key, {collector_name: @use_case.collector.name, program_name: @use_case.program.name}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+      post :get_key, {collector_name: @use_case.collector.name, collector_version: @use_case.collector_version.version, program_name: @use_case.program.name}, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
       expect(response.body).to eql "{\"response\":\"#{@use_case.key}\"}"
       expect(response.response_code).to be 200 
     end
@@ -62,14 +66,12 @@ describe UseCasesController do
   describe "POST get_key_from_form" do 
     it "returns an error if the collector doesn't exist" do
       xhr :post, :get_key_from_form, {collector_id: nil, program_id: @use_case.program.id}
-      expect(response.body).to eql "{\"response\":\"Invalid collector name\"}"
+      expect(response.body).to eql "{\"response\":\"Invalid collector and/or version\"}"
       expect(response.response_code).to be 200 
     end
 
-    it "returns an error if the collector version is incorrect"
-
     it 'returns a message with the key in it' do 
-      xhr :post, :get_key_from_form, {collector_id: @use_case.collector.id, program_id: @use_case.program.id}
+      xhr :post, :get_key_from_form, {collector_id: @use_case.collector.id, collector_version_id: @use_case.collector_version.id, program_id: @use_case.program.id}
       expect(response.body).to eql "{\"response\":\"#{@use_case.key}\"}"
       expect(response.response_code).to be 200 
     end

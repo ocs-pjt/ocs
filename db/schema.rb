@@ -27,13 +27,15 @@ ActiveRecord::Schema.define(version: 20131126153248) do
   create_table "collector_versions", force: true do |t|
     t.string   "version"
     t.integer  "collector_id"
+    t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "collector_versions", ["collector_id", "version"], name: "index_collector_versions_on_collector_id_and_version", unique: true, using: :btree
+
   create_table "collectors", force: true do |t|
     t.string   "name"
-    t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,7 +91,6 @@ ActiveRecord::Schema.define(version: 20131126153248) do
   create_table "use_cases", force: true do |t|
     t.string   "key"
     t.integer  "user_id"
-    t.integer  "collector_id"
     t.integer  "collector_version_id"
     t.integer  "program_id"
     t.integer  "program_version_id"

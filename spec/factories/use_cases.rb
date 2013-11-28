@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :use_case do
     key "abc"
     user
-    collector
     collector_version
     program
     program_version

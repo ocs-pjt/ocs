@@ -3,7 +3,6 @@
 %table.table.table-hover
   %tr
     %th Name
-    %th File
     %th
     %th
     %th
@@ -11,7 +10,6 @@
   - @collectors.each do |collector|
     %tr
       %td= collector.name
-      %td= display_filename(collector.file)
       %td= link_to 'Show', collector
       %td= link_to 'Edit', edit_collector_path(collector)
       %td= link_to 'Destroy', collector, :method => :delete, :data => { :confirm => 'Are you sure?' }

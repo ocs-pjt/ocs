@@ -1,24 +1,19 @@
 class Collector < ActiveRecord::Base
-  mount_uploader :file, CollectorUploader
-
   has_many :collector_versions
 
-  validates :name, :file, presence: true
+  validates :name, presence: true
   validates :name, uniqueness: true
 
-  def filename
-    File.basename(self.file.path)
+  def self.with_name_and_version(name, version)
+    includes(:collector_versions).where(name: name, collector_versions: {version: version}).first
   end
 
-  def url
-    self.file.url
+  def self.with_id_and_version_id(id, version_id)
+    includes(:collector_versions).where(id: id, collector_versions: {id: version_id}).first
   end
 
-  def self.with_name(name)
-    find_by(name: name.try(:strip))
-  end
 
-  def self.with_id(id)
-    find_by(id: id)
+  def get_version_id
+    collector_versions.first.id
   end
 end

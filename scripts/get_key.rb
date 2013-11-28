@@ -2,20 +2,21 @@ require 'curb'
 require 'benchmark'
 
 ### WEBSERVICE 1 ###
-
 params = 
   [
-    '{"email": "test@test.com"', 
-    '"authentication_key": "YWyHE936yyeMAV9jvKDE"', 
+    '{"email": "vialette@univ-mlv.fr"', 
+    '"authentication_key": "GNp72m1Tmu9Hym4a7h6n"', 
     '"collector_name": "RUBY"',
-    '"tags": "Biology, Genomic, Something stupid, Something stupid4"}'
+    '"collector_version": "1.0.0"',
+    '"program_name": "Word"',
+    '"tags": "Biology, Genomic, Mathematic, Info"}'
   ].join(", ")
 
 
 Benchmark.bm do |x|
   x.report do
     @http = Curl::Easy.http_post(
-      "http://localhost:3000/use_cases/get_key",
+      "http://localhost:9292/use_cases/get_key",
       params
     ) do |curl|
       curl.headers['Accept']        = 'application/json'

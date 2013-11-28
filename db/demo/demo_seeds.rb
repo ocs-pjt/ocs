@@ -27,24 +27,24 @@ tag1 = Tag.first
 tag2 = Tag.last
 
 file = Rack::Test::UploadedFile.new(File.open(Rails.root.join('spec', 'fixtures', 'files', 'fake.txt')))
-Collector.create!([{name: 'RUBY', file: file },{name: 'PYTHON', file: file }])
+Collector.create!([{name: 'RUBY'},{name: 'PYTHON'}])
 
 collector1 = Collector.first
 collector2 = Collector.last
 
 CollectorVersion.create!([
-  {version: '1.0.0', collector_id: collector1.id}, 
-  {version: '1.0.1', collector_id: collector1.id},
-  {version: '2.0.0', collector_id: collector2.id},
-  {version: '2.0.1', collector_id: collector2.id}
+  {version: '1.0.0', collector_id: collector1.id, file: file }, 
+  {version: '1.0.1', collector_id: collector1.id, file: file },
+  {version: '2.0.0', collector_id: collector2.id, file: file },
+  {version: '2.0.1', collector_id: collector2.id, file: file }
 ])
 
 collector_version1 = CollectorVersion.first
 collector_version2 = CollectorVersion.last
 
 UseCase.create!([
-  {key: "abc", user_id: user.id, collector_id: collector1.id, collector_version_id: collector_version1.id},
-  {key: "def", user_id: user.id, collector_id: collector2.id, collector_version_id: collector_version2.id}
+  {key: "abc", user_id: user.id, collector_version_id: collector_version1.id},
+  {key: "def", user_id: user.id, collector_version_id: collector_version2.id}
 ])
 
 use_case1 = UseCase.first

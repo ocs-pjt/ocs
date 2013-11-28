@@ -1,1 +1,1 @@
-json.extract! @collector, :name, :url, :filename, :created_at, :updated_at
+json.extract! @collector, :name :created_at, :updated_at

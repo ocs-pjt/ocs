@@ -1,16 +1,20 @@
 class UseCase < ActiveRecord::Base
   belongs_to :user
-  belongs_to :collector
   belongs_to :collector_version
   belongs_to :program
   belongs_to :program_version
 
-  has_and_belongs_to_many :tags
+  has_one :collector, through: :collector_version
 
-  validates :key, :user, :collector, presence: true
+  has_many :tags_use_cases
+  has_many :tags, through: :tags_use_cases
 
-  scope :with_params , -> (user_id, collector_id, program_id) { where(user_id: user_id, collector_id: collector_id, program_id: program_id) } 
+  validates :key, :user, presence: true
 
+  scope :with_params, -> (user_id, collector_version_id, program_id) do 
+    where(user_id: user_id, collector_version_id: collector_version_id, program_id: program_id) 
+  end
+  
   scope :select_use_case_with_tags, -> (tags) do 
     set = Set.new(tags.map(&:name))
     select_use_case_with_set_tag_names(set)
@@ -35,11 +39,12 @@ class UseCase < ActiveRecord::Base
     program_version.try(:version)
   end
 
-  def self.new_use_case_with_tags(user_id, collector_id, program_id, tags)
-    u = UseCase.new(user_id: user_id, collector_id: collector_id, program_id: program_id)
+  def self.get_new_key(user_id, collector_version_id, program_id, tags)
+    u = self.new(user_id: user_id, collector_version_id: collector_version_id, program_id: program_id)
     u.tags << tags if tags
     u.key = SecureRandom.hex
     u
+    u.key if u.save! 
   end
 
 end

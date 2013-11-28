@@ -3,11 +3,7 @@ class Program < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: true
 
-  def self.find_or_create_with_name(name)
-    find_by(name: name.try(:strip)) || Program.create(name: name) if name
-  end
-
-  def self.with_id(id)
-    find_by(id: id)
+  def self.try_id(id)
+    find_by(id: id).try(:id)
   end
 end

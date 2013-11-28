@@ -5,15 +5,13 @@ describe UseCase do
     @use_case = FactoryGirl.create(:use_case_with_tags)
   end
 
-  it "returns a new use case with tags" do
-    @user =       FactoryGirl.create(:user)
-    @collector =  FactoryGirl.create(:collector)
-    @tag =        FactoryGirl.create(:tag)
+  it "returns a new use case key" do
+    @user = FactoryGirl.create(:user)
+    @collector_version =  FactoryGirl.create(:collector_version)
+    @tag = FactoryGirl.create(:tag)
     
-    u = UseCase.new_use_case_with_tags(@user.id, @collector.id, nil, [@tag])
-    expect(u.user).to eql @user
-    expect(u.collector).to eql @collector
-    expect(u.tags.first).to eql @tag
+    key = UseCase.get_new_key(@user.id, @collector_version.id, nil, [@tag])
+    expect(key).not_to be_empty
   end
 
   it "returns an existing use case with its key even if the tags are not in the same order in the table" do 

@@ -1,5 +1,8 @@
 class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :use_cases
+  
+  has_many :tags_use_cases
+  has_many :use_cases, through: :tags_use_cases
+  
   validates :name, presence: true
   validates :name, uniqueness: true
 

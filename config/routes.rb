@@ -19,11 +19,16 @@ Ocs::Application.routes.draw do
 
   resources :users
 
-  resources :collectors
+  resources :collectors do 
+    member do 
+      get 'versions', to: 'collectors#versions'
+    end
+  end
 
-  get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
+  resources :collector_versions, only: :show
+  # get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
 
-  resources :concurrents
+  # resources :concurrents
 
   root to: "home#index"
 end
