@@ -26,9 +26,6 @@ Ocs::Application.routes.draw do
   end
 
   resources :collector_versions, only: :show
-  # get 'auth_tokens/create_or_get', to: 'auth_tokens#create_or_get'
-
-  # resources :concurrents
 
   root to: "home#index"
 end

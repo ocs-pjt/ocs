@@ -1,3 +1,4 @@
+# TODO : worker class not used anymore
 class PermutationsWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
