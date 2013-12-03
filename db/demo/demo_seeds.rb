@@ -6,7 +6,8 @@ end
 
 user = User.new(email: 'test@test.com',
                 password: 'test1234',
-                password_confirmation: 'test1234')
+                password_confirmation: 'test1234',
+                name: 'Test User')
 user.confirm!
 user.authentication_token = "YWyHE936yyeMAV9jvKDE"
 user.add_role :normal
@@ -15,7 +16,8 @@ user.save!
 
 user2 = User.new(email: 'vialette@univ-mlv.fr',
                 password: 'test1234',
-                password_confirmation: 'test1234')
+                password_confirmation: 'test1234',
+                name: 'Stéphane Vialette')
 user2.confirm!
 user2.authentication_token = "GNp72m1Tmu9Hym4a7h6n"
 user2.add_role :admin

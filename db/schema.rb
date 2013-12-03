@@ -16,14 +16,6 @@ ActiveRecord::Schema.define(version: 20131126153248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "auth_tokens", force: true do |t|
-    t.integer  "collector_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "token"
-  end
-
   create_table "collector_versions", force: true do |t|
     t.string   "version"
     t.integer  "collector_id"
