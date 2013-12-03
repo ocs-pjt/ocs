@@ -1,5 +1,5 @@
 class Collector < ActiveRecord::Base
-  has_many :collector_versions
+  has_many :collector_versions, dependent: :delete_all
 
   validates :name, presence: true
   validates :name, uniqueness: true
@@ -11,7 +11,6 @@ class Collector < ActiveRecord::Base
   def self.with_id_and_version_id(id, version_id)
     includes(:collector_versions).where(id: id, collector_versions: {id: version_id}).first
   end
-
 
   def get_version_id
     collector_versions.first.id

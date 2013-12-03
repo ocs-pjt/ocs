@@ -1,5 +1,6 @@
 class Program < ActiveRecord::Base
-  has_many :program_versions
+  has_many :program_versions, dependent: :delete_all
+  
   validates :name, presence: true
   validates :name, uniqueness: true
 
