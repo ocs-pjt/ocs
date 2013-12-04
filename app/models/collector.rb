@@ -3,6 +3,9 @@ class Collector < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, uniqueness: true
+  # validate :has_versions?
+
+  accepts_nested_attributes_for :collector_versions, allow_destroy: true
 
   def self.with_name_and_version(name, version)
     includes(:collector_versions).where(name: name, collector_versions: {version: version}).first
@@ -14,5 +17,9 @@ class Collector < ActiveRecord::Base
 
   def get_version_id
     collector_versions.first.id
+  end
+
+  def has_versions?
+    errors[:base] << "A collector must have at least one version." if self.collector_versions.blank?
   end
 end

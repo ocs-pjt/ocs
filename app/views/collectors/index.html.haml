@@ -3,6 +3,7 @@
 %table.table.table-hover
   %tr
     %th Name
+    %th Versions
     %th
     %th
     %th
@@ -10,9 +11,10 @@
   - @collectors.each do |collector|
     %tr
       %td= collector.name
+      %td= collector.collector_versions.map(&:version).join("<br/>").html_safe
       %td= link_to 'Show', collector
       %td= link_to 'Edit', edit_collector_path(collector)
-      %td= link_to 'Destroy', collector, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Destroy', collector, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

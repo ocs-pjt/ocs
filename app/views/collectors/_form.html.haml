@@ -3,6 +3,9 @@
 
   .form-inputs
     = f.input :name
-
+    = f.simple_fields_for :collector_versions do |collectors_form|
+      = collectors_form.input :version
+      = collectors_form.input :file, as: :file
+      = collectors_form.input :_destroy, as: :boolean, inline_label: 'Remove version', label: false unless (params[:action] == 'new' || @collector.invalid?)
   .form-actions
     = f.button :submit

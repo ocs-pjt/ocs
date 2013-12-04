@@ -15,6 +15,7 @@ class CollectorsController < ApplicationController
   # GET /collectors/new
   def new
     @collector = ::Collector.new
+    @collector_version = @collector.collector_versions.build
   end
 
   # GET /collectors/1/edit
@@ -73,6 +74,6 @@ class CollectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def collector_params
-      params.require(:collector).permit(:name)
+      params.require(:collector).permit(:name, collector_versions_attributes: [:version, :file, :id, :_destroy])
     end
 end

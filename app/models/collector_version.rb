@@ -1,5 +1,5 @@
 class CollectorVersion < ActiveRecord::Base
-  default_scope { order('created_at desc') }
+  default_scope { order('version desc') }
   
   mount_uploader :file, CollectorUploader
 
