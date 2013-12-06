@@ -1,10 +1,10 @@
 class CollectorsController < ApplicationController
-  before_action :set_collector, only: [:show, :edit, :update, :destroy, :versions]
+  before_action :set_collector, only: [:show, :edit, :update, :destroy, :versions, :add_version_form]
 
   # GET /collectors
   # GET /collectors.json
   def index
-    @collectors = ::Collector.all
+    @collectors = ::Collector.includes(:collector_versions)
   end
 
   # GET /collectors/1

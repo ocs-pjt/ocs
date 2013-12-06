@@ -10,7 +10,7 @@
 
     #download_collector
       Download collector installer :
-      %span
+      %span= link_to  @collector_versions.first.try(:filename), @collector_versions.first.try(:url)
     / #auth_token 
     /   Auth token : 
     /   %span

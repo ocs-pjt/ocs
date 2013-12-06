@@ -3,9 +3,12 @@
 
   .form-inputs
     = f.input :name
-    = f.simple_fields_for :collector_versions do |collectors_form|
-      = collectors_form.input :version
-      = collectors_form.input :file, as: :file
-      = collectors_form.input :_destroy, as: :boolean, inline_label: 'Remove version', label: false unless (params[:action] == 'new' || @collector.invalid?)
+    
+    #versions
+      = f.simple_fields_for :collector_versions do |collector_form|
+        = render partial: 'collector_version_fields', locals:{f: collector_form}
+      .links
+        = link_to_add_association 'Add version', f, :collector_versions, class: "btn btn-custom"
+
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: "btn-primary"

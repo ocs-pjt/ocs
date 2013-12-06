@@ -1,0 +1,4 @@
+.nested-fields
+  = f.input :version
+  = f.input :file, as: :file
+  = f.input :_destroy, as: :boolean, inline_label: 'Remove version', label: false unless (params[:action] == 'new' || @collector.invalid?)

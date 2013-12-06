@@ -46,7 +46,14 @@ initialize = ->
       $("#generate-key-form input[type=submit]").removeAttr("disabled")
       $("#generate-key-form input[type=submit]").val("Generate key")
     )
-  
+
+
+  $('#add-collector-version-btn').on 'click', (event) ->
+    event.preventDefault()
+    $.get "/collectors/" + $(this).val() + "/add_version_form",
+      success: (form) ->
+        $("#versions").append(form)
+
 
 $(document).ready(initialize)
 $(document).on('page:load', initialize)
