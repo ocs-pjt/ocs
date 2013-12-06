@@ -9,7 +9,6 @@ initialize = ->
     $.ajax
       url: '/collectors/' + $(this).val() + '/versions'
       success: (options) ->
-        console.log options.length
         html = ''
         options.forEach (option) ->
           html += "<option value='" + option['id'] + "'>" + option['version'] + "</option>"
