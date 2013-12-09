@@ -1,37 +1,65 @@
-h1. Ocs !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs
+h1. OCS - Open Combinatorial Structure !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs
 
-This application was generated with the "rails_apps_composer":https://github.com/RailsApps/rails_apps_composer gem provided by the "RailsApps Project":http://railsapps.github.io/.
+INTRO TODO
 
-h2. Diagnostics
+h2. Getting Started
 
-This application was built with recipes that are known to work together.
+h3. Authentication key
 
-This application was built with preferences that are NOT known to work together.
+To request the application it is necessary to create an account on the website. Thus, the authentication key to communicate with the API is available in "Edit Account". Here is the !http://cornflakes.univ-mlv.fr:8080/users/sign_up!:signup page.
 
-If the application doesn't work as expected, please "report an issue":https://github.com/RailsApps/rails_apps_composer/issues and include these diagnostics:
+h3. Use Case key
 
-We'd also like to know if you've found combinations of recipes or preferences that do work together.
+It is also necessary to create at least one Use Case key. This use case key will be used for you to provide the following information in the requests : 
 
-Recipes:
-["apps4", "controllers", "core", "email", "extras", "frontend", "gems", "git", "init", "models", "prelaunch", "railsapps", "readme", "routes", "saas", "setup", "testing", "views"]
+* The collector used and its version (mandatory information that need to match one of the collector on the website)
+* Optional information such as a program name, the program version and the attached tags
 
-Preferences:
-{:git=>true, :apps4=>"none", :dev_webserver=>"thin", :prod_webserver=>"puma", :database=>"postgresql", :templates=>"haml", :unit_test=>"rspec", :integration=>"rspec-capybara", :continuous_testing=>"guard", :fixtures=>"factory_girl", :frontend=>"bootstrap", :bootstrap=>"sass", :email=>"smtp", :authentication=>"devise", :devise_modules=>"default", :authorization=>"cancan", :form_builder=>"simple_form", :starter_app=>"admin_app", :rvmrc=>true, :quiet_assets=>true, :local_env_file=>true, :better_errors=>true, :ban_spiders=>true, :jsruntime=>true, :github=>true}
+To generate this key you can either generate it from the homepage form after signing in or you can also retrieve it from a collector sending a well-crafted json request. Here is an example : 
 
-h2. Ruby on Rails
+<pre>
+  <code>
+   params = 
+    [
+      '{"email": "your_email@your_domain.com"', 
+      '"authentication_key": "your_authentication_key"', 
+      '"collector_name": "RUBY"',
+      '"collector_version": "1.0.0"',
+      '"program_name": "Word"', # Optional
+      '"program_version": "1.0.0"', # Optional
+      '"tags": "Biology, Genomic, Mathematic, Info"}' # Optional
+    ].join(", ")
+  </code>
+</pre>
 
-This application requires:
+If some optional parameters don't exist on the server and eventually are lacking, those will be automatically created.
 
-* Ruby version 2.0.0
-* Rails version 4.0.0
+The header of the request needs to be set as followed : 
 
-Learn more about "Installing Rails":http://railsapps.github.io/installing-rails.html.
+<pre>
+  <code>
+    'Accept'        = 'application/json'
+    'Content-Type'  = 'application/json'
+  </code>
+</pre>
 
-h2. Database
+And the URL to request the webservice is :
 
-This application uses PostgreSQL with ActiveRecord.
+<pre>
+  <code>
+    http://cornflakes.univ-mlv.fr:8080/use_cases/get_key
+  </code>
+</pre>
 
-h2. Development
+h2. Requirements
+
+This application was generated with the "rails_apps_composer":https://github.com/RailsApps/rails_apps_composer gem provided by the "RailsApps Project":http://railsapps.github.io/. it requires : 
+
+* Ruby version ~ 2.0.x
+* Rails version ~ 4.0.x
+* PostgreSQL ~ 9.x and uses ActiveRecord as ORM.
+
+h2. Frameworks & engines
 
 * Template Engine: Haml
 * Testing Framework: RSpec and Factory Girl
@@ -40,39 +68,10 @@ h2. Development
 * Authentication: Devise
 * Authorization: CanCan
 
-h2. Email
-
-The application is configured to send email using a SMTP account.
-
-h2. Getting Started
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-h2. Documentation and Support
-
-This is the only documentation.
-
-h4. Issues
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-h2. Similar Projects
-
-h2. Contributing
-
-If you make improvements to this application, please share with others.
-
-* Fork the project on GitHub.
-* Make your feature addition or bug fix.
-* Commit with Git.
-* Send the author a pull request.
-
-If you add functionality to this application, create an alternative implementation, or build an application that is similar, please contact me and I'll add a note to the README so that others can find your work.
-
 h2. Credits
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+TODO
 
 h2. License
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+TODO
