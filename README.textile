@@ -1,4 +1,4 @@
-h1. OCS - Open Combinatorial Structure !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs
+h1. OCS - Open Combinatorial Structures !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs
 
 INTRO TODO
 
@@ -6,7 +6,7 @@ h2. Getting Started
 
 h3. Authentication key
 
-To request the application it is necessary to create an account on the website. Thus, the authentication key to communicate with the API is available in "Edit Account". Here is the !http://cornflakes.univ-mlv.fr:8080/users/sign_up!:signup page.
+To request the application it is necessary to create an account on the website. Thus, the authentication key to communicate with the API is available in "Edit Account". Here is the "signup":http://cornflakes.univ-mlv.fr:8080/users/sign_up page.
 
 h3. Use Case key
 

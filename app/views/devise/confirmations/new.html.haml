@@ -1,0 +1,10 @@
+.form-signin
+  %h2 Resend confirmation instructions
+  = simple_form_for(resource, :as => resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    = f.error_notification
+    = f.full_error :confirmation_token
+    .form-inputs
+      = f.input_field :email, required: true, autofocus: true, placeholder: 'Email', size: 20, class: 'form-control'
+    .form-actions
+      = f.button :submit, "Resend confirmation instructions"
+  = render "devise/shared/links"

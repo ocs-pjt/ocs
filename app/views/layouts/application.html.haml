@@ -8,18 +8,27 @@
         = javascript_include_tag "application", "data-turbolinks-track" => true
         = csrf_meta_tags
         = yield(:head)
-  %body{class: "#{controller_name} #{action_name}"}
-    .navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
+  %body
+    #wrap
+      .navbar.navbar-inverse.navbar-static-top{role:"navigation", style: "padding:0px 20px;"} 
+        .navbar-header
+          %button{type:"button", class:"navbar-toggle", 'data-toggle' => "collapse", 'data-target' => "#bs-example-navbar-collapse-1"}
+            %span{class:"sr-only"}
+              Toggle navigation
+            %span{class:"icon-bar"}
+            %span{class:"icon-bar"}
+            %span{class:"icon-bar"}
+          = link_to "OCS", root_path, class: 'navbar-brand'
+
+        .collapse.navbar-collapse
           = render 'layouts/navigation'
-    #main{role: "main"}
       .container
-        .content
-          .row
-            .span12
-              = render 'layouts/messages'
-              = yield
-          %footer
-      / ! end of .container
-    / ! end of #main
+        .jumbotron
+          = render 'layouts/messages'
+          = yield
+    #footer
+      .text-muted.text-center
+        %p © Université Paris-Est Marne-la-Vallée 2013
+        - if Rails.env.production? then klass = "hidden" end
+        %p{class: klass}
+          = "Environment: #{Rails.env} - tag: #{GIT_TAG} - branch: #{GIT_BRANCH} - last commit: #{GIT_COMMIT}"

@@ -1,10 +1,11 @@
-%h2 Sign up
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-vertical' }) do |f|
-  = f.error_notification
-  = display_base_errors resource
-  = f.input :name, autofocus: true
-  = f.input :email, required: true
-  = f.input :password, required: true
-  = f.input :password_confirmation, required: true
-  = f.button :submit, 'Sign up', class: 'btn-primary'
-= render "devise/shared/links"
+.form-signin
+  %h2.form-signin-heading Please sign up
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal' }) do |f|
+    = f.error_notification
+    = display_base_errors resource
+    = f.input_field :name, autofocus: true, placeholder: 'Name', label: false, size: 20, class: 'form-control'
+    = f.input_field :email, required: true, placeholder: 'Email', label: false, size: 20, class: 'form-control'
+    = f.input_field :password, required: true, placeholder: 'Password', label: false, size: 20, class: 'form-control'
+    = f.input_field :password_confirmation, required: true, placeholder: 'Password confirmation', label: false, size: 20, class: 'form-control'
+    = f.button :submit, 'Sign up', class: 'btn-primary'
+  = render "devise/shared/links"
