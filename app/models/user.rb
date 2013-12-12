@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   def self.authentication_token
     loop do
       token = Devise.friendly_token

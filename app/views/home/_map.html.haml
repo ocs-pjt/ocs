@@ -1,0 +1,43 @@
+ 
+%div{style:'width: 800px;'}
+  %div{id:"map", style:'width: 800px; height: 400px;'}
+
+
+%script{type:"text/javascript"}
+  circle = [{lng: 0, lat: 5, radius: 50000, strokeColor: "#FF00FF"}];
+  polygon = [[{lng: 0, lat: 0}, {lng: 1, lat: 6}, {lng: 10, lat: 10}]];
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: { minZoom: 3, maxZoom: 16, zoom: 4, mapTypeId: google.maps.MapTypeId.ROADMAP, panControl: false, streetViewControl: false, scaleControl: false, mapTypeControl: false }, internal: {id: 'map'}}, function(){
+  handler.map.centerOn({ lat: 48.78963, lng: 14.778386 })
+  markers = handler.addMarkers([{
+  "lat": 6,
+  "lng": 1,
+  "picture": {
+  "width":  36,
+  "height": 36
+  },
+  "infowindow": "hello!"
+  },{
+  "lat": 0,
+  "lng": 0,
+  "picture": {
+  "width":  36,
+  "height": 36
+  },
+  "infowindow": "hello!"
+  },
+  {
+  "lat": 10,
+  "lng": 10,
+  "picture": {
+  "width":  36,
+  "height": 36
+  },
+  "infowindow": "hello!"
+  }]);
+
+  handler.addCircles(circle);
+  handler.addPolygons(polygon);
+  handler.bounds.extendWith(markers);
+  / handler.fitMapToBounds();
+  });

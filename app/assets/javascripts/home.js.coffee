@@ -1,7 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-
 initialize = ->
   # on 'change' doesn't work as expected on certain versions of IE.
   # put on 'click' if needed
@@ -45,7 +44,6 @@ initialize = ->
       $("#generate-key-form input[type=submit]").removeAttr("disabled")
       $("#generate-key-form input[type=submit]").val("Generate key")
     )
-
 
   $('#add-collector-version-btn').on 'click', (event) ->
     event.preventDefault()
