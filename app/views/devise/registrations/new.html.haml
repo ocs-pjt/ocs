@@ -5,7 +5,10 @@
     = display_base_errors resource
     = f.input_field :name, autofocus: true, placeholder: 'Name', label: false, size: 20, class: 'form-control'
     = f.input_field :email, required: true, placeholder: 'Email', label: false, size: 20, class: 'form-control'
+    = f.error :email
     = f.input_field :password, required: true, placeholder: 'Password', label: false, size: 20, class: 'form-control'
+    = f.error :password
     = f.input_field :password_confirmation, required: true, placeholder: 'Password confirmation', label: false, size: 20, class: 'form-control'
+    = f.error :password_confirmation
     = f.button :submit, 'Sign up', class: 'btn btn btn-lg btn-primary btn-block'
   = render "devise/shared/links"
