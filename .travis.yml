@@ -1,8 +1,8 @@
 language: ruby
 rvm:
   - 2.0.0
-  - 2.1.0
   - jruby
+  - 2.1.0
   - rbx
 matrix:
   allow_failures:
@@ -16,6 +16,7 @@ before_install:
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database ocs_test' -U postgres
+  - export JRUBY_OPTS="--1.9 -Xcext.enabled=true"
 bundler_args: --without development
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
