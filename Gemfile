@@ -96,14 +96,6 @@ group :development do
 
   # Gem to populate quickly the database with basic demo data
   gem 'populator', require: false
-end
-
-group :development, :test do
-  # Gem to use for tests to handle factories 
-  gem 'factory_girl_rails'
-
-  # Use of rspec for the test environment
-  gem 'rspec-rails'
 
   # Thin web-server
   gem 'thin'
@@ -118,11 +110,18 @@ group :development, :test do
 
   # Catch emails sent in dev mode
   gem 'mailcatcher'
+end
+
+group :development, :test do
+  # Gem to use for tests to handle factories 
+  gem 'factory_girl_rails'
+
+  # Use of rspec for the test environment
+  gem 'rspec-rails'
 
   # Gem to populate factories with random but human-readable data
   gem 'faker'
 end
-
 
 #group :production do
   # Puma webserver
