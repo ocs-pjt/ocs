@@ -1,9 +1,11 @@
 language: ruby
 rvm:
+  - jruby
   - 2.1.0
   - 2.0.0
   - rbx
-  - jruby
+env:
+  - JRUBY_OPTS="--1.9 -J-XX:+CMSClassUnloadingEnabled -J-XX:+UseConcMarkSweepGC -J-XX:MaxPermSize=256m -J-Xmx1024m"
 matrix:
   allow_failures:
     - rvm: 2.1.0
