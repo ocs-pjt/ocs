@@ -29,8 +29,6 @@ gem 'simple_form', '>= 3.0.0.rc'
 
 # Gem to import files / documents / pictures etc...
 gem 'carrierwave'
-gem 'mongoid', github: 'mongoid/mongoid'
-gem 'bson_ext'
 
 # Management and monitoring of the production servers 
 gem 'newrelic_rpm'

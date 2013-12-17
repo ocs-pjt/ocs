@@ -1,16 +1,14 @@
 language: ruby
 rvm:
-  - jruby
-  - 2.1.0
   - 2.0.0
+  - 2.1.0
+  - jruby
   - rbx
-env:
-  - JRUBY_OPTS="-Xcext.enabled=true"
 matrix:
   allow_failures:
+    - rvm: jruby
     - rvm: 2.1.0
     - rvm: rbx
-    - rvm: jruby
 env:
   - DB=postgresql
 before_install:
