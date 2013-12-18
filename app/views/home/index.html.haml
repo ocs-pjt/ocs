@@ -11,12 +11,6 @@
       .form-group.col-md-4
         %p * Select a collector version :
         = select_tag "collector-version-list", options_from_collection_for_select(@collector_versions, "id", "version"), name: "collector_version_id", class: "form-control"
-    .row
-      .form-group.col-md-4
-        %span.label.label-success
-          %span#download_collector
-            Download collector installer :
-            %span= link_to  @collector_versions.first.try(:filename), @collector_versions.first.try(:url)
     
     .row
       .form-group.col-md-4
@@ -27,14 +21,20 @@
       .form-group.col-md-4
         %p Select tags :
         = select_tag "tag-list", options_from_collection_for_select(Tag.all, "id", "name"), multiple: true, name: "tag_ids[]", class: "form-control"
-
-    %br
-    =submit_tag "Generate key", data: { disable_with: 'Please wait...' }, class: "btn btn-primary"
-    %br
-    %br
-    %span.label.label-success
-      %span#use_case_key
-        Key :
-        %span
+    .row
+      .form-group.col-md-4
+        =submit_tag "Generate key", data: { disable_with: 'Please wait...' }, class: "btn btn-primary"
+        
+    .row
+      .form-group.col-md-4
+        %span#use_case_key.label.label-success
+          Key :
+          %span
+    
+    .row
+      .form-group.col-md-4
+        %span#download_collector.label.label-success
+          Download collector installer :
+          %span= link_to  @collector_versions.first.try(:filename), @collector_versions.first.try(:url)
 
 =# render partial: 'map'

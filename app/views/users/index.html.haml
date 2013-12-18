@@ -1,27 +1,5 @@
 %h3 Users
-.span8
-  %table.table.table-condensed
-    %thead
-      %tr
-        %th Username
-        %th Email
-        %th Registered
-        %th Role
-        %th
-        %th
-        %th
-    %tbody
-      - @users.each do |user|
-        %tr
-          %td= link_to user.name, user
-          %td= user.email
-          %td= user.created_at.to_date
-          %td= user.roles.first.name.titleize unless user.roles.first.nil?
-          %td
-            %a.btn.btn-mini{"data-toggle" => "modal", href: "#role-options-#{user.id}", type: "button"} Change role
-            = render user
-          %td= link_to("Delete user", user_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-mini') unless user == current_user
-          - label = user.locked_at ? "unlock" : "lock"
-          - locked_at = user.locked_at ? nil : Time.now
-          %td= link_to(label, user_path(user, user: { locked_at: locked_at }), method: :patch, class: 'btn btn-mini') unless user == current_user
+.col-md-3
+  = text_field_tag 'user_search', nil, placeholder: 'Enter username or email...', class: "form-control"
 
+#users-list= render partial: 'users_list', locals: { users: @users }

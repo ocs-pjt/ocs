@@ -62,6 +62,9 @@ gem 'underscore-rails'
 # Gem to display maps 
 gem 'gmaps4rails'
 
+# Handle pagination
+gem 'will_paginate'
+
 group :assets do
   gem 'therubyracer', platform: :ruby
 end

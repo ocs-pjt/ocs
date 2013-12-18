@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  scope :filter_with, -> (filter_value) { where('users.name ILIKE ? OR users.email ILIKE ?', "%#{filter_value}%", "%#{filter_value}%") }
+
   def self.authentication_token
     loop do
       token = Devise.friendly_token

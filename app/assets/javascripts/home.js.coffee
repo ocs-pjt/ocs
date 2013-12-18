@@ -2,8 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 initialize = ->
-  # on 'change' doesn't work as expected on certain versions of IE.
-  # put on 'click' if needed
+
+  # Refresh the collector versions options for a specific selected collector in a first ajax request
+  # then do a second ajax request to get the associated installer
+  # if on 'change' doesn't work as expected (happens on certain versions of IE) use on 'click' instead 
   $('#collector-list').on 'change', ->
     $.ajax
       url: '/collectors/' + $(this).val() + '/versions'
@@ -18,15 +20,8 @@ initialize = ->
           success: (result) ->
             $('#download_collector span').html("<a href='" + result['url'] + "'>" + result['filename'] + "</a>")
 
-      # $.when( 
-      #   $.getJSON('/collectors/versions')
-      # ,
-      #   $.getJSON('/collector_versions/' + $("#collector-version-list").val())
-      # ).done( (result1, result2)->
-      #   # $('#collector-version-list').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
-      #   $('#download_collector span').html("<a href='" + result2[0]['url'] + "'>" + result2[0]['filename'] + "</a>")
-      # )
 
+  # Ajax request to set the collector installer file associated to the version of the collector selected
   $('#collector-version-list').on 'change', ->
     $.ajax
       url: '/collector_versions/' + $(this).val()
@@ -34,6 +29,8 @@ initialize = ->
       success: (result) ->
         $('#download_collector span').html("<a href='" + result['url'] + "'>" + result['filename'] + "</a>")
 
+
+  # Ajax request to retrieve the generated use case key
   $('#generate-key-form').on 'submit', (event)->
     event.preventDefault()
     $.getJSON(
@@ -45,12 +42,29 @@ initialize = ->
       $("#generate-key-form input[type=submit]").val("Generate key")
     )
 
+
+  # Add new collector version inputs to the collector form
   $('#add-collector-version-btn').on 'click', (event) ->
     event.preventDefault()
     $.get "/collectors/" + $(this).val() + "/add_version_form",
-      success: (form) ->
-        $("#versions").append(form)
+      success: (inputs) ->
+        $("#versions").append(inputs)
 
 
+  # Filter user list
+  $("#user_search").on('change', ->
+    val = $(this).val().trim()
+    val = val.replace(/\s+/g, "")
+    if val.length % 3 is 0 #for checking 3 characters
+      $.ajax
+        url: '/users'
+        data: { search_value: $(this).val() }
+        success: (partial) ->
+          $("#users-list").html(partial)
+  ).keyup ->
+    $(this).change()
+
+
+# Necessary to do because of use of turbolinks
 $(document).ready(initialize)
 $(document).on('page:load', initialize)
