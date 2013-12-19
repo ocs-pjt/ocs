@@ -1,5 +1,6 @@
 %h3 Users
-.col-md-3
-  = text_field_tag 'user_search', nil, placeholder: 'Enter username or email...', class: "form-control"
+.row
+  .col-md-3
+    = text_field_tag 'user_search', nil, placeholder: 'Enter username or email...', class: "form-control"
 
 #users-list= render partial: 'users_list', locals: { users: @users }
