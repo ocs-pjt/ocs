@@ -8,7 +8,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Gem to handle complex json responses
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 
 # Gem for use of twitter bootstrap
 gem 'bootstrap-sass', '~> 3.0.3.0'
@@ -131,7 +131,7 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'database_cleaner', '1.0.1'
+  gem 'database_cleaner', '~> 1.2.0'
   gem 'email_spec'
 
   # Gem that display
