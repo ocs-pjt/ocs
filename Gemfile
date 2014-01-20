@@ -74,8 +74,8 @@ group :development do
   gem 'ruby-prof'
 
   # Gem to display errors when occuring in development mode
-  gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :rbx]
+  gem 'better_errors', '>= 1.1.0'
+  gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
@@ -102,7 +102,7 @@ group :development do
   gem 'thin'
   
   # Pry debugger
-  gem 'pry', '~> 0.9.7.4'
+  gem 'pry', '~> 0.9'
   gem 'pry-remote'
   gem 'pry-nav'
 
