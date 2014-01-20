@@ -1,13 +1,13 @@
 language: ruby
 rvm:
+  - 2.1.0
   - 2.0.0
   - jruby
-  - 2.1.0
   - rbx
 matrix:
   allow_failures:
+    - rvm: 2.0.0
     - rvm: jruby
-    - rvm: 2.1.0
     - rvm: rbx
 env:
   - DB=postgresql
