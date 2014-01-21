@@ -21,7 +21,9 @@ gem 'devise'
 gem 'haml-rails'
 
 # Gem to handle the postgresql driver
-gem 'pg'
+gem 'pg', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
+gem 'activerecord-jdbcpostgresql-adapter', platforms: [:jruby]
+
 gem 'rolify'
 
 # Gem to handle form in a simple way :)
@@ -35,6 +37,8 @@ gem 'newrelic_rpm'
 
 # Gem to process requests in background
 gem 'sidekiq'
+
+
 gem 'activeresource', require: 'active_resource'
 gem 'activeresource-persistent', require: 'active_resource/persistent'
 
@@ -71,7 +75,7 @@ end
 
 group :development do
   # Profiler ruby
-  gem 'ruby-prof'
+  gem 'ruby-prof', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
 
   # Gem to display errors when occuring in development mode
   gem 'better_errors', '>= 1.1.0'
@@ -79,7 +83,7 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'html2haml'
+  gem 'html2haml', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
   gem 'hub', require: nil
   gem 'quiet_assets'
   gem 'rails_layout'
@@ -99,7 +103,7 @@ group :development do
   gem 'populator', require: false
 
   # Thin web-server
-  gem 'thin'
+  gem 'thin', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
   
   # Pry debugger
   gem 'pry', '~> 0.9'
@@ -107,10 +111,10 @@ group :development do
   gem 'pry-nav'
 
   # Debugger
-  gem 'debugger2'
+  gem 'debugger2', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
 
   # Catch emails sent in dev mode
-  gem 'mailcatcher'
+  gem 'mailcatcher', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
 end
 
 group :development, :test do
@@ -136,4 +140,5 @@ group :test do
 
   # Gem that display
   gem 'simplecov', require: false
+
 end
