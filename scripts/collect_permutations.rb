@@ -3,9 +3,9 @@ require 'benchmark'
 
 ### WEBSERVICE 2 ###
 data = ""
-ar = (1..10).to_a
+ar = (1..10000).to_a
+str = ar.join(",")
 9.times do
-  str = ar.join(",")
   data << '{"function": "qsort", "data":"' << str << '"},'
 end
 data << '{"function": "mergesort", "data": "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"}'

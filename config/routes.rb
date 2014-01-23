@@ -1,4 +1,6 @@
 Ocs::Application.routes.draw do
+  resources :tasks, only: [:index, :destroy]
+
   resources :use_cases, only: :index do
     collection do
       post 'get_key', to: 'use_cases#get_key'
@@ -26,6 +28,8 @@ Ocs::Application.routes.draw do
   end
 
   resources :collector_versions, only: :show
+
+  post '/search/export' => 'search#search_export'
 
   root to: "home#index"
 end

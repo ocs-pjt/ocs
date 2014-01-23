@@ -69,6 +69,12 @@ gem 'gmaps4rails'
 # Handle pagination
 gem 'will_paginate'
 
+# Handle simple search on facets
+gem 'facetious', github:  'lothar59/facetious'
+
+# datepicker for twitter bootstrap
+gem 'bootstrap-datepicker-rails'
+
 group :assets do
   gem 'therubyracer', platform: :ruby
 end

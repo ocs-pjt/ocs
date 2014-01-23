@@ -65,6 +65,15 @@ initialize = ->
     $(this).change()
 
 
+  $('#first_records').on('click', ->
+    $('#last_records').attr('checked', false)
+  )
+
+  $('#last_records').on('click', ->
+    $('#first_records').attr('checked', false)
+  )
+
+
 # Necessary to do because of use of turbolinks
 $(document).ready(initialize)
 $(document).on('page:load', initialize)

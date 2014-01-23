@@ -16,4 +16,13 @@ module ApplicationHelper
     link_to File.basename(file.path), file.url 
   end
 
+  def export_button(options)
+    button_to 'Export CSV',
+      search_export_path(format: options[:format],
+      resource_type: options[:resource_type]),
+      multipart: true,
+      class: 'btn btn-success pull-right'
+  end
+
+
 end
