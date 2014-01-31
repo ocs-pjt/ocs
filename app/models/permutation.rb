@@ -11,7 +11,7 @@ class Permutation < ActiveRecord::Base
   # facet :first_records
 
   # TODO : eventually create a table of the list of functions
-  FUNCTIONS = ["sort"]
+  FUNCTIONS = ["sort", "qsort", "mergesort"]
 
   def self.insert(items, use_case)
     time = Time.now

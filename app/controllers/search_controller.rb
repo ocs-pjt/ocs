@@ -4,8 +4,8 @@ class SearchController < ApplicationController
     # process search params and export in background
     facets = params[:facets].delete_if {|key, value| value.blank? } || {}
 
-    if Search::SEARCH_TARGETS.keys.include?(resource_type = params[:resource_type].to_sym)
-      
+    if Search::SEARCH_TARGETS.keys.include?(resource_type = params[:resource_type].to_sym) 
+    # TODO : count if there are actually records to export     
       unless (f = params[:first_records].blank?) && params[:last_records].blank?
         method = f ? :last : :first         
         ExportsWorker.perform_async({facets: facets, resource_type: resource_type, user_id: current_user.id, method: method})

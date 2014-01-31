@@ -4,7 +4,7 @@ class Search
 
   SEARCH_TARGETS = {
     permutation: proc {
-      Permutation.includes(:use_case)
+      Permutation.includes(use_case: [:tags])
     }
   }
 
@@ -14,7 +14,7 @@ class Search
 
 
   def self.to_csv(collection, options = {})
-    collection.first.class.to_csv(collection, options = {})
+    collection.first.class.to_csv(collection, options = {}) 
   end
 
 end

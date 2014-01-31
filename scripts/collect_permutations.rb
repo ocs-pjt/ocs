@@ -5,23 +5,23 @@ require 'benchmark'
 data = ""
 ar = (1..10000).to_a
 str = ar.join(",")
-9.times do
+999.times do
   data << '{"function": "qsort", "data":"' << str << '"},'
 end
-data << '{"function": "mergesort", "data": "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"}'
+data << '{"function": "mergesort", "data": "' + str + '"}'
 
 params = 
   [
-    '{"email": "test@test.com"', 
-    '"authentication_key": "YWyHE936yyeMAV9jvKDE"', 
-    '"use_case_key": "abc"',
+    '{"email": "vialette@univ-mlv.fr"', 
+    '"authentication_key": "GNp72m1Tmu9Hym4a7h6n"', 
+    '"use_case_key": "b448bb33fe02602c6543261c2af778e6"',
     '"items": [' + data + ']}'
   ].join(", ")
 
 
 Benchmark.bm do |x|
   x.report do
-    1000.times do
+    1.times do
       @http = Curl::Easy.http_post(
         "http://localhost:9292/permutations/collect",
         params
