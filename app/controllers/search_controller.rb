@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
 
   def search_export
-    # process search params and export in background
-    facets = params[:facets].delete_if {|key, value| value.blank? } || {}
+    # TODO : should check eventually if params[:facets] is nil
+    facets = Search.pre_process(params[:facets])
 
     if Search::SEARCH_TARGETS.keys.include?(resource_type = params[:resource_type].to_sym) 
     # TODO : count if there are actually records to export     
