@@ -1,13 +1,26 @@
-%h1 Listing tasks
+%h1 Listing in progress tasks
+
+%table.table.table-hover
+  %tr
+    %th Task id
+    %th Status
+
+  - @tasks_in_progress.each do |task|
+    - if (status = Sidekiq::Status::status(task.job_id)) != :complete
+      %tr
+        %td= task.job_id
+        %td= status.to_s.capitalize
+
+%h1 Listing treated tasks
 
 %table.table.table-hover
   %tr
     %th File
-    %th
-    %th
+    %th Created at
     %th
 
   - @tasks.each do |task|
     %tr
       %td= link_to  task.try(:filename), task.try(:url)
+      %td= task.created_at
       %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }

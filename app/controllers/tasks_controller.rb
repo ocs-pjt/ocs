@@ -4,7 +4,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks_in_progress = current_user.in_progress_tasks
+
+    @tasks = current_user.tasks
   end
 
   # DELETE /tasks/1

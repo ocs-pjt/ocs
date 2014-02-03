@@ -1,5 +1,7 @@
 class ExportsWorker
   include Sidekiq::Worker
+  include Sidekiq::Status::Worker
+
   sidekiq_options retry: false
   #sidekiq_options queue: 'high'
 

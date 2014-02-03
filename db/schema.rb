@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140123144823) do
+ActiveRecord::Schema.define(version: 20140203113337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20140123144823) do
 
   create_table "collectors", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "in_progress_tasks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,6 +86,13 @@ ActiveRecord::Schema.define(version: 20140123144823) do
 
   add_index "tags_use_cases", ["use_case_id", "tag_id"], name: "index_tags_use_cases_on_use_case_id_and_tag_id", using: :btree
   add_index "tags_use_cases", ["use_case_id"], name: "index_tags_use_cases_on_use_case_id", using: :btree
+
+  create_table "task_in_progresses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tasks", force: true do |t|
     t.integer  "user_id"

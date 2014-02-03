@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   scope :filter_with, -> (filter_value) { where('users.name ILIKE ? OR users.email ILIKE ?', "%#{filter_value}%", "%#{filter_value}%") }
 
   has_many :tasks
+  has_many :in_progress_tasks
 
   def self.authentication_token
     loop do

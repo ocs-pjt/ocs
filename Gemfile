@@ -38,6 +38,8 @@ gem 'newrelic_rpm'
 # Gem to process requests in background
 gem 'sidekiq'
 
+# Gem to ask the status of a job for sidekiq
+gem 'sidekiq-status'
 
 gem 'activeresource', require: 'active_resource'
 gem 'activeresource-persistent', require: 'active_resource/persistent'
@@ -121,6 +123,9 @@ group :development do
 
   # Catch emails sent in dev mode
   gem 'mailcatcher', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
+
+  # Print objects awesomly
+  gem 'awesome_print'
 end
 
 group :development, :test do
