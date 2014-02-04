@@ -1,7 +1,7 @@
 %ul.nav.navbar-nav
+  %li
+    = link_to "Home", root_path
   - if user_signed_in?
-    %li
-      = link_to 'Edit account', edit_user_registration_path
     - if can? :manage, Collector
       %li
         = link_to 'Collectors', collectors_path
@@ -11,18 +11,26 @@
     - if can? :manage, Tag
       %li
         = link_to 'Tags', tags_path
-    - if current_user.has_role? :admin
-      %li
-        = link_to 'Admin', users_path
   - else
     %li
       = link_to 'Login', new_user_session_path
     %li
       = link_to 'Sign up', new_user_registration_path
 
-%ul.nav.navbar-nav.navbar-right
-  - if user_signed_in?
-    %li 
-      = link_to 'Tasks', tasks_path
-    %li
-      = link_to 'Logout', destroy_user_session_path, method: 'delete'
+- if user_signed_in?
+  %ul.nav.navbar-nav.navbar-right
+    %li.dropdown
+      %button.btn.btn-danger.dropdown-toggle{'data-toggle' => "dropdown", style:"padding-top:15px;padding-bottom:15px"}
+        = current_user.name
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          = link_to 'Edit account', edit_user_registration_path
+        %li 
+          = link_to 'Tasks', tasks_path
+        %li
+          = link_to 'Logout', destroy_user_session_path, method: 'delete'
+        - if current_user.has_role? :admin
+          %li
+            = link_to 'Admin', users_path
+    
