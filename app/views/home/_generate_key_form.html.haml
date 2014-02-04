@@ -22,14 +22,13 @@
     .row
       = submit_tag "Generate key", data: { disable_with: 'Please wait...' }, class: "btn btn-primary"
     
-    %br    
-    .row
-      %span#use_case_key.label.label-success
+    %br
+    .row.alert.alert-success
+      %span#use_case_key
         Key :
         %span
     
-    %br
-    .row
-      %span#download_collector.label.label-success
+    .row.alert.alert-success
+      %span#download_collector
         Download collector installer :
         %span= link_to  @collector_versions.first.try(:filename), @collector_versions.first.try(:url)

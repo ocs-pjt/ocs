@@ -9,6 +9,6 @@
         = render partial: 'collector_version_fields', locals:{f: collector_form}
       .links
         = link_to_add_association 'Add version', f, :collector_versions, class: "btn btn-custom"
-
+  %br
   .form-actions
     = f.button :submit, class: "btn-primary"

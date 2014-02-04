@@ -8,14 +8,12 @@
   = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
   = f.input :password_confirmation, required: false
   = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
-  
-  .row
-    .form-group.col-md-4
-      %span.label.label-success
-        Authentication token : 
-        = f.object.authentication_token
+  .form-group.col-md-5
+    .row.alert.alert-success
+      Authentication Token : 
+      = f.object.authentication_token
+  %div{style: 'clear:both;'}
   = f.button :submit, 'Update', class: 'btn-primary'
 %h3 Cancel my account
 %p
   Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}.
-= link_to "Back", :back
