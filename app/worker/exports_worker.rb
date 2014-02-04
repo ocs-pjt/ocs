@@ -1,3 +1,5 @@
+require 'xz'
+
 class ExportsWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
@@ -15,18 +17,19 @@ class ExportsWorker
                     where('use_cases.user_id' => options['user_id']).
                     __send__(options['method'], Search::MAX_RECORDS)
 
-    filename = "#{Utils.filename(resource_type)}.csv"
+    filename = "#{Utils.filename(resource_type)}-#{SecureRandom.hex(2)}.csv.xz"
 
     file_path = '/tmp/' + filename
 
-    file = File.new(file_path, "w")
+    file = File.new(file_path, "wb")
 
-    csv = Search.to_csv(@collection)
+    csv = XZ.compress(Search.to_csv(@collection))
 
     file.write(csv)
     
     Task.create(file: file, user_id: options['user_id'])
 
+    InProgressTask.where(job_id: self.jid).delete_all
     File.delete(file_path)
   end
 end

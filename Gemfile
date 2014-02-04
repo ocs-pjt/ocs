@@ -77,6 +77,9 @@ gem 'facetious', github:  'lothar59/facetious'
 # datepicker for twitter bootstrap
 gem 'bootstrap-datepicker-rails'
 
+# Ruby XZ compression tool
+gem 'ruby-xz'
+
 group :assets do
   gem 'therubyracer', platform: :ruby
 end

@@ -1,6 +1,7 @@
 class Search
   
   MAX_RECORDS = 10_000
+  QUOTA_TASKS = 3
 
   SEARCH_TARGETS = {
     permutation: proc {
