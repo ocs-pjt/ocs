@@ -11,20 +11,20 @@ class SearchController < ApplicationController
         unless (f = params[:first_records].blank?) && params[:last_records].blank?
           method = f ? :last : :first
           job_id = ExportsWorker.perform_async({facets: facets, resource_type: resource_type, user_id: current_user.id, method: method})
-          if InProgressTask.create(user_id: current_user.id, job_id: job_id)
-            render js: "TODO: Votre tache: #{job_id} a été ajouté à la liste des taches"
-          else
-            render js: "TODO: A problem occured while creating the task. Contact the administrator emailing at : "
-          end
+          
+          InProgressTask.create!(user_id: current_user.id, job_id: job_id)
+          flash.now[:success] = "La tâche: #{job_id} a été ajouté à la liste des tâches."
         else
-          render js: "TODO: Too many records"
+          flash.now[:danger] = "Too many records too export."
         end
       else
-        render js: "TODO: resource_type incorrect"
+        flash.now[:danger] = "The export failed. Reason: resource is incorrect or unknown."
       end
     else
-      render js: "TODO: Quota exceeded"
+        flash.now[:danger] = "Quota of tasks to be treated has exceeded. Please wait until one finishes."
     end
+
+    render partial: 'shared/message' if request.xhr?
   end
 
 

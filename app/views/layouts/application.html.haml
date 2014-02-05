@@ -26,7 +26,8 @@
           = render 'layouts/navigation'
       .container
         .jumbotron
-          = render 'layouts/messages'
+          #alert_messages
+            = render 'layouts/messages'
           = yield
     #footer
       .text-muted.text-center
