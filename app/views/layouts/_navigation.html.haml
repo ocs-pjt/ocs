@@ -1,7 +1,7 @@
 %ul.nav.navbar-nav
-  %li
-    = link_to "Home", root_path
   - if user_signed_in?
+    %li
+      = link_to "Dashboard", root_path
     - if can? :manage, Collector
       %li
         = link_to 'Collectors', collectors_path

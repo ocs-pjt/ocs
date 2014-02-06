@@ -19,7 +19,7 @@
           %a{"data-toggle" => "modal", href: "#role-options-#{user.id}", type: "button"} Change role
           = render user
         %td= link_to("Delete user", user_path(user), data: { confirm: "Are you sure?" }, method: :delete) unless user == current_user
-        - label = user.locked_at ? "unlock" : "lock"
+        - label = user.locked_at ? "Unlock" : "Lock"
         - locked_at = user.locked_at ? nil : Time.now
         %td= link_to(label, user_path(user, user: { locked_at: locked_at }), method: :patch) unless user == current_user
 
