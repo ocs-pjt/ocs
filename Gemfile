@@ -80,6 +80,12 @@ gem 'bootstrap-datepicker-rails'
 # Ruby XZ compression tool
 gem 'ruby-xz'
 
+# Add vector maps with regions
+gem 'jvectormap-rails', github: 'lothar59/jvectormap-rails'
+
+# Tasks Scheduler
+gem 'whenever', require: false
+
 group :assets do
   gem 'therubyracer', platform: :ruby
 end

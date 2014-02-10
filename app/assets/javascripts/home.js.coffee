@@ -51,7 +51,7 @@ initialize = ->
         $("#versions").append(inputs)
 
 
-  # Filter user list
+  # Filter users in users list
   $("#user_search").on('change', ->
     val = $(this).val().trim()
     val = val.replace(/\s+/g, "")
@@ -65,12 +65,25 @@ initialize = ->
     $(this).change()
 
 
+  # Check/Uncheck First/Last records for CSV Export radio buttons
   $('#first_records').on('click', ->
     $('#last_records').attr('checked', false)
   )
-
   $('#last_records').on('click', ->
     $('#first_records').attr('checked', false)
+  )
+
+  # Fill in world map with statistics
+  $.getJSON "/statistic/france-elections.json", (data) ->
+  new jvm.WorldMap(
+    map: "world_mill_en"
+    container: $("#world-map")
+    series:
+      regions: [
+        scale: ['#DEEBF7', '#08519C']
+        attribute: "fill"
+        values: {"US":1,"FR":2, "GB":3, "NZ":4, "RU":5, "AU": 5}
+      ]
   )
 
 

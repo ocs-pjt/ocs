@@ -65,8 +65,9 @@ class User < ActiveRecord::Base
     user
   end
 
+  # For a matter of speed we insert permutations manually
   def self.insert_permutations(items)
-    time = Time.now
+    time = Time.now # CHECK : Maybe an issue with the Timezone
     inserts = []
     items.each do |h|
       inserts.push "('#{h['data']}', '#{h['function']}', #{use_case.id}, '#{time}')"

@@ -18,4 +18,7 @@
 //= require cocoon
 //= require underscore
 //= require gmaps/google
+//= require jvectormap
+//= require jvectormap/maps/world_mill_en
+//= require jvectormap/maps/fr_merc_en
 //= require_tree .
