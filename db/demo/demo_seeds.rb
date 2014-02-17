@@ -1,7 +1,7 @@
 # TODO : eventually delete and reset need to be removed
 # Set sequence id to specific value example
 # ActiveRecord::Base.connection.execute("SELECT setval('parties_party_id_seq', 9, false);")
-[User, Tag, Collector, CollectorVersion, UseCase, TagsUseCase].each do |klass|
+[User, Tag, Collector, CollectorVersion, UseCase, TagsUseCase, Statistic].each do |klass|
   klass.delete_all
   ActiveRecord::Base.connection.reset_pk_sequence!(klass.table_name)
 end
@@ -16,6 +16,8 @@ user.authentication_token = "GNp72m1Tmu9Hym4a7h6n"
 user.add_role :admin
 user.save!
 
+Statistic.create(user: user, stats: {nb_permutations: 10000})
+
 user = User.new(email: 'albert@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -25,6 +27,8 @@ user.confirm!
 user.authentication_token = "GNp72m1Tmu9Hym4a7h6"
 user.add_role :normal
 user.save!
+
+Statistic.create(user: user, stats: {nb_permutations: 20000})
 
 user = User.new(email: 'raymond@fakeadress.com',
                 password: 'test1234',
@@ -36,6 +40,8 @@ user.authentication_token = "GNp72m1Tmu9Hym4a7h"
 user.add_role :normal
 user.save!
 
+Statistic.create(user: user, stats: {nb_permutations: 30000})
+
 user = User.new(email: 'jake@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -46,15 +52,19 @@ user.authentication_token = "GNp72m1Tmu9Hym4a7"
 user.add_role :normal
 user.save!
 
+Statistic.create(user: user, stats: {nb_permutations: 50000})
+
 user = User.new(email: 'james@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'James Stewart',
-                postal_address: '235 W Van Buren St Chicago, IL 60607 ')
+                postal_address: '235 W Van Buren St Chicago, IL 60607')
 user.confirm!
 user.authentication_token = "GNp72m1Tmu9Hym4a"
 user.add_role :normal
 user.save!
+
+Statistic.create(user: user, stats: {nb_permutations: 100000})
 
 user = User.new(email: 'bradley@fakeadress.com',
                 password: 'test1234',
@@ -66,6 +76,8 @@ user.authentication_token = "GNp72m1Tmu9Hym4"
 user.add_role :normal
 user.save!
 
+Statistic.create(user: user, stats: {nb_permutations: 200000})
+
 user = User.new(email: 'vladimir@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -76,6 +88,8 @@ user.authentication_token = "GNp72m1Tmu9Hym"
 user.add_role :normal
 user.save!
 
+Statistic.create(user: user, stats: {nb_permutations: 25000})
+
 user = User.new(email: 'no-postal-address@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -84,6 +98,8 @@ user.confirm!
 user.authentication_token = "GNp72m1Tmu9Hy"
 user.add_role :normal
 user.save!
+
+Statistic.create(user: user, stats: {nb_permutations: 30000})
 
 Tag.create!([
   {name: 'Genomic'}, 

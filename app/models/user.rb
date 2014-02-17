@@ -8,8 +8,15 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
-  geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  geocoded_by :postal_address
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.state = geo.state
+      obj.country_code = geo.country_code
+      obj.jvectormap_state_code = obj.jvm_state_code(obj.country_code, obj.state)
+    end
+  end
+  after_validation :geocode, :reverse_geocode, if: -> { :postal_address_changed? }
 
   scope :filter_with, -> (filter_value) { where('users.name ILIKE ? OR users.email ILIKE ?', "%#{filter_value}%", "%#{filter_value}%") }
 
@@ -76,5 +83,13 @@ class User < ActiveRecord::Base
     ActiveRecord::Base.connection.execute sql
   end
 
+
+  def jvm_state_code(country_code, state)
+    case country_code
+    when "FR"
+      CodeMatch::FRENCH_REGIONS[state]
+    # TODO : mapping US states, Russia states etc ... 
+    end
+  end
 
 end

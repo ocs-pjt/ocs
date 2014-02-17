@@ -1,4 +1,5 @@
 class CollectorVersionsController < ApplicationController
+  before_action :authenticate_user! # Normal devise authentication
   before_action :set_collector_version, only: [:show]
 
   # GET /collectors/1

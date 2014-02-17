@@ -3,6 +3,17 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 initialize = ->
 
+  # Set the request for any of $.ajax, $.post, $.get, $.getJSON
+  method = "PUT" # or 'DELETE'
+  $.ajaxSetup
+    beforeSend: (xhr) ->
+      xhr.setRequestHeader "X-HTTP-Method-Override", method
+
+    scriptCharset: "utf-8"
+    contentType: "application/json; charset=utf-8"
+
+
+
   # Refresh the collector versions options for a specific selected collector in a first ajax request
   # then do a second ajax request to get the associated installer
   # if on 'change' doesn't work as expected (happens on certain versions of IE) use on 'click' instead 
@@ -74,17 +85,29 @@ initialize = ->
   )
 
   # Fill in world map with statistics
-  $.getJSON "/statistic/france-elections.json", (data) ->
-  new jvm.WorldMap(
-    map: "world_mill_en"
-    container: $("#world-map")
-    series:
-      regions: [
-        scale: ['#DEEBF7', '#08519C']
-        attribute: "fill"
-        values: {"US":1,"FR":2, "GB":3, "NZ":4, "RU":5, "AU": 5}
-      ]
-  )
+  $.ajax(
+    headers:
+      Accept: "text/plain; charset=utf-8"
+      "Content-Type": "text/plain; charset=utf-8"
+    url: "/statistics/world"
+    dataType: 'json'
+    success: (data) ->
+      new jvm.WorldMap(
+        map: "world_mill_en"
+        container: $("#world-map")
+        series:
+          regions: [
+            scale: ['#DEEBF7', '#08519C']
+            attribute: "fill"
+            values: data
+            normalizeFunction: 'polynomial' # related to size of the country
+          ]
+        onRegionLabelShow: (e, el, code) ->
+          if data[code] isnt undefined
+            el.html el.html() + " (" + data[code] + ")"             
+          return
+      )
+    )
 
 
 # Necessary to do because of use of turbolinks

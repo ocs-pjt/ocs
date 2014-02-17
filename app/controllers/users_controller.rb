@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user! # Normal devise authentication
+  
   def index
     authorize! :index, @user, message: 'Not authorized as an administrator.'
     @users = User.paginate(page: params[:page], per_page: 30).filter_with(params['search_value'])

@@ -138,11 +138,11 @@ ActiveRecord::Schema.define(version: 20140212093230) do
     t.string   "uid"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "address"
     t.string   "postal_address"
     t.string   "country_code"
     t.string   "state_code"
     t.string   "state"
+    t.string   "jvectormap_state_code"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

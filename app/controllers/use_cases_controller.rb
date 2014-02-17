@@ -1,4 +1,5 @@
 class UseCasesController < ApplicationController
+  before_action :authenticate_user! # Normal devise authentication
 
   # GET /use_cases
   # GET /use_cases.json

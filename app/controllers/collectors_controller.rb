@@ -1,4 +1,5 @@
 class CollectorsController < ApplicationController
+  before_action :authenticate_user! # Normal devise authentication
   before_action :set_collector, only: [:show, :edit, :update, :destroy, :versions, :add_version_form]
 
   # GET /collectors

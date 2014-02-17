@@ -31,5 +31,8 @@ Ocs::Application.routes.draw do
 
   post '/search/export' => 'search#search_export'
 
+  get '/statistics/world' => 'statistics#world'
+
+
   root to: "home#index"
 end

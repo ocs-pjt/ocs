@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user! # Normal devise authentication
   before_action :set_task, only: [:destroy]
 
   # GET /tasks

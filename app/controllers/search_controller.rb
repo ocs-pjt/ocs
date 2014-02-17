@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  before_action :authenticate_user! # Normal devise authentication
 
   def search_export
     # Check if user is over the maximum of tasks he can make

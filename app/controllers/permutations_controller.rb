@@ -1,5 +1,6 @@
 class PermutationsController < ApplicationController
-
+  before_action :authenticate_user! # Normal devise authentication
+  
   def collect
     if params[:items].presence
       if use_case = UseCase.find_by(key: params[:use_case_key].strip)
