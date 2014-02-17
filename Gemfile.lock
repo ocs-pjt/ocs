@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/lothar59/jvectormap-rails.git
-  revision: da23a9700e1bbc7ba6c829f52c270c4c6debb81c
+  revision: e75b8d17b9abd1adaa0e8bd9d7910ddc06bfdc52
   specs:
     jvectormap-rails (1.0.0)
       railties (~> 4.0)

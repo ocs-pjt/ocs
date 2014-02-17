@@ -89,8 +89,9 @@ initialize = ->
     url: "/statistics/world"
     dataType: 'json'
     success: (data) ->
-      new jvm.WorldMap(
+      world_map = new jvm.WorldMap(
         map: "world_mill_en"
+        backgroundColor: '#ccc'
         container: $("#world-map")
         series:
           regions: [
@@ -111,9 +112,10 @@ initialize = ->
               data: {country_code: code}
               dataType: 'json'
               success: (data) ->
-                $("#world-map").empty()
+                world_map.remove()
                 new jvm.WorldMap(
                   map: map
+                  backgroundColor: '#ccc'
                   container: $("#world-map")
                   series:
                     regions: [
@@ -127,6 +129,7 @@ initialize = ->
                       el.html el.html() + " (" + data[code] + ")"             
                     return
                 )
+                $("#world-map").children(":first").prepend("<a class='back_to_world_map' href='/'>Back to world map</a>")
             )
       )
     )
