@@ -18,6 +18,8 @@ user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 10000})
 
+sleep 0.1
+
 user = User.new(email: 'albert@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -27,6 +29,8 @@ user.confirm!
 user.authentication_token = "GNp72m1Tmu9Hym4a7h6"
 user.add_role :normal
 user.save!
+
+sleep 0.1
 
 Statistic.create(user: user, stats: {nb_permutations: 20000})
 
@@ -42,6 +46,8 @@ user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 30000})
 
+sleep 0.1
+
 user = User.new(email: 'jake@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -53,6 +59,8 @@ user.add_role :normal
 user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 50000})
+
+sleep 0.1
 
 user = User.new(email: 'james@fakeadress.com',
                 password: 'test1234',
@@ -66,6 +74,8 @@ user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 100000})
 
+sleep 0.1
+
 user = User.new(email: 'bradley@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
@@ -77,6 +87,8 @@ user.add_role :normal
 user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 200000})
+
+sleep 0.1
 
 user = User.new(email: 'vladimir@fakeadress.com',
                 password: 'test1234',
@@ -90,12 +102,56 @@ user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 25000})
 
+sleep 0.1
+
+user = User.new(email: 'sam@fakeadress.com',
+                password: 'test1234',
+                password_confirmation: 'test1234',
+                name: 'Sam Gamgi',
+                postal_address: 'Bombai')
+user.confirm!
+user.authentication_token = "GNp72m1Tmu9H"
+user.add_role :normal
+user.save!
+
+Statistic.create(user: user, stats: {nb_permutations: 100000})
+
+sleep 0.1
+
+user = User.new(email: 'bob@fakeadress.com',
+                password: 'test1234',
+                password_confirmation: 'test1234',
+                name: 'Bob Gamgi',
+                postal_address: 'Pekin')
+user.confirm!
+user.authentication_token = "GNp72m1Tmu9"
+user.add_role :normal
+user.save!
+
+Statistic.create(user: user, stats: {nb_permutations: 50000})
+
+sleep 0.1
+
+user = User.new(email: 'momo@fakeadress.com',
+                password: 'test1234',
+                password_confirmation: 'test1234',
+                name: 'Momo Lesudafricain',
+                postal_address: 'Pretoria')
+user.confirm!
+user.authentication_token = "GNp72m1Tmu"
+user.add_role :normal
+user.save!
+
+Statistic.create(user: user, stats: {nb_permutations: 50000})
+
+sleep 0.1
+
 user = User.new(email: 'no-postal-address@fakeadress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Jacques Sansadresse')
 user.confirm!
-user.authentication_token = "GNp72m1Tmu9Hy"
+user.authentication_token = "GNp72m1Tm"
 user.add_role :normal
 user.save!
 

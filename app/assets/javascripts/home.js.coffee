@@ -86,9 +86,6 @@ initialize = ->
 
   # Fill in world map with statistics
   $.ajax(
-    headers:
-      Accept: "text/plain; charset=utf-8"
-      "Content-Type": "text/plain; charset=utf-8"
     url: "/statistics/world"
     dataType: 'json'
     success: (data) ->
@@ -106,6 +103,31 @@ initialize = ->
           if data[code] isnt undefined
             el.html el.html() + " (" + data[code] + ")"             
           return
+        onRegionClick: (e, code) ->
+          map = code.toLowerCase() + "_merc_en"
+          if jvm.WorldMap.maps.hasOwnProperty(map)
+            $.ajax(
+              url: "/statistics/regions"
+              data: {country_code: code}
+              dataType: 'json'
+              success: (data) ->
+                $("#world-map").empty()
+                new jvm.WorldMap(
+                  map: map
+                  container: $("#world-map")
+                  series:
+                    regions: [
+                      scale: ['#DEEBF7', '#08519C']
+                      attribute: "fill"
+                      values: data
+                      normalizeFunction: 'polynomial' # related to size of the country
+                    ]
+                  onRegionLabelShow: (e, el, code) ->
+                    if data[code] isnt undefined
+                      el.html el.html() + " (" + data[code] + ")"             
+                    return
+                )
+            )
       )
     )
 

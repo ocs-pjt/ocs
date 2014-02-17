@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   has_many :tasks
   has_many :in_progress_tasks
+  has_one :statistic
 
   def self.authentication_token
     loop do
