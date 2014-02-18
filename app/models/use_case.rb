@@ -8,6 +8,7 @@ class UseCase < ActiveRecord::Base
 
   has_many :tags_use_cases
   has_many :tags, through: :tags_use_cases
+  has_many :permutations
 
   validates :key, :user, presence: true
 

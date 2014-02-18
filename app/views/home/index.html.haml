@@ -4,9 +4,9 @@
   .col-md-4
     = render partial: 'generate_key_form'
   .col-md-8
-    = render partial: 'map'
+    = render partial: 'map', locals: {height: 400}
     %div{style: 'clear:both'}
 
   %div{style: 'clear:both'}
 -else
-  = render partial: 'map'
+  = render partial: 'map', locals: {height: 500}

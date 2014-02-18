@@ -14,7 +14,7 @@ params =
   [
     '{"email": "vialette@univ-mlv.fr"', 
     '"authentication_key": "GNp72m1Tmu9Hym4a7h6n"', 
-    '"use_case_key": "b448bb33fe02602c6543261c2af778e6"',
+    '"use_case_key": "abc"',
     '"items": [' + data + ']}'
   ].join(", ")
 
