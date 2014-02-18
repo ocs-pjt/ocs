@@ -1,5 +1,5 @@
 require 'highline/import'
-require 'faker'
+require 'ffaker'
 
 ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'
 require_relative '../config/environment'
