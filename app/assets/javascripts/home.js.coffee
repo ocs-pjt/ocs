@@ -3,17 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 initialize = ->
 
-  # Set the request for any of $.ajax, $.post, $.get, $.getJSON
-  method = "PUT" # or 'DELETE'
-  $.ajaxSetup
-    beforeSend: (xhr) ->
-      xhr.setRequestHeader "X-HTTP-Method-Override", method
-
-    scriptCharset: "utf-8"
-    contentType: "application/json; charset=utf-8"
-
-
-
   # Refresh the collector versions options for a specific selected collector in a first ajax request
   # then do a second ajax request to get the associated installer
   # if on 'change' doesn't work as expected (happens on certain versions of IE) use on 'click' instead 
@@ -84,56 +73,70 @@ initialize = ->
     $('#first_records').attr('checked', false)
   )
 
-  # Fill in world map with statistics
-  $.ajax(
-    url: "/statistics/world"
-    dataType: 'json'
-    success: (data) ->
-      world_map = new jvm.WorldMap(
-        map: "world_mill_en"
-        backgroundColor: '#ccc'
-        container: $("#world-map")
-        series:
-          regions: [
-            scale: ['#DEEBF7', '#08519C']
-            attribute: "fill"
-            values: data
-            normalizeFunction: 'polynomial' # related to size of the country
-          ]
-        onRegionLabelShow: (e, el, code) ->
-          if data[code] isnt undefined
-            el.html el.html() + " (" + data[code] + ")"             
-          return
-        onRegionClick: (e, code) ->
-          map = code.toLowerCase() + "_merc_en"
-          if jvm.WorldMap.maps.hasOwnProperty(map)
-            $.ajax(
-              url: "/statistics/regions"
-              data: {country_code: code}
-              dataType: 'json'
-              success: (data) ->
-                world_map.remove()
-                new jvm.WorldMap(
-                  map: map
-                  backgroundColor: '#ccc'
-                  container: $("#world-map")
-                  series:
-                    regions: [
-                      scale: ['#DEEBF7', '#08519C']
-                      attribute: "fill"
-                      values: data
-                      normalizeFunction: 'polynomial' # related to size of the country
-                    ]
-                  onRegionLabelShow: (e, el, code) ->
-                    if data[code] isnt undefined
-                      el.html el.html() + " (" + data[code] + ")"             
-                    return
-                )
-                $("#world-map").children(":first").prepend("<a class='back_to_world_map' href='/'>Back to world map</a>")
-            )
-      )
+  # Get world map statistics
+  getWorldStatistics = -> 
+    console.log "here"
+    $.ajax
+      url: "/statistics/world"
+      dataType: 'json'
+      success: (data) ->
+        displayWorldMap(data)
+
+  # Call it on page loading
+  getWorldStatistics()
+
+
+  # Display the world map from the ajax data received
+  displayWorldMap = (data) ->
+    console.log "here"
+    world_map = new jvm.WorldMap(
+      map: "world_mill_en"
+      backgroundColor: '#ccc'
+      container: $("#world-map")
+      series:
+        regions: [
+          scale: ['#DEEBF7', '#08519C']
+          attribute: "fill"
+          values: data
+          normalizeFunction: 'polynomial' # related to size of the country
+        ]
+      onRegionLabelShow: (e, el, code) ->
+        if data[code] isnt undefined
+          el.html el.html() + " (" + data[code] + ")"             
+        return
+      onRegionClick: (e, code) ->
+        displayCountry(e, code, world_map)
     )
 
+  # Display the country with statistics per regions/states 
+  displayCountry = (e, code, world_map) ->
+    map = code.toLowerCase() + "_merc_en"
+    if jvm.WorldMap.maps.hasOwnProperty(map)
+      $.ajax(
+        url: "/statistics/regions"
+        data: {country_code: code}
+        dataType: 'json'
+        success: (data) ->
+          world_map.remove()
+          new jvm.WorldMap(
+            map: map
+            backgroundColor: '#ccc'
+            container: $("#world-map")
+            series:
+              regions: [
+                scale: ['#DEEBF7', '#08519C']
+                attribute: "fill"
+                values: data
+                normalizeFunction: 'polynomial' # related to size of the country
+              ]
+            onRegionLabelShow: (e, el, code) ->
+              if data[code] isnt undefined
+                el.html el.html() + " (" + data[code] + ")"             
+              return
+          )
+          # href only correct if the map is displayed in root_path
+          $("#world-map").children(":first").prepend("<a class='back_to_world_map' href='/'>Back to world map</a>")
+      )
 
 # Necessary to do because of use of turbolinks
 $(document).ready(initialize)

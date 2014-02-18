@@ -145,7 +145,7 @@ group :development, :test do
   gem 'rspec-rails'
 
   # Gem to populate factories with random but human-readable data
-  gem 'faker'
+  gem 'ffaker'
 end
 
 #group :production do

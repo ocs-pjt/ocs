@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/lothar59/jvectormap-rails.git
-  revision: e75b8d17b9abd1adaa0e8bd9d7910ddc06bfdc52
+  revision: 3fb27abc7aa4ddca6ceafa34378efe4caf9e21fc
   specs:
     jvectormap-rails (1.0.0)
       railties (~> 4.0)
@@ -137,11 +137,10 @@ GEM
     factory_girl_rails (4.4.0)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
-    faker (1.2.0)
-      i18n (~> 0.5)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
+    ffaker (1.23.0)
     ffi (1.9.3)
     ffi (1.9.3-java)
     figaro (0.7.0)
@@ -149,7 +148,7 @@ GEM
       rails (>= 3, < 5)
     formatador (0.2.4)
     geocoder (1.1.9)
-    gmaps4rails (2.1.1)
+    gmaps4rails (2.1.2)
     guard (2.4.0)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -183,7 +182,7 @@ GEM
     hub (1.11.2)
     i18n (0.6.9)
     io-like (0.3.0)
-    jbuilder (2.0.2)
+    jbuilder (2.0.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jdbc-postgres (9.3.1100)
@@ -258,7 +257,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    polyglot (0.3.3)
+    polyglot (0.3.4)
     populator (1.0.0)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -454,7 +453,7 @@ DEPENDENCIES
   email_spec
   facetious!
   factory_girl_rails
-  faker
+  ffaker
   figaro
   geocoder
   gmaps4rails

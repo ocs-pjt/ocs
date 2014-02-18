@@ -30,6 +30,7 @@ Ocs::Application.routes.draw do
   resources :collector_versions, only: :show
 
   post '/search/export' => 'search#search_export'
+  get '/search/export_form' => 'search#export_form'
 
   get '/statistics/world' => 'statistics#world'
   get '/statistics/regions' => 'statistics#regions'

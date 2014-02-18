@@ -27,6 +27,8 @@
         %li
           = link_to 'Edit account', edit_user_registration_path
         %li 
+          = link_to 'Export CSV', search_export_form_path
+        %li 
           = link_to 'Tasks', tasks_path
         - if current_user.has_role? :admin
           %li

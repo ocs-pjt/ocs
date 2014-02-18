@@ -1,6 +1,9 @@
 class SearchController < ApplicationController
   before_action :authenticate_user! # Normal devise authentication
 
+  def export_form
+  end
+
   def search_export
     # Check if user is over the maximum of tasks he can make
     if InProgressTask.where(user_id: current_user.id).count < Search::QUOTA_TASKS 
@@ -31,7 +34,7 @@ class SearchController < ApplicationController
 
   def search
 
-    # retrieve records from provided params
+    # TODO? : retrieve records from provided params
 
   end
 
