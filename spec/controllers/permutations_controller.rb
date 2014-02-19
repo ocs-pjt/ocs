@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe PermutationsController do
   before (:each) do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    sign_in
   end
 
   describe "POST collect" do

@@ -14,6 +14,7 @@ user = User.new(email: 'vialette@univ-mlv.fr',
 user.confirm!
 user.authentication_token = "GNp72m1Tmu9Hym4a7h6n"
 user.add_role :admin
+user.is_active = true
 user.save!
 
 Statistic.create(user: user, stats: {nb_permutations: 10000})

@@ -8,6 +8,7 @@
       %th
       %th
       %th
+      %th
   %tbody
     - users.each do |user|
       %tr
@@ -22,5 +23,8 @@
         - label = user.locked_at ? "Unlock" : "Lock"
         - locked_at = user.locked_at ? nil : Time.now
         %td= link_to(label, user_path(user, user: { locked_at: locked_at }), method: :patch) unless user == current_user
+        - label = user.is_active ? "Invalidate" : "Validate"
+        - bool = user.is_active ? false : true
+        %td= link_to(label, user_path(user, user: { is_active: bool }), method: :patch) unless user == current_user
 
 = will_paginate(users, renderer: WillPaginate::ActionView::LinkRenderer, params: params)

@@ -21,8 +21,7 @@ require 'spec_helper'
 describe CollectorsController do
 
   before (:each) do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    sign_in
   end
 
   # This should return the minimal set of attributes required to create a valid

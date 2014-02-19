@@ -36,6 +36,6 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:locked_at, :role_ids)
+      params.require(:user).permit(:locked_at, :is_active, :role_ids)
     end
 end
