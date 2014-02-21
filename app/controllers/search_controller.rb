@@ -2,8 +2,15 @@ class SearchController < ApplicationController
   before_action :authenticate_user! # Normal devise authentication
 
   def export_form
+    case params[:resource_type]
+    when "trace"
+      render partial: 'traces/export_form'
+    else
+      render partial: 'permutations/export_form'
+    end if request.xhr?
   end
 
+  # Export resources (permutations,traces...) as CSV in background with sidekiq
   def search_export
     # Check if user is over the maximum of tasks he can make
     if InProgressTask.where(user_id: current_user.id).count < Search::QUOTA_TASKS 
@@ -17,9 +24,9 @@ class SearchController < ApplicationController
           job_id = ExportsWorker.perform_async({facets: facets, resource_type: resource_type, user_id: current_user.id, method: method})
           
           InProgressTask.create!(user_id: current_user.id, job_id: job_id)
-          flash.now[:success] = "La tâche: #{job_id} a été ajouté à la liste des tâches."
+          flash.now[:success] = "La tâche: <a href='/tasks'>#{job_id}</a> a été ajouté à la liste des tâches.".html_safe
         else
-          flash.now[:danger] = "Too many records too export."
+          flash.now[:danger] = "Too many records to export."
         end
       else
         flash.now[:danger] = "The export failed. Reason: resource is incorrect or unknown."

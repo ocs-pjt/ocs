@@ -1,5 +1,6 @@
 class StatisticsController < ApplicationController
 
+  # Render user stats grouped by country_code
   def world
     @statistics = Statistic.includes(:user)
 
@@ -14,7 +15,7 @@ class StatisticsController < ApplicationController
     render json: world_stats.to_json
   end
 
-
+  # Render user stats grouped by jvectormap state code (regions/states) for a given country_code
   def regions
     country_code = params[:country_code]
     @users = User.where(country_code: country_code).includes(:statistic)

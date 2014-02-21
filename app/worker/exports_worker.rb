@@ -19,16 +19,20 @@ class ExportsWorker
 
     filename = "#{Utils.filename(resource_type)}-#{SecureRandom.hex(2)}.csv.xz"
 
+    # Store the temporary file in the tmp directory
     file_path = '/tmp/' + filename
 
     file = File.new(file_path, "wb")
 
+    # Compress the file to make it much smaller
     csv = XZ.compress(Search.to_csv(@collection))
 
     file.write(csv)
     
+    # Create a finished task with its associated file
     Task.create(file: file, user_id: options['user_id'])
 
+    # Delete all finished jobs
     InProgressTask.where(job_id: self.jid).delete_all
     File.delete(file_path)
   end

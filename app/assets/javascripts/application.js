@@ -43,4 +43,5 @@
 //= require jvectormap/maps/co_merc_en
 //= require jvectormap/maps/ve_merc_en
 //= require jvectormap/maps/za_merc_en
+//= require jvectormap/maps/ru_merc_en
 //= require_tree .

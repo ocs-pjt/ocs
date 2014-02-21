@@ -1,0 +1,34 @@
+= form_tag search_export_path(resource_type: "permutation"), id: "export-form", remote: true do
+  .row
+    Functions
+    = select_tag "function", options_for_select(Permutation.function_names), multiple: true, class: "form-control", name: "facets[function][]"
+    %br
+  .row
+    Created at : 
+    %div{class:"input-daterange input-group", id:"datepicker"}
+      %label{class:"input-group-addon"} From
+      %input{type:"text", class:"form-control", name:"facets[created_from]"}
+      %label{class:"input-group-addon"} To
+      %input{type:"text", class:"form-control", name:"facets[created_to]"}
+    
+    = # TODO : move in coffee file
+    %script{type:"text/javascript"}
+      $(document).ready(function(){$('.input-daterange').datepicker({format: 'dd-mm-yyyy'});})
+    
+    %br
+  .row
+    Tags :
+    =# TODO : load tags asynchronously in the futur
+    = select_tag "tag-list", options_from_collection_for_select(Tag.all, "id", "name"), multiple: true, name: "facets[tag_ids][]", class: "form-control"
+    %br
+  .row    
+    = radio_button_tag 'first_records', 'yes', false
+    = label_tag 'first_records', "First #{Search::MAX_RECORDS} records"
+  .row
+    = radio_button_tag 'last_records', 'yes', true      
+    = label_tag 'last_records', "Last #{Search::MAX_RECORDS} records"
+
+    %br
+  .row
+    =# export_button(type: 'CSV', format: 'csv', resource_type: 'permutation')
+    = submit_tag 'Export CSV', data: { disable_with: 'Please wait...' }, class: 'btn btn-primary'

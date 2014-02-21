@@ -34,7 +34,7 @@ class Permutation < ActiveRecord::Base
 
   def self.to_csv(collection, options = {})
     CSV.generate(options) do |csv|
-      real_column_names = self.column_names - ["id", "use_case_id", "created_at", "updated_at"]
+      real_column_names = self.column_names - ["id", "use_case_id", "created_at", "updated_at", "already_handled"]
       csv << real_column_names
       collection.each do |resource|
         csv << resource.attributes.values_at(*real_column_names)

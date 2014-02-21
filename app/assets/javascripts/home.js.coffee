@@ -75,7 +75,6 @@ initialize = ->
 
   # Get world map statistics
   getWorldStatistics = -> 
-    console.log "here"
     $.ajax
       url: "/statistics/world"
       dataType: 'json'
@@ -88,7 +87,6 @@ initialize = ->
 
   # Display the world map from the ajax data received
   displayWorldMap = (data) ->
-    console.log "here"
     world_map = new jvm.WorldMap(
       map: "world_mill_en"
       backgroundColor: '#ccc'

@@ -6,18 +6,18 @@
   ActiveRecord::Base.connection.reset_pk_sequence!(klass.table_name)
 end
 
-user = User.new(email: 'vialette@univ-mlv.fr',
+user2 = User.new(email: 'vialette@univ-mlv.fr',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Stéphane Vialette',
                 postal_address: '10 Rue Rivotte, Besançon, France')
-user.confirm!
-user.authentication_token = "GNp72m1Tmu9Hym4a7h6n"
-user.add_role :admin
-user.is_active = true
-user.save!
+user2.confirm!
+user2.authentication_token = "GNp72m1Tmu9Hym4a7h6n"
+user2.add_role :admin
+user2.is_active = true
+user2.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 10000})
+Statistic.create(user: user2, stats: {nb_permutations: 10000})
 
 sleep 0.1
 
@@ -187,8 +187,8 @@ collector_version1 = CollectorVersion.first
 collector_version2 = CollectorVersion.last
 
 UseCase.create!([
-  {key: "abc", user_id: user.id, collector_version_id: collector_version1.id},
-  {key: "def", user_id: user.id, collector_version_id: collector_version2.id}
+  {key: "abc", user_id: user2.id, collector_version_id: collector_version1.id},
+  {key: "def", user_id: user2.id, collector_version_id: collector_version2.id}
 ])
 
 use_case1 = UseCase.first

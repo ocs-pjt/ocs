@@ -18,6 +18,8 @@ Ocs::Application.routes.draw do
 
   post 'permutations/collect', to: 'permutations#collect'
   get 'permutations/collect', to: 'permutations#collect'
+  post 'traces/collect', to: 'traces#collect'
+  get 'traces/collect', to: 'traces#collect'
 
   resources :users
 
