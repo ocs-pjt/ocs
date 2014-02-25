@@ -146,6 +146,9 @@ group :development, :test do
 
   # Gem to populate factories with random but human-readable data
   gem 'ffaker'
+
+  # For the coverage badge
+  gem 'coveralls', require: false
 end
 
 #group :production do
