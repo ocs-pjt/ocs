@@ -163,5 +163,10 @@ group :test do
 
   # Gem that display
   gem 'simplecov', require: false
+end
 
+platforms :rbx do
+  gem 'racc'
+  gem 'rubysl', '~> 2.0'
+  gem 'psych'
 end
