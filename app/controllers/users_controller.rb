@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user! # Normal devise authentication
+  before_action :authenticate_user!, except: :authentication_key # Normal devise authentication
   
   def index
     authorize! :index, @user, message: 'Not authorized as an administrator.'
@@ -31,6 +31,20 @@ class UsersController < ApplicationController
     else
       redirect_to users_path, notice: "Can't delete yourself."
     end
+  end
+
+  def authentication_key
+    if user = User.find_by(email: params[:email].to_s.strip.downcase)
+      if user.valid_password?(params[:password].to_s.strip)
+        msg = user.authentication_token
+      else
+        msg = "Invalid password"
+      end
+    else
+      msg = "Invalid user"
+    end
+
+    render text: msg
   end
 
   private

@@ -21,7 +21,11 @@ Ocs::Application.routes.draw do
   post 'traces/collect', to: 'traces#collect'
   get 'traces/collect', to: 'traces#collect'
 
-  resources :users
+  resources :users, except: [:edit, :create, :new] do 
+    collection do 
+      post 'authentication_key', to: 'users#authentication_key'
+    end
+  end
 
   resources :collectors do 
     member do 
