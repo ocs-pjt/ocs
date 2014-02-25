@@ -1,3 +1,4 @@
+# Overrides devise flash messages for twitter boostrap
 module DeviseControllerFlashMessage
   # This method is called when this mixin is included
   def self.included klass
