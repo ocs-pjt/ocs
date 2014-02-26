@@ -11,7 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # Gem for use of twitter bootstrap
-gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'bootstrap-sass', '~> 3.0'
 
 # Gem to handle authorizations and permissions
 gem 'cancan'
@@ -109,8 +109,8 @@ group :development do
   gem 'rb-inotify', require: false
 
   # Gem to use for deployment
-  gem 'capistrano', '~> 3.0.0'
-  gem "rvm1-capistrano3", "~> 0.9.1", require: false
+  gem 'capistrano', '~> 3.0'
+  gem "rvm1-capistrano3", "~> 1.0", require: false
   gem 'highline'
 
   # Gem to display and warn for eventual security holes
