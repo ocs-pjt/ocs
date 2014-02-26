@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', branch: '4-1-stable'
+gem 'rails', '4.1.0.rc1'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -54,7 +54,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
 # Handle environment variables
-gem 'figaro'
+gem 'figaro', github: 'laserlemon/figaro'
 
 # Rails asset-pipeline gem to simply add/remove nested objects
 gem 'cocoon'
