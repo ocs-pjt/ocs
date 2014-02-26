@@ -1,4 +1,6 @@
-h1. OCS - Open Combinatorial Structures !https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs !https://coveralls.io/repos/ocs-pjt/ocs/badge.png(Coverage Status)!:https://coveralls.io/r/ocs-pjt/ocs !https://gemnasium.com/ocs-pjt/ocs.png(Dependency Status)!:https://gemnasium.com/ocs-pjt/ocs
+h1. OCS - Open Combinatorial Structures 
+
+!https://travis-ci.org/ocs-pjt/ocs.png?branch=master!:https://travis-ci.org/ocs-pjt/ocs "!https://codeclimate.com/github/ocs-pjt/ocs.png!":https://codeclimate.com/github/ocs-pjt/ocs !https://gemnasium.com/ocs-pjt/ocs.png(Dependency Status)!:https://gemnasium.com/ocs-pjt/ocs !https://coveralls.io/repos/ocs-pjt/ocs/badge.png(Coverage Status)!:https://coveralls.io/r/ocs-pjt/ocs 
 
 INTRO TODO
 
