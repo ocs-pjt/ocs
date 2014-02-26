@@ -70,6 +70,17 @@ h2. Frameworks & engines
 * Authentication: Devise
 * Authorization: CanCan
 
+h2. Development Mode
+
+In development mode to catch emails sent run the following : 
+<pre>
+  <code>
+  gem install mailcatcher # then start mailcatcher
+  </code>
+</pre>
+
+Don't add mailcatcher in Gemfile
+
 h2. Credits
 
 TODO

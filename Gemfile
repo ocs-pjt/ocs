@@ -130,9 +130,6 @@ group :development do
   # Debugger
   gem 'debugger2', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
 
-  # Catch emails sent in dev mode
-  gem 'mailcatcher', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
-
   # Print objects awesomly
   gem 'awesome_print'
 end
