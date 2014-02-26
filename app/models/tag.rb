@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: true
 
-  scope :with_ids, -> (ids) { ids.try(:map) { |tag_id| Tag.find(tag_id) } }
+  scope :with_ids, ->(ids) { ids.try(:map) { |tag_id| Tag.find(tag_id) } }
 
   def self.find_or_create_tags(tag_names)
     tag_names.map do |tag_name|

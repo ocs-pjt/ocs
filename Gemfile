@@ -17,7 +17,7 @@ gem 'bootstrap-sass', '~> 3.0'
 gem 'cancan'
 
 # Gem for the authentication
-gem 'devise'
+gem 'devise', github: 'plataformatec/devise'
 gem 'haml-rails'
 
 # Gem to handle the postgresql driver

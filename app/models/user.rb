@@ -18,7 +18,9 @@ class User < ActiveRecord::Base
   end
   after_validation :geocode, :reverse_geocode, if: -> { :postal_address_changed? }
 
-  scope :filter_with, -> (filter_value) { where('users.name ILIKE ? OR users.email ILIKE ?', "%#{filter_value}%", "%#{filter_value}%") }
+  scope :filter_with, ->(filter_value) do 
+    where('users.name ILIKE ? OR users.email ILIKE ?', "%#{filter_value}%", "%#{filter_value}%") 
+  end
 
   has_many :tasks
   has_many :in_progress_tasks

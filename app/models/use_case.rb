@@ -12,21 +12,21 @@ class UseCase < ActiveRecord::Base
 
   validates :key, :user, presence: true
 
-  scope :with_params, -> (user_id, collector_version_id, program_id) do 
+  scope :with_params, ->(user_id, collector_version_id, program_id) do 
     where(user_id: user_id, collector_version_id: collector_version_id, program_id: program_id) 
   end
   
-  scope :select_use_case_with_tags, -> (tags) do 
+  scope :select_use_case_with_tags, ->(tags) do 
     set = Set.new(tags.map(&:name))
     select_use_case_with_set_tag_names(set)
   end
 
-  scope :select_use_case_with_tag_names, -> (tag_names) do 
+  scope :select_use_case_with_tag_names, ->(tag_names) do 
     set = Set.new(tag_names)
     select_use_case_with_set_tag_names(set)
   end
 
-  scope :select_use_case_with_set_tag_names, -> (set_tag_names) do
+  scope :select_use_case_with_set_tag_names, ->(set_tag_names) do
     select do |use_case|
       Set.new(use_case.tags.map(&:name)) == set_tag_names
     end
