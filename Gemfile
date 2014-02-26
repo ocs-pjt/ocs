@@ -100,7 +100,6 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'html2haml', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
   gem 'hub', require: nil
   gem 'quiet_assets'
   gem 'rails_layout'
@@ -114,7 +113,7 @@ group :development do
   gem 'highline'
 
   # Gem to display and warn for eventual security holes
-  gem 'brakeman', require: false
+  gem 'brakeman', '~> 2.4.1', require: false
 
   # Gem to populate quickly the database with basic demo data
   gem 'populator', require: false
