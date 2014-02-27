@@ -1,5 +1,6 @@
 class Permutation < ActiveRecord::Base
   belongs_to :use_case
+  belongs_to :additional_information
 
   facet :function
   facet :created_from, field_name: 'permutations.created_at', where: '>= {{value}}'
@@ -13,13 +14,13 @@ class Permutation < ActiveRecord::Base
   # TODO : eventually create a table of the list of functions
   FUNCTIONS = ["sort", "qsort", "mergesort"]
 
-  def self.insert(items, use_case)
-    time = Time.now
+  def self.insert(items, use_case, additional_information)
+    time = Time.now # Check for timezone
     inserts = []
-    items.each do |h|
-      inserts.push "('#{h['data']}', '#{h['function']}', #{use_case.id}, '#{time}')"
+    items.each do |value|
+      inserts.push "('#{value}', #{use_case.id}, #{additional_information.id}, '#{time}')"
     end
-    sql = "INSERT INTO permutations (data, function, use_case_id, created_at) VALUES #{inserts.join(", ")}"
+    sql = "INSERT INTO permutations (data, use_case_id, additional_information_id, created_at) VALUES #{inserts.join(", ")}"
     ActiveRecord::Base.connection.execute sql
   end
 

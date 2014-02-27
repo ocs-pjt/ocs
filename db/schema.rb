@@ -11,11 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221104711) do
+ActiveRecord::Schema.define(version: 20140227162152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "additional_informations", force: true do |t|
+    t.string   "operating_system"
+    t.string   "collection_point"
+    t.string   "optional"
+    t.string   "description"
+    t.datetime "deferred_date"
+    t.string   "postman_name"
+    t.string   "postman_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "collector_versions", force: true do |t|
     t.string   "version"
@@ -46,7 +58,8 @@ ActiveRecord::Schema.define(version: 20140221104711) do
     t.integer  "use_case_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "already_handled", default: false
+    t.boolean  "already_handled",           default: false
+    t.integer  "additional_information_id"
   end
 
   create_table "program_versions", force: true do |t|
@@ -96,6 +109,14 @@ ActiveRecord::Schema.define(version: 20140221104711) do
   add_index "tags_use_cases", ["use_case_id", "tag_id"], name: "index_tags_use_cases_on_use_case_id_and_tag_id", using: :btree
   add_index "tags_use_cases", ["use_case_id"], name: "index_tags_use_cases_on_use_case_id", using: :btree
 
+  create_table "tags_users", force: true do |t|
+    t.integer "tag_id"
+    t.integer "user_id"
+  end
+
+  add_index "tags_users", ["user_id", "tag_id"], name: "index_tags_users_on_user_id_and_tag_id", using: :btree
+  add_index "tags_users", ["user_id"], name: "index_tags_users_on_user_id", using: :btree
+
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
     t.string   "file"
@@ -106,9 +127,10 @@ ActiveRecord::Schema.define(version: 20140221104711) do
   create_table "traces", force: true do |t|
     t.text     "data"
     t.integer  "use_case_id"
-    t.boolean  "already_handled", default: false
+    t.boolean  "already_handled",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "additional_information_id"
   end
 
   create_table "use_cases", force: true do |t|

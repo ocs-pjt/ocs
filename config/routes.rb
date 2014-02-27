@@ -3,10 +3,10 @@ Ocs::Application.routes.draw do
 
   resources :use_cases, only: :index do
     collection do
-      post 'get_key', to: 'use_cases#get_key'
-      get 'get_key', to: 'use_cases#get_key'
-      post 'get_key_from_form', to: 'use_cases#get_key_from_form'
-      get 'get_key_from_form', to: 'use_cases#get_key_from_form'
+      post  'get_key',            to: 'use_cases#get_key'
+      get   'get_key',            to: 'use_cases#get_key'
+      post  'get_key_from_form',  to: 'use_cases#get_key_from_form'
+      get   'get_key_from_form',  to: 'use_cases#get_key_from_form'
     end
   end
 
@@ -14,12 +14,16 @@ Ocs::Application.routes.draw do
 
   resources :programs
 
-  devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
+  devise_for :users, controllers: {
+    registrations:      "registrations", 
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
 
-  post 'permutations/collect', to: 'permutations#collect'
-  get 'permutations/collect', to: 'permutations#collect'
-  post 'traces/collect', to: 'traces#collect'
-  get 'traces/collect', to: 'traces#collect'
+  post  'resources/collect',      to: 'resources#collect'
+  post  'permutations/collect',   to: 'permutations#collect'
+  get   'permutations/collect',   to: 'permutations#collect'
+  post  'traces/collect',         to: 'traces#collect'
+  get   'traces/collect',         to: 'traces#collect'
 
   resources :users, except: [:edit, :create, :new] do 
     collection do 
@@ -35,12 +39,13 @@ Ocs::Application.routes.draw do
 
   resources :collector_versions, only: :show
 
-  post '/search/export' => 'search#search_export'
-  get '/search/export_form' => 'search#export_form'
+  post  '/search/export'        => 'search#search_export'
+  get   '/search/export_form'   => 'search#export_form'
 
-  get '/statistics/world' => 'statistics#world'
-  get '/statistics/regions' => 'statistics#regions'
-  post '/statistics/regions' => 'statistics#regions'
+  get   '/statistics/world'     => 'statistics#world'
+  get   '/statistics/regions'   => 'statistics#regions'
+  post  '/statistics/regions'   => 'statistics#regions'
+
 
   root to: "home#index"
 end
