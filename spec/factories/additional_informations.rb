@@ -2,12 +2,12 @@
 
 FactoryGirl.define do
   factory :additional_information do
-    operating_system "MyString"
-    collection_point "MyString"
-    optional "MyString"
-    description "MyString"
+    operating_system "Windows"
+    collection_point "Sort"
+    optional "Info"
+    description "Desc info"
     deferred_date "2014-02-27 15:28:10"
-    postman_name "MyString"
-    postman_version "MyString"
+    postman_name "Dude"
+    postman_version "1.0.0"
   end
 end

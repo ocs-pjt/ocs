@@ -17,11 +17,11 @@ user2.add_role :admin
 user2.is_active = true
 user2.save!
 
-Statistic.create(user: user2, stats: {nb_permutations: 10000})
+Statistic.create(user: user2, stats: {permutations: 10000})
 
 sleep 0.1
 
-user = User.new(email: 'albert@fakeadress.com',
+user = User.new(email: 'albert@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Albert Jacquard',
@@ -31,11 +31,23 @@ user.authentication_token = "GNp72m1Tmu9Hym4a7h6"
 user.add_role :normal
 user.save!
 
+Statistic.create(user: user, stats: {permutations: 20000})
+
 sleep 0.1
 
-Statistic.create(user: user, stats: {nb_permutations: 20000})
+user = User.new(email: 'joe@fakeaddress.com',
+                password: 'test1234',
+                password_confirmation: 'test1234',
+                name: 'Joe Letaxi',
+                postal_address: 'Biaritz, France')
+user.confirm!
+user.authentication_token = "joe@fakeaddress.com"
+user.add_role :normal
+user.save!
 
-user = User.new(email: 'raymond@fakeadress.com',
+sleep 0.1
+
+user = User.new(email: 'raymond@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Raymond Michel',
@@ -45,11 +57,11 @@ user.authentication_token = "GNp72m1Tmu9Hym4a7h"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 30000})
+Statistic.create(user: user, stats: {permutations: 30000})
 
 sleep 0.1
 
-user = User.new(email: 'jake@fakeadress.com',
+user = User.new(email: 'jake@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Jake Johnson',
@@ -59,11 +71,11 @@ user.authentication_token = "GNp72m1Tmu9Hym4a7"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 50000})
+Statistic.create(user: user, stats: {permutations: 50000})
 
 sleep 0.1
 
-user = User.new(email: 'james@fakeadress.com',
+user = User.new(email: 'james@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'James Stewart',
@@ -73,11 +85,11 @@ user.authentication_token = "GNp72m1Tmu9Hym4a"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 100000})
+Statistic.create(user: user, stats: {permutations: 100000})
 
 sleep 0.1
 
-user = User.new(email: 'bradley@fakeadress.com',
+user = User.new(email: 'bradley@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Bradley Snowden',
@@ -87,11 +99,11 @@ user.authentication_token = "GNp72m1Tmu9Hym4"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 200000})
+Statistic.create(user: user, stats: {permutations: 200000})
 
 sleep 0.1
 
-user = User.new(email: 'vladimir@fakeadress.com',
+user = User.new(email: 'vladimir@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Vladimir Lenin',
@@ -101,11 +113,11 @@ user.authentication_token = "GNp72m1Tmu9Hym"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 25000})
+Statistic.create(user: user, stats: {permutations: 25000})
 
 sleep 0.1
 
-user = User.new(email: 'sam@fakeadress.com',
+user = User.new(email: 'sam@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Sam Gamgi',
@@ -115,11 +127,11 @@ user.authentication_token = "GNp72m1Tmu9H"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 100000})
+Statistic.create(user: user, stats: {permutations: 100000})
 
 sleep 0.1
 
-user = User.new(email: 'bob@fakeadress.com',
+user = User.new(email: 'bob@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Bob Gamgi',
@@ -129,11 +141,11 @@ user.authentication_token = "GNp72m1Tmu9"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 50000})
+Statistic.create(user: user, stats: {permutations: 50000})
 
 sleep 0.1
 
-user = User.new(email: 'momo@fakeadress.com',
+user = User.new(email: 'momo@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Momo Lesudafricain',
@@ -143,11 +155,11 @@ user.authentication_token = "GNp72m1Tmu"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 50000})
+Statistic.create(user: user, stats: {permutations: 50000})
 
 sleep 0.1
 
-user = User.new(email: 'no-postal-address@fakeadress.com',
+user = User.new(email: 'no-postal-address@fakeaddress.com',
                 password: 'test1234',
                 password_confirmation: 'test1234',
                 name: 'Jacques Sansadresse')
@@ -156,7 +168,7 @@ user.authentication_token = "GNp72m1Tm"
 user.add_role :normal
 user.save!
 
-Statistic.create(user: user, stats: {nb_permutations: 30000})
+Statistic.create(user: user, stats: {permutations: 30000})
 
 Tag.create!([
   {name: 'Genomic'}, 

@@ -16,7 +16,7 @@ describe UseCase do
 
   it "returns an existing use case with its key even if the tags are not in the same order in the table" do 
     @tag1, @tag2 = Tag.first, Tag.last
-    u = UseCase.select_use_case_with_tags([@tag2, @tag1]).first
+    u = UseCase.with_tags([@tag2, @tag1]).first
     expect(u.key).to eql @use_case.key
   end
 end

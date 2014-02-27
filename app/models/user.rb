@@ -8,14 +8,14 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
-  geocoded_by :postal_address
-  reverse_geocoded_by :latitude, :longitude do |obj,results|
+  geocoded_by :postal_address do |obj,results|
     if geo = results.first
       obj.state = geo.state
       obj.country_code = geo.country_code
       obj.jvectormap_state_code = obj.jvm_state_code(obj.country_code, obj.state)
     end
   end
+  reverse_geocoded_by :latitude, :longitude 
   after_validation :geocode, :reverse_geocode, if: -> { :postal_address_changed? }
 
   scope :filter_with, ->(filter_value) do 
@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :in_progress_tasks
   has_one :statistic
+  has_many :use_cases
+
+  has_many :tags_users
+  has_many :default_tags, through: :tags_users
 
   def self.authentication_token
     loop do
