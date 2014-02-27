@@ -11,7 +11,7 @@ describe Tag do
   end
 
   it 'returns an array of strip tag names' do 
-    ar = Tag.tag_names_from_str('  Bio,   Math  ')
+    ar = Tag.tag_names('  Bio,   Math  ')
     expect(ar).to eql ['Bio', 'Math']
   end
 end

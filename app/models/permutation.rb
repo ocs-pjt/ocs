@@ -4,6 +4,8 @@ class Permutation < ActiveRecord::Base
   belongs_to :use_case
   belongs_to :additional_information
 
+  validates :additional_information, :use_case, presence: true
+
   # TODO: It works but the generation from the gem seems a bit clumsy though (to look at)
   facet :collection_point, where: %{
     EXISTS(
@@ -29,4 +31,5 @@ class Permutation < ActiveRecord::Base
   def self.collection_points
     COLLECTION_POINTS
   end
+  
 end

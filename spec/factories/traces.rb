@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :trace do
-    data "MyText"
+    data "MyTrace"
     use_case
+    additional_information
     already_handled false
   end
 end

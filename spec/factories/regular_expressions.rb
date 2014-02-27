@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :regular_expression do
-    data "MyText"
+    data "MyRegExp"
     use_case
+    additional_information
     already_handled false
-    additional_information_id 1
   end
 end

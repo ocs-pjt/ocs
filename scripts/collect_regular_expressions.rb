@@ -16,7 +16,7 @@ params = {
   use_case_key: "abc",
   operating_system: "Windows",
   object: {
-    collection_point: "sort",
+    collection_point: "regexp_cp",
     data_type: "regular_expression",
     data: data,
     optional: "More Info",

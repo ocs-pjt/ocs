@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :permutation do
     data "1,2,3"
     use_case
+    additional_information
   end
 end

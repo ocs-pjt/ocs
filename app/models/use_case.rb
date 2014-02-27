@@ -9,6 +9,8 @@ class UseCase < ActiveRecord::Base
   has_many :tags_use_cases
   has_many :tags, through: :tags_use_cases
   has_many :permutations
+  has_many :traces
+  has_many :regular_expressions
 
   validates :key, :user, presence: true
 
@@ -16,17 +18,17 @@ class UseCase < ActiveRecord::Base
     where(user_id: user_id, collector_version_id: collector_version_id, program_id: program_id) 
   end
   
-  scope :select_use_case_with_tags, ->(tags) do 
+  scope :with_tags, ->(tags) do 
     set = Set.new(tags.map(&:name))
-    select_use_case_with_set_tag_names(set)
+    with_set_tag_names(set)
   end
 
-  scope :select_use_case_with_tag_names, ->(tag_names) do 
+  scope :with_tag_names, ->(tag_names) do 
     set = Set.new(tag_names)
-    select_use_case_with_set_tag_names(set)
+    with_set_tag_names(set)
   end
 
-  scope :select_use_case_with_set_tag_names, ->(set_tag_names) do
+  scope :with_set_tag_names, ->(set_tag_names) do
     select do |use_case|
       Set.new(use_case.tags.map(&:name)) == set_tag_names
     end
@@ -46,6 +48,18 @@ class UseCase < ActiveRecord::Base
     u.key = SecureRandom.hex
     u
     u.key if u.save! 
+  end
+
+  def self.with(use_case_params)
+    with_params(use_case_params[:user_id], use_case_params[:collector_version_id], use_case_params[:program_id]).
+      with_tag_names(use_case_params[:tag_names]).
+      first
+  end
+
+  def self.with_params_tags(use_case_params)
+    with_params(use_case_params[:user_id], use_case_params[:collector_version_id], use_case_params[:program_id]).
+      with_tags(use_case_params[:tags]).
+      first
   end
 
 end

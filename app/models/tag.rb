@@ -14,8 +14,7 @@ class Tag < ActiveRecord::Base
     end if tag_names
   end
 
-
-  def self.tag_names_from_str(tag_names_str)
+  def self.tag_names(tag_names_str)
     tag_names_str.try(:split, ",").try(:map, &:strip)
   end
 

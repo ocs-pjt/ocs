@@ -23,9 +23,9 @@ Benchmark.bm do |x|
       curl.headers['Content-Type']  = 'application/json'
       curl.headers['Api-Version']   = '2.2'
     end
-    puts "<br/>"
+    puts "\n"
   end
 end
 
-puts "<br/><br/>#{@http.body_str}"
+puts "\n#{@http.body_str}"
 
