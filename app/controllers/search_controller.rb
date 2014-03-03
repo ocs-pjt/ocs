@@ -14,20 +14,24 @@ class SearchController < ApplicationController
   def search_export
     # Check if user is over the maximum of tasks he can make
     if InProgressTask.where(user_id: current_user.id).count < Search::QUOTA_TASKS 
-      # TODO : should check eventually if params[:facets] is nil
+      
+      # TODO : should check eventually if any params are nil or not formatted correctly
       facets = Search.pre_process(params[:facets])
 
       if Search::SEARCH_TARGETS.keys.include?(resource_type = params[:resource_type].to_sym)
-      # TODO : count if there are actually records to export
-        unless (f = params[:first_records].blank?) && params[:last_records].blank?
-          method = f ? :last : :first
-          job_id = ExportsWorker.perform_async({facets: facets, resource_type: resource_type, user_id: current_user.id, method: method})
-          
-          InProgressTask.create!(user_id: current_user.id, job_id: job_id)
-          flash.now[:success] = "La tâche: <a href='/tasks'>#{job_id}</a> a été ajouté à la liste des tâches.".html_safe
-        else
-          flash.now[:danger] = "Too many records to export."
-        end
+          unless (f = params[:first_records].blank?) && params[:last_records].blank?
+            order_method = f ? :last : :first
+            if Search.perform(resource_type, facets, current_user.id, order_method, Search::MAX_RECORDS).count > 0
+              job_id = ExportsWorker.perform_async({facets: facets, resource_type: resource_type, user_id: current_user.id, order_method: order_method})
+              
+              InProgressTask.create!(user_id: current_user.id, job_id: job_id)
+              flash.now[:success] = "La tâche: <a href='/tasks'>#{job_id}</a> a été ajouté à la liste des tâches.".html_safe
+            else
+              flash.now[:danger] = "No records to export."
+            end
+          else
+            flash.now[:danger] = "Too many records to export."
+          end
       else
         flash.now[:danger] = "The export failed. Reason: resource is incorrect or unknown."
       end

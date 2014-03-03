@@ -12,10 +12,7 @@ class ExportsWorker
 
     # Filter a resource by its search facets and by the resource he collected
     # Because of :first and :last method, this returns an array and not a collection of the resource
-    @collection = Search.target_base(resource_type.to_sym).
-                    find_by_facets(options['facets']).
-                    where('use_cases.user_id' => options['user_id']).
-                    __send__(options['method'], Search::MAX_RECORDS)
+    @collection = Search.perform(resource_type.to_sym, options['facets'], options['user_id'], options['order_method'], Search::MAX_RECORDS)
 
     filename = "#{Utils.filename(resource_type)}-#{SecureRandom.hex(2)}.csv.xz"
 

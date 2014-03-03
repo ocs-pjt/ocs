@@ -2,17 +2,26 @@ class Permutation < ActiveRecord::Base
   belongs_to :use_case
   belongs_to :additional_information
 
-  facet :function
+  # TODO: Generation from the gem seem a bit clumsy though (to look at)
+  facet :collection_point, where: %{
+    EXISTS(
+      SELECT *
+      FROM additional_informations AS ai
+      WHERE permutations.additional_information_id = ai.id
+      ?
+    )
+  }.gsub(/\s+/, " ").strip
+
   facet :created_from, field_name: 'permutations.created_at', where: '>= {{value}}'
   facet :created_to, field_name: 'permutations.created_at', where: '<= {{value}}'
-  facet :tag_ids, field_name: 'tags.id'
+  facet :tag_ids, field_name: "tags.id"
 
   # # Not possible yet with the gem, would be better though
   # facet :last_records
   # facet :first_records
 
   # TODO : eventually create a table of the list of functions
-  FUNCTIONS = ["sort", "qsort", "mergesort"]
+  COLLECTION_POINTS = ["sort", "qsort", "mergesort"]
 
   def self.insert(items, use_case, additional_information)
     time = Time.now # Check for timezone
@@ -24,18 +33,9 @@ class Permutation < ActiveRecord::Base
     ActiveRecord::Base.connection.execute sql
   end
 
-  # def self.to_csv(options = {})
-  #   CSV.generate(options) do |csv|
-  #     csv << self.column_names 
-  #     all.each do |permutation|
-  #       csv << permutation.attributes.values_at(*self.column_names)
-  #     end
-  #   end
-  # end
-
-  def self.to_csv(collection, options = {})
+  def self.to_csv(collection, options = {col_sep: ";"})
     CSV.generate(options) do |csv|
-      real_column_names = self.column_names - ["id", "use_case_id", "created_at", "updated_at", "already_handled"]
+      real_column_names = column_names - columns_to_remove
       csv << real_column_names
       collection.each do |resource|
         csv << resource.attributes.values_at(*real_column_names)
@@ -43,7 +43,13 @@ class Permutation < ActiveRecord::Base
     end
   end
 
-  def self.function_names
-    FUNCTIONS
+  # Get the list of collection_points (function names)
+  def self.collection_points
+    COLLECTION_POINTS
+  end
+
+  # Filter out these columns when exporting data
+  def self.columns_to_remove
+    ["id", "use_case_id", "created_at", "updated_at", "already_handled", "additional_information_id"]
   end
 end

@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :permutation do
-    function "MyText"
+    data "1,2,3"
   end
 end

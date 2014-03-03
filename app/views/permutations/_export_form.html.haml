@@ -1,7 +1,7 @@
 = form_tag search_export_path(resource_type: "permutation"), id: "export-form", remote: true do
   .row
-    Functions
-    = select_tag "function", options_for_select(Permutation.function_names), multiple: true, class: "form-control", name: "facets[function][]"
+    Collection points
+    = select_tag "collection_points", options_for_select(Permutation.collection_points), multiple: true, class: "form-control", name: "facets[collection_point][]"
     %br
   .row
     Created at : 
@@ -10,10 +10,6 @@
       %input{type:"text", class:"form-control", name:"facets[created_from]"}
       %label{class:"input-group-addon"} To
       %input{type:"text", class:"form-control", name:"facets[created_to]"}
-    
-    = # TODO : move in coffee file
-    %script{type:"text/javascript"}
-      $(document).ready(function(){$('.input-daterange').datepicker({format: 'dd-mm-yyyy'});})
     
     %br
   .row

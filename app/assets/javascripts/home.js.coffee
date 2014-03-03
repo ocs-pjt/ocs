@@ -136,6 +136,11 @@ initialize = ->
           $("#world-map").children(":first").prepend("<a class='back_to_world_map' href='/'>Back to world map</a>")
       )
 
+
+  # Format date fields correctly
+  $('.input-daterange').datepicker
+    format: 'dd-mm-yyyy'
+
 # Necessary to do because of use of turbolinks
 $(document).ready(initialize)
 $(document).on('page:load', initialize)

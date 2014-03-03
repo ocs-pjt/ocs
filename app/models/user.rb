@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
     self.authentication_token = self.class.authentication_token
   end
 
-  # For login in with facebook
+  # Create a user if not created to login with facebook
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     
@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
     user
   end
 
+  # Create a user if not created to login with google
   def self.find_for_google_oauth(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(email: data["email"]).first
@@ -75,18 +76,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  # For a matter of speed we insert permutations manually
-  def self.insert_permutations(items)
-    time = Time.now # CHECK : Maybe an issue with the Timezone
-    inserts = []
-    items.each do |h|
-      inserts.push "('#{h['data']}', '#{h['function']}', #{use_case.id}, '#{time}')"
-    end
-    sql = "INSERT INTO permutations (data, function, use_case_id, created_at) VALUES #{inserts.join(", ")}"
-    ActiveRecord::Base.connection.execute sql
-  end
-
-
+  # Get the jvectormap code map from the country and the state (set automatically by reverse_geocoded_by)
   def jvm_state_code(country_code, state)
     case country_code
     when "FR"
