@@ -30,7 +30,7 @@ namespace :deploy do
     task :precompile do 
       on roles(:web), :except => { :no_release => true } do
         within fetch(:release_path) do
-          with rails_env: fetch(:rails_env) do
+          with rails_env: fetch(:stage) do
             execute :rake, 'assets:precompile'
           end
         end
