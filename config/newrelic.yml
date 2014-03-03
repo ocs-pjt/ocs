@@ -91,7 +91,7 @@ common: &default_settings
   # are optional. Default port is 8080.
   #
   # proxy_host: hostname
-  # proxy_port: 8080
+  proxy_port: 8081
   # proxy_user:
   # proxy_pass:
 
