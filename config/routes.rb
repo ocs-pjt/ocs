@@ -20,10 +20,20 @@ Ocs::Application.routes.draw do
   }
 
   post  'resources/collect',      to: 'resources#collect'
-  post  'permutations/collect',   to: 'permutations#collect'
-  get   'permutations/collect',   to: 'permutations#collect'
-  post  'traces/collect',         to: 'traces#collect'
-  get   'traces/collect',         to: 'traces#collect'
+
+  resources :permutations, only: :index do
+    collection do
+      post  'collect',  to: 'permutations#collect'
+      get   'collect',   to: 'permutations#collect'
+    end
+  end
+
+  resources :traces, only: :index do
+    collection do
+      post  'traces/collect',         to: 'traces#collect'
+      get   'traces/collect',         to: 'traces#collect'
+    end
+  end
 
   resources :users, except: [:edit, :create, :new] do 
     collection do 

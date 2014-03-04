@@ -1,5 +1,9 @@
 class TracesController < ApplicationController
   before_action :authenticate_user! # Normal devise authentication
+
+  def index 
+    @traces = Trace.includes(:additional_information).paginate(page: params[:page], per_page: 30) 
+  end
   
   def collect
     if params[:object].presence && params[:object][:data].presence

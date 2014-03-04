@@ -1,0 +1,14 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Data
+      %th Collection Point
+      %th Create at
+  %tbody
+    - @permutations.each do |permutation|
+      %tr
+        %td= permutation.data
+        %td= permutation.additional_information.collection_point
+        %td= permutation.created_at
+        
+= will_paginate(@permutation, renderer: WillPaginate::ActionView::LinkRenderer, params: params)

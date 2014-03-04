@@ -1,0 +1,14 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Data
+      %th Collection Point
+      %th Created at
+  %tbody
+    - @traces.each do |trace|
+      %tr
+        %td= trace.data
+        %td= trace.additional_information.collection_point
+        %td= trace.created_at
+        
+= will_paginate(@traces, renderer: WillPaginate::ActionView::LinkRenderer, params: params)
