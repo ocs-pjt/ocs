@@ -149,7 +149,7 @@ end
 
 #group :production do
   # Puma webserver
-  gem 'puma'
+  gem 'puma', '2.7.1'
 #end
 
 group :test do
