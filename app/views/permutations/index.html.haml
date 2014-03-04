@@ -3,11 +3,11 @@
     %tr
       %th Data
       %th Collection Point
-      %th Create at
+      %th Created at
   %tbody
     - @permutations.each do |permutation|
       %tr
-        %td= permutation.data
+        %td= truncate_popup(permutation, 50)
         %td= permutation.additional_information.collection_point
         %td= permutation.created_at
         

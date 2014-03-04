@@ -4,8 +4,8 @@ require 'json'
 
 ### WEBSERVICE 2 ###
 data = []
-ar = (1..10).to_a
-str = ar.join(",")
+ar = (1..100).to_a
+str = ar.shuffle.join(",")
 1.times do
   data << str
 end

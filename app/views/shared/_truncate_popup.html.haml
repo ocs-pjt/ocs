@@ -1,0 +1,8 @@
+= link_to(truncate(data, length: 50, omission: '...'), '#', data: { target: "#data_#{id}", toggle: "modal" })
+%div.modal.fade{id: "data_#{id}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body.word-wrap
+        = data
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close

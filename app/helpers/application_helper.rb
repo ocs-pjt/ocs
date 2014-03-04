@@ -24,5 +24,11 @@ module ApplicationHelper
       class: 'btn btn-success pull-right'
   end
 
-
+  def truncate_popup(resource, size)
+    if resource.data.size > 50
+      render partial: 'shared/truncate_popup', locals: {id: resource.id, data: resource.data, size: size}
+    else
+      resource.data
+    end
+  end
 end

@@ -4,7 +4,7 @@ require 'json'
 
 ### WEBSERVICE 4 ###
 data = []
-ar = (1..10).to_a
+ar = (1..100).to_a
 str = ar.join(",")
 1.times do
   data << str
