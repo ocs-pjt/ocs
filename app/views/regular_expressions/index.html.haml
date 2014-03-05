@@ -1,0 +1,14 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Data
+      %th Collection Point
+      %th Created at
+  %tbody
+    - @regular_expressions.each do |regular_expression|
+      %tr
+        %td= truncate_popup(regular_expression, 50)
+        %td= regular_expression.additional_information.collection_point
+        %td= regular_expression.created_at
+        
+= will_paginate(@regular_expressions, renderer: WillPaginate::ActionView::LinkRenderer, params: params)

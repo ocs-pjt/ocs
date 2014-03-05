@@ -1,9 +1,9 @@
-class Trace < ActiveRecord::Base
+class RegularExpression < ActiveRecord::Base
   belongs_to :use_case
   belongs_to :additional_information
 
-  facet :created_from, field_name: 'traces.created_at', where: '>= {{value}}'
-  facet :created_to, field_name: 'traces.created_at', where: '<= {{value}}'
+  facet :created_from, field_name: 'regular_expressions.created_at', where: '>= {{value}}'
+  facet :created_to, field_name: 'regular_expressions.created_at', where: '<= {{value}}'
   facet :tag_ids, field_name: 'tags.id'
 
   def self.insert(items, use_case, additional_information)
@@ -12,7 +12,7 @@ class Trace < ActiveRecord::Base
     items.each do |value|
       inserts.push "('#{value}', #{use_case.id}, #{additional_information.id}, '#{time}')"
     end
-    sql = "INSERT INTO traces (data, use_case_id, additional_information_id, created_at) VALUES #{inserts.join(", ")}"
+    sql = "INSERT INTO regular_expressions (data, use_case_id, additional_information_id, created_at) VALUES #{inserts.join(", ")}"
     ActiveRecord::Base.connection.execute sql
   end
 
@@ -30,5 +30,6 @@ class Trace < ActiveRecord::Base
   def self.columns_to_remove
     ["id", "use_case_id", "created_at", "updated_at", "already_handled", "additional_information_id"]
   end
+
 
 end

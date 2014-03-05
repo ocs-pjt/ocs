@@ -8,6 +8,9 @@ class Search
     },
     trace: proc {
       Trace.includes(use_case: [:tags])
+    },
+    regular_expression: proc {
+      RegularExpression.includes(use_case: [:tags])
     }
   }
 

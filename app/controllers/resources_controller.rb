@@ -7,6 +7,8 @@ class ResourcesController < ApplicationController
       redirect_to controller: :permutations, action: :collect, params: params
     when 'trace'
       redirect_to controller: :traces, action: :collect, params: params
+    when 'regular_expression'
+      redirect_to controller: :regular_expressions, action: :collect, params: params
     end
   end
 

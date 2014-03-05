@@ -6,7 +6,7 @@
       %br
     .row
       Resource to export : 
-      = select_tag "resource_type_field", options_for_select([["Permutation", "permutation"],["Trace", "trace"]]), class: "form-control", name: "resource_type"
+      = select_tag "resource_type_field", options_for_select([["Permutation", "permutation"],["Trace", "trace"],["Regular Expression","regular_expression"]]), class: "form-control", name: "resource_type"
     %br
     = render partial: 'permutations/export_form'
 

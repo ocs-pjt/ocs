@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PermutationsController do
+describe RegularExpressionsController do
   before (:each) do
     sign_in
   end
@@ -14,11 +14,11 @@ describe PermutationsController do
 
   describe "POST collect" do
     describe "with valid params" do
-      it "creates a new Permutation" do
+      it "creates a new RegularExpression" do
         @use_case = FactoryGirl.create(:use_case)
         expect {
           post :collect, {items: [{"data" => "1,2,3", "function" => "sort"}], use_case_key: @use_case.key }, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
-        }.to change(Permutation, :count).by(1)
+        }.to change(RegularExpression, :count).by(1)
       end
     end
   end

@@ -23,15 +23,22 @@ Ocs::Application.routes.draw do
 
   resources :permutations, only: :index do
     collection do
-      post  'collect',  to: 'permutations#collect'
-      get   'collect',   to: 'permutations#collect'
+      post  'permutations/collect',  to: 'permutations#collect'
+      get   'permutations/collect',  to: 'permutations#collect'
     end
   end
 
   resources :traces, only: :index do
     collection do
-      post  'traces/collect',         to: 'traces#collect'
-      get   'traces/collect',         to: 'traces#collect'
+      post  'traces/collect',  to: 'traces#collect'
+      get   'traces/collect',  to: 'traces#collect'
+    end
+  end
+
+  resources :regular_expressions, only: :index do
+    collection do
+      post  'regular_expressions/collect',  to: 'regular_expressions#collect'
+      get   'regular_expressions/collect',  to: 'regular_expressions#collect'
     end
   end
 

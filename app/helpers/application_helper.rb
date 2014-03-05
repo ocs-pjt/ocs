@@ -12,10 +12,12 @@ module ApplicationHelper
     html.html_safe
   end
 
+  # Display link to download a file
   def display_filename(file)
     link_to File.basename(file.path), file.url 
   end
 
+  # Display an export button
   def export_button(options)
     button_to 'Export CSV',
       search_export_path(format: options[:format],
@@ -24,8 +26,9 @@ module ApplicationHelper
       class: 'btn btn-success pull-right'
   end
 
-  def truncate_popup(resource, size)
-    if resource.data.size > 50
+  # Display popup template in case the text is too long
+  def truncate_popup(resource, size = 50)
+    if resource.data.size > size
       render partial: 'shared/truncate_popup', locals: {id: resource.id, data: resource.data, size: size}
     else
       resource.data

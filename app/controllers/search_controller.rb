@@ -5,8 +5,10 @@ class SearchController < ApplicationController
     case params[:resource_type]
     when "trace"
       render partial: 'traces/export_form'
-    else
+    when "permutation"
       render partial: 'permutations/export_form'
+    else 
+      render partial: 'regular_expressions/export_form'
     end if request.xhr?
   end
 
