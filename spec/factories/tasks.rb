@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :task do
-    user_id 1
-    file "MyString"
+    user
+    file Rack::Test::UploadedFile.new(File.open(Rails.root.join('spec', 'fixtures','files', 'fake.txt')))
   end
 end

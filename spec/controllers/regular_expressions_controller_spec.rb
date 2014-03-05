@@ -17,7 +17,7 @@ describe RegularExpressionsController do
       it "creates a new RegularExpression" do
         @use_case = FactoryGirl.create(:use_case)
         expect {
-          post :collect, {items: [{"data" => "1,2,3", "function" => "sort"}], use_case_key: @use_case.key }, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+          post :collect, {object: {data: ['1,2,3']}, use_case_key: @use_case.key }, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
         }.to change(RegularExpression, :count).by(1)
       end
     end
