@@ -38,5 +38,36 @@ describe ResourcesController do
     end
   end
 
+  describe "POST regular expression collect" do
+    describe "with valid params" do
+      it "creates a new regular expression" do
+        @use_case = FactoryGirl.create(:use_case)
+        post :collect, {object: {data_type: 'regular_expression'}, use_case_key: @use_case.key }, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+        expect(response.body).to eql "{\"response\":\"No data to proceed\"}"
+      end
+    end
+  end
+
+  describe "POST regular expression collect" do
+    describe "with valid params" do
+      it "creates a new regular expression" do
+        @use_case = FactoryGirl.create(:use_case)
+        post :collect, {object: {data: ['1,2,3'], data_type: 'foo'}, use_case_key: @use_case.key }, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+        expect(response.body).to eql "{\"response\":\"Data type incorrect\"}"
+      end
+    end
+  end
+
+  describe "POST regular expression collect" do
+    describe "with valid params" do
+      it "creates a new regular expression" do
+        @use_case = FactoryGirl.create(:use_case)
+        post :collect, {object: {data: ['1,2,3'], data_type: 'foo'}, use_case_key: "bar" }, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+        expect(response.body).to eql "{\"response\":\"Data type incorrect\"}"
+      end
+    end
+  end
+
+
 end
 
