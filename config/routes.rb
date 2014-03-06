@@ -19,28 +19,13 @@ Ocs::Application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  post  'resources/collect',      to: 'resources#collect'
+  post  'resources/collect', to: 'resources#collect'
 
-  resources :permutations, only: :index do
-    collection do
-      post  'permutations/collect',  to: 'permutations#collect'
-      get   'permutations/collect',  to: 'permutations#collect'
-    end
-  end
+  resources :permutations, only: :index
 
-  resources :traces, only: :index do
-    collection do
-      post  'traces/collect',  to: 'traces#collect'
-      get   'traces/collect',  to: 'traces#collect'
-    end
-  end
+  resources :traces, only: :index
 
-  resources :regular_expressions, only: :index do
-    collection do
-      post  'regular_expressions/collect',  to: 'regular_expressions#collect'
-      get   'regular_expressions/collect',  to: 'regular_expressions#collect'
-    end
-  end
+  resources :regular_expressions, only: :index
 
   resources :users, except: [:edit, :create, :new] do 
     collection do 

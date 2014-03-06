@@ -36,7 +36,6 @@ Benchmark.bm do |x|
         "http://localhost:9292/resources/collect",
         params.to_json
       ) do |curl|
-        curl.follow_location = true
         curl.headers['Accept']        = 'application/json'
         curl.headers['Content-Type']  = 'application/json'
         curl.headers['Api-Version']   = '2.2'

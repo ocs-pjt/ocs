@@ -2,7 +2,7 @@ class Search
   MAX_RECORDS = 10_000
   QUOTA_TASKS = 3
 
-  SEARCH_TARGETS = {
+  TARGETS = {
     permutation: proc {
       Permutation.includes(use_case: [:tags])
     },
@@ -15,7 +15,7 @@ class Search
   }
 
   def self.target_base(target)
-    SEARCH_TARGETS[target].call
+    TARGETS[target].call
   end
 
   def self.to_csv(collection, options = {})
@@ -37,6 +37,10 @@ class Search
     find_by_facets(facets).
     where('use_cases.user_id' => user_id).
     __send__(order_method, max_records)
+  end
+
+  def self.target_keys
+    TARGETS.keys
   end
 
 end

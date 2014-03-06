@@ -20,7 +20,7 @@ class SearchController < ApplicationController
       # TODO : should check eventually if any params are nil or not formatted correctly
       facets = Search.pre_process(params[:facets])
 
-      if Search::SEARCH_TARGETS.keys.include?(resource_type = params[:resource_type].to_sym)
+      if Search.target_keys.include?(resource_type = params[:resource_type].to_sym)
           unless (f = params[:first_records].blank?) && params[:last_records].blank?
             order_method = f ? :last : :first
             if Search.perform(resource_type, facets, current_user.id, order_method, Search::MAX_RECORDS).count > 0
