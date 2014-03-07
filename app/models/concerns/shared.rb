@@ -7,7 +7,7 @@ module Concerns
         time = Time.now # Check for timezone
         inserts = []
         items.each do |value|
-          inserts.push "('#{value}', #{use_case.id}, #{additional_information.id}, '#{time}')"
+          inserts.push sanitize_sql_array(["(?, #{use_case.id}, #{additional_information.id}, '#{time}')", value]) 
         end
         sql = "INSERT INTO #{self.table_name} (data, use_case_id, additional_information_id, created_at) VALUES #{inserts.join(", ")}"
         ActiveRecord::Base.connection.execute sql
