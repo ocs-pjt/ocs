@@ -7,18 +7,48 @@ describe UsersController do
     sign_in @user
   end
 
+  describe "GET 'index'" do 
+    it "doesn't allow non admin to display users list" do
+      get :index
+      expect(response).to redirect_to root_path
+    end
+
+    it "renders the users list" do 
+      @user.add_role :admin
+      xhr :get, :index
+      expect(response).to render_template('users/_users_list')
+    end
+
+    it "renders the users list" do 
+      @user.add_role :admin
+      get :index
+      expect(response).to render_template('users/index')
+    end
+  end
+
   describe "GET 'show'" do
-    
     it "should be successful" do
-      get :show, :id => @user.id
+      get :show, id: @user.id
       response.should be_success
     end
     
     it "should find the right user" do
-      get :show, :id => @user.id
+      get :show, id: @user.id
       assigns(:user).should == @user
-    end
-    
+    end  
   end
 
+  describe "PUT 'update'" do 
+    it "doesn't allow non admin to update a user" do
+      put :update, {id: @user.id}
+      expect(response).to redirect_to root_path
+    end
+  end
+
+  describe "DELETE 'destroy'" do 
+    it "doesn't allow non admin to delete a user" do
+      delete :destroy, {id: @user.id}
+      expect(response).to redirect_to root_path
+    end
+  end
 end
