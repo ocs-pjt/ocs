@@ -1,15 +1,13 @@
 require 'simplecov'
 require 'coveralls'
 
-puts "RUBY_VERSION:" + ENV["RUBY_VERSION"]
-
-Coveralls.wear!('rails') if /ruby/ =~ ENV["RUBY_VERSION"]
+Coveralls.wear!('rails')
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
 ]
-SimpleCov.start
+SimpleCov.start if /ruby/ =~ ENV["RUBY_VERSION"]
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
