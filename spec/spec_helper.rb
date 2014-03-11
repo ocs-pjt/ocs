@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'coveralls'
-Coveralls.wear!('rails')
+
+Coveralls.wear!('rails') if /ruby/ =~ ENV["RUBY_VERSION"]
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
