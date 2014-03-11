@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :trace do
     data "MyText"
-    use_case_id 1
+    use_case
     already_handled false
   end
 end

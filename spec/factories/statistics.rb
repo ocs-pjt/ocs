@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :statistic do
-    user_id 1
+    user
     stats ""
   end
 end

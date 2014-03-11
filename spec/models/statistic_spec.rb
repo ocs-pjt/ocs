@@ -1,5 +1,21 @@
 require 'spec_helper'
 
 describe Statistic do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  before(:each) do
+    @stat = FactoryGirl.create(:statistic)
+    @use_case = FactoryGirl.create(:use_case, user: @stat.user)
+    @p,@p2 = [FactoryGirl.create(:permutation, use_case: @use_case),FactoryGirl.create(:permutation, use_case: @use_case)]
+    @t = FactoryGirl.create(:trace, use_case: @use_case)
+    @re = FactoryGirl.create(:regular_expression, use_case: @use_case)
+  end
+
+  it "recalculates user stats" do
+    Statistic.recalculate_stats
+    stats = @stat.reload.stats
+    expect(stats['permutations']).to eql "2"
+    expect(stats['traces']).to eql "1"
+    expect(stats['regular_expressions']).to eql "1"
+  end
+
 end
