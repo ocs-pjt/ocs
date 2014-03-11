@@ -12,7 +12,8 @@ class Statistic < ActiveRecord::Base
 
       @statistic.stats['nb_permutations'] = user.statistic.stats['nb_permutations'].to_i + count_new_permutations
       @statistic.stats['nb_traces'] = user.statistic.stats['nb_traces'].to_i + count_new_traces
-      @statistic.save! # Doesn't save in db yet. Bug : https://github.com/rails/rails/issues/6127?source=cc
+      @statistic.stats_will_change! # Needed for hstore fields otherwise rails dont update them. see : https://github.com/rails/rails/issues/6127?source=cc
+      @statistic.save!
     end
   end
 end
