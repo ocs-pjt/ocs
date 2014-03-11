@@ -278,9 +278,9 @@ GEM
       pry (~> 0.9)
       slop (~> 3.0)
     psych (2.0.4)
-    puma (2.7.1)
+    puma (2.8.1)
       rack (>= 1.1, < 2.0)
-    puma (2.7.1-java)
+    puma (2.8.1-java)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -679,7 +679,7 @@ DEPENDENCIES
   pry-nav
   pry-remote
   psych
-  puma (= 2.7.1)
+  puma
   quiet_assets
   racc
   rails (= 4.1.0.rc1)
