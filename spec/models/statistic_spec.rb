@@ -5,9 +5,10 @@ describe Statistic do
   before(:each) do
     @stat = FactoryGirl.create(:statistic)
     @use_case = FactoryGirl.create(:use_case, user: @stat.user)
-    @p,@p2 = [FactoryGirl.create(:permutation, use_case: @use_case),FactoryGirl.create(:permutation, use_case: @use_case)]
-    @t = FactoryGirl.create(:trace, use_case: @use_case)
-    @re = FactoryGirl.create(:regular_expression, use_case: @use_case)
+    FactoryGirl.create(:permutation, use_case: @use_case)
+    FactoryGirl.create(:permutation, use_case: @use_case)
+    FactoryGirl.create(:trace, use_case: @use_case)
+    FactoryGirl.create(:regular_expression, use_case: @use_case)
   end
 
   it "recalculates user stats" do

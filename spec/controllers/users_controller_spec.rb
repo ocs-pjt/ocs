@@ -51,4 +51,21 @@ describe UsersController do
       expect(response).to redirect_to root_path
     end
   end
+
+  describe "POST 'authentication_key'" do 
+    it "returns the authentication key" do 
+      post :authentication_key, email: @user.email, password: 'changeme' 
+      expect(response.body).to eql @user.authentication_token
+    end
+
+    it "returns invalid email" do 
+      post :authentication_key, email: "wrong@email.com", password: 'changeme' 
+      expect(response.body).to eql "Invalid user"
+    end
+
+    it "returns invalid password" do 
+      post :authentication_key, email: @user.email, password: 'wrong_pwd' 
+      expect(response.body).to eql "Invalid password"
+    end
+  end
 end

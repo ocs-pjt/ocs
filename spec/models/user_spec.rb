@@ -17,6 +17,23 @@ describe User do
     User.create!(@attr)
   end
 
+  it "should create a new user with geocode informations set" do
+    @u = User.create!(@attr.merge(postal_address: "Paris, France"))
+    expect(@u.state).not_to be_nil
+    expect(@u.country_code).not_to be_nil
+    expect(@u.jvectormap_state_code).not_to be_nil
+  end
+
+  it "should create a facebook user" do
+    oa = OmniAuth::AuthHash.new({ provider: 'facebook', uid: '123545', info: {email: "test@test.fr"},extra: {raw_info: { name: "Test" } } })
+    expect{ User.find_for_facebook_oauth(oa) }.to change{User.count}.by(1)
+  end
+
+  it "should create a google user" do 
+    token = mock_model('Token', {info: {"email" => "test@test.fr"}, name: "Test"})
+    expect{ User.find_for_google_oauth(token) }.to change{User.count}.by(1)
+  end
+
   it "should require an email address" do
     no_email_user = User.new(@attr.merge(email: ""))
     no_email_user.should_not be_valid
@@ -52,7 +69,6 @@ describe User do
   end
 
   describe "passwords" do
-
     before(:each) do
       @user = User.new(@attr)
     end
@@ -67,7 +83,6 @@ describe User do
   end
 
   describe "password validations" do
-
     it "should require a password" do
       User.new(@attr.merge(password: "", password_confirmation: "")).
         should_not be_valid
@@ -83,11 +98,9 @@ describe User do
       hash = @attr.merge(password: short, password_confirmation: short)
       User.new(hash).should_not be_valid
     end
-
   end
 
   describe "password encryption" do
-
     before(:each) do
       @user = User.create!(@attr)
     end
@@ -99,7 +112,6 @@ describe User do
     it "should set the encrypted password attribute" do
       @user.encrypted_password.should_not be_blank
     end
-
   end
 
 end

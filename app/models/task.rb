@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  include Concerns::File
   belongs_to :user
 
   mount_uploader :file, TaskUploader
