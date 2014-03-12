@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CodeMatch
 
   # Mapping of french regions with jVectorMap (see jVectorMap gem (lib/maps directory))
